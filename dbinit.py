@@ -5,8 +5,14 @@ import psycopg2 as dbapi2
 
 
 INIT_STATEMENTS = [
-    "CREATE TABLE IF NOT EXISTS DUMMY (NUM INTEGER)",
-    "INSERT INTO DUMMY VALUES (42)",
+    """CREATE TABLE IF NOT EXISTS PROVIDER (
+        ProviderID integer PRIMARY KEY,
+        Company varchar(50) NOT NULL,
+        Address text NOT NULL,
+        Phone varchar(12) NOT NULL,
+        TaxID varchar(10) NOT NULL,
+        Authority text NOT NULL,
+        )""",
 ]
 
 
