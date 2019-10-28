@@ -5,7 +5,7 @@ import psycopg2 as dbapi2
 from flask import Flask
 
 
-url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='EiWIdrfC_c6yWoP6Ln1goR5uq-Dl2hnp'" 
+url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'" 
 
 
 
