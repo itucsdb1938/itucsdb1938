@@ -2,7 +2,6 @@ import os
 import sys
 
 import psycopg2 as dbapi2
-
 from flask import Flask
 
 
