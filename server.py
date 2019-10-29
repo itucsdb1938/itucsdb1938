@@ -3,7 +3,7 @@ import sys
 
 import psycopg2 as dbapi2
 from flask import Flask
-
+from dbinit import initialize
 
 url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'" 
 
