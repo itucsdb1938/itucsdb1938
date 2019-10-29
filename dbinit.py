@@ -12,8 +12,34 @@ INIT_STATEMENTS = [
         Phone varchar(12) NOT NULL,
         TaxID varchar(10) NOT NULL,
         Authority text NOT NULL
-        )"""
-]
+        )""",
+    """CREATE TABLE IF NOT EXISTS Employee(
+        EmployeeID serial PRIMARY KEY,
+        Name varchar(40) NOT NULL,
+        Surname varchar(20) NOT NULL,
+        Phonenumber varchar(12) NOT NULL,
+        Email varchar(25) NOT NULL,
+        WorkingHours varchar(255) NOT NULL,
+        WorkingDays varchar(255) NOT NULL
+    )""",
+    """CREATE TABLE IF NOT EXISTS CargoCompany(
+        CompanyID serial PRIMARY KEY,
+        Name varchar(255) NOT NULL,
+        Address varchar(255) NOT NULL,
+        PricePerKilo integer NOT NULL,
+        TaxID varchar(10) NOT NULL,
+        Authority text NOT NULL
+    )""",
+    """CREATE TABLE IF NOT EXISTS Marketplace(
+        MarketID serial PRIMARY KEY,
+        Name varchar(255) NOT NULL,
+        Address varchar(255) NOT NULL,
+        Authority text NOT NULL,
+        Phonenumber varchar(12) NOT NULL,
+        TaxID varchar(10) NOT NULL,
+        Commissionfee integer NOT NULL
+    )"""
+    ]
 
 
 def initialize(url):
