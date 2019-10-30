@@ -19,38 +19,23 @@ def home_page():
 
 @app.route("/marketplace", methods=['GET','POST'])
 def marketplace_page():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render_template('marketplace_add.html')
+
+    elif request.method == 'POST':
         market_name = request.form.get('market_name')
-        market_adress = request.form.get('market_adress')
+        market_address = request.form.get('market_address')
         market_authority = request.form.get('market_authority')
         market_phonenumber = request.form.get('market_phonenumber')
         market_taxid = request.form.get('market_taxid')
-        market_commisionfee = request.form.get('market_commisionfee')
-
-        forms.MarketPlace.MarketPlace_add(market_name,market_adress,market_authority,market_phonenumber,market_taxid,market_commisionfee)
-
-        return render_template('marketplace_add',errorMessage="Done")
-
+        market_commisionfee = request.form.get('market_commission')
         
+        obj = forms.MarketPlace()
 
-@app.route("/xx")
-def xx_page():
+        obj.MarketPlace_add(market_name,market_address,market_authority,market_phonenumber,market_taxid,market_commisionfee)
 
-    connection = dbapi2.connect(url)
-    cursor = connection.cursor()
-
-    query_string = "SELECT * FROM dummy"
-
-    cursor.execute(query_string)
-
-    data = cursor.fetchall()
-
-    connection.close()
-
-    print(data)
-
-    return str(data[0])
-
+        return render_template('marketplace_add.html',errorMessage="Done")
+ 
 
 if __name__ == "__main__":
     app.run()
