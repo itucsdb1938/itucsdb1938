@@ -1,7 +1,13 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <title></title>
-</head>
-    {% block layout %}{% endblock %}
+    <head>
+
+        <meta charset="utf-8"> 
+        {% block title %}{% endblock %} 
+
+    </head>
+
+    <body>
+        {% block content%}{% endblock %}
+    </body>
 </html>
