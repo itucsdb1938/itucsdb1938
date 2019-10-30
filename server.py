@@ -1,5 +1,6 @@
 import os
 import sys
+import forms
 
 import psycopg2 as dbapi2
 from flask import Flask,render_template,redirect,url_for, request, session, escape
@@ -19,9 +20,18 @@ def home_page():
 @app.route("/marketplace", methods=['GET','POST'])
 def marketplace_page():
     if request.method == 'POST':
+        market_name = request.form.get('market_name')
+        market_adress = request.form.get('market_adress')
+        market_authority = request.form.get('market_authority')
+        market_phonenumber = request.form.get('market_phonenumber')
+        market_taxid = request.form.get('market_taxid')
+        market_commisionfee = request.form.get('market_commisionfee')
+
+        forms.MarketPlace.MarketPlace_add(market_name,market_adress,market_authority,market_phonenumber,market_taxid,market_commisionfee)
+
+        return render_template('marketplace_add',errorMessage="Done")
+
         
-
-
 
 @app.route("/xx")
 def xx_page():
