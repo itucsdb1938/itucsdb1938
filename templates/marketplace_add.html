@@ -1,9 +1,23 @@
-{% extends "layout.html" %}
+{% extends "base.html" %}
 {% block title %}
-<title>{{ load_resource('Employee.Create', 'PageTitles') }}</title>
+<title>Marketplace</title>
 {% endblock %}
 {% block content %}
 <div>
-    <p>AHMET</p>
+    <form method='POST'>
+        <label>Marketplace name</label>
+        <input type="text" name="market_name" value="{{market_name}}">
+        <label>Marketplace Adress</label>
+        <input type="text" name="market_address" value="{{market_address}}">
+        <label>Marketplace Authority</label>
+        <input type="text" name="market_authority" value="{{market_authority}}">
+        <label>Marketplace Phone number</label>
+        <input type="text" name="market_phonenumber" value="{{market_phonenumber}}">
+        <label>Marketplace TaxID</label>
+        <input type="text" name="market_taxid" value="{{market_taxid}}">
+        <label>Marketplace Commission Fee</label>
+        <input type="text" name="market_commission" value="{{market_commission}}">
+        <input type="submit"> 
+    </form>
 </div>
 {% endblock %}
