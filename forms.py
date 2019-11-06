@@ -13,3 +13,20 @@ class MarketPlace:
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
+    
+    def MarketPlace_select(self, name = "IS NOT NULL", address = "IS NOT NULL", authority = "IS NOT NULL", phonenumber = "IS NOT NULL", taxid = "IS NOT NULL", commission = "IS NOT NULL"):
+        parameters = [name, address, authority, phonenumber, taxid, commission]
+        for i in parameters:
+            if (i.upper() == 'NULL'):
+                i = 'IS ' + i.upper()
+            elif (i.upper() == 'NOT NULL'):
+                i = 'IS ' + i.upper()
+            else:
+                i = '= ' + i.upper()
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT * FROM marketplace WHERE (name %s AND address %s AND authority %s AND phonenumber %s AND taxid %s AND commissionfee %s)"""
+        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission))
+        selection = cursor.fetchall()
+        cursor.close()
+        return selection
