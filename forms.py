@@ -9,7 +9,7 @@ class MarketPlace:
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
         queryString = """INSERT INTO Marketplace (name, address, authority, phonenumber, taxid, commissionfee) VALUES (%s, %s, %s, %s, %s, %s)"""
-        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission))
+        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
@@ -31,7 +31,7 @@ class MarketPlace:
             return selection
         elif (id != '' and name == ''):
             queryString = """SELECT * FROM Marketplace WHERE MarketID = %s ORDER BY MarketID ASC"""
-            cursor.execute(queryString, (id))
+            cursor.execute(queryString, (id,))
             selection = cursor.fetchall()
             cursor.close()
             return selection
@@ -51,7 +51,7 @@ class MarketPlace:
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
         queryString = """UPDATE Marketplace SET name = %s, address = %s, authority = %s, phonenumber = %s, taxid = %s, commissionfee = %s  WHERE  MarketID = %s"""
-        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission, market_id))
+        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission, market_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
