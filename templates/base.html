@@ -1,14 +1,21 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
 
-        <meta charset="utf-8"> 
-        {% block title %}{% endblock %} 
+<head>
 
-    </head>
+    <meta charset="utf-8">
+    {% block title %}{% endblock %}
 
-    <body>
-        {{ errorMessage }}
-        {% block content%}{% endblock %}
-    </body>
+</head>
+
+<body>
+    <div>
+        <form method='POST'>
+            <input type="submit" name="submit_button" value="Homepage">
+        </form>
+    </div>
+    {{ errorMessage }}
+    {% block content%}{% endblock %}
+</body>
+
 </html>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Provider</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Provider ID</label>
+        <input type="text" name="provider_id" value="{{provider_id}}">
+        <label>Provider company</label>
+        <input type="text" name="provider_company" value="{{provider_company}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% if data %}
+<div>
+    <form method='POST'>
+        <table>
+            <thead>
+                <th>Selection</th>
+                <th>Provider ID</th>
+                <th>Provider Company</th>
+                <th>Provider Address</th>
+                <th>Provider Phone Number</th>
+                <th>Provider TaxID</th>
+                <th>Provider Authority</th>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td><input type="radio" name="options" value="{{ item[0] }}"></input><br></td>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" name="submit_button" value="Delete Selected">
+        <input type="submit" name="submit_button" value="Edit Selected">
+    </form>
+</div>
+{% endif %}
+{% endblock %}

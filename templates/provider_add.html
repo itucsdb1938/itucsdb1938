@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Provider</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Provider company</label>
+        <input type="text" name="provider_company" value="{{provider_company}}">
+        <label>Provider Adress</label>
+        <input type="text" name="provider_address" value="{{provider_address}}">
+        <label>Provider Phone number</label>
+        <input type="text" name="provider_phonenumber" value="{{provider_phonenumber}}">
+        <label>Provider TaxID</label>
+        <input type="text" name="provider_taxid" value="{{provider_taxid}}">
+        <label>Provider Authority</label>
+        <input type="text" name="provider_authority" value="{{provider_authority}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% endblock %}

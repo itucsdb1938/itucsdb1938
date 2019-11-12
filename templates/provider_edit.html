@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Provider</title>
+{% endblock %}
+{% block content %}
+<div>
+    Current data:
+    <table>
+        <thead>
+            <th>Provider ID</th>
+            <th>Provider Company</th>
+            <th>Provider Address</th>
+            <th>Provider Phone Number</th>
+            <th>Provider TaxID</th>
+            <th>Provider Authority</th>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[4] }}</td>
+                <td>{{ item[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    <form method='POST'>
+        <label>Provider company</label>
+        <input type="text" name="provider_company" value="{{provider_company}}">
+        <label>Provider Adress</label>
+        <input type="text" name="provider_address" value="{{provider_address}}">
+        <label>Provider Phone number</label>
+        <input type="text" name="provider_phonenumber" value="{{provider_phonenumber}}">
+        <label>Provider TaxID</label>
+        <input type="text" name="provider_taxid" value="{{provider_taxid}}">
+        <label>Provider Authority</label>
+        <input type="text" name="provider_authority" value="{{provider_authority}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% endblock %}
