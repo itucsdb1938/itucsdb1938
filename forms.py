@@ -8,25 +8,50 @@ class MarketPlace:
     def MarketPlace_add(self, name, address, authority, phonenumber, taxid, commission):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """INSERT INTO marketplace (name, address, authority, phonenumber, taxid, commissionfee) VALUES (%s, %s, %s, %s, %s, %s)"""
+        queryString = """INSERT INTO Marketplace (name, address, authority, phonenumber, taxid, commissionfee) VALUES (%s, %s, %s, %s, %s, %s)"""
         cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
     
-    def MarketPlace_select(self, name = "IS NOT NULL", address = "IS NOT NULL", authority = "IS NOT NULL", phonenumber = "IS NOT NULL", taxid = "IS NOT NULL", commission = "IS NOT NULL"):
-        parameters = [name, address, authority, phonenumber, taxid, commission]
-        for i in parameters:
-            if (i.upper() == 'NULL'):
-                i = 'IS ' + i.upper()
-            elif (i.upper() == 'NOT NULL'):
-                i = 'IS ' + i.upper()
-            else:
-                i = '= ' + i.upper()
+    def MarketPlace_select(self, id, name):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """SELECT * FROM marketplace WHERE (name %s AND address %s AND authority %s AND phonenumber %s AND taxid %s AND commissionfee %s)"""
-        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission))
-        selection = cursor.fetchall()
+        if (id == '*' or name == '*'):
+            queryString = """SELECT * FROM Marketplace ORDER BY MarketID ASC"""
+            cursor.execute(queryString)
+            selection = cursor.fetchall()
+            cursor.close()
+            return selection
+        elif (id == '' and name != ''):
+            queryString = """SELECT * FROM Marketplace WHERE name = %s ORDER BY MarketID ASC"""
+            cursor.execute(queryString, (name,))
+            selection = cursor.fetchall()
+            cursor.close()
+            return selection
+        elif (id != '' and name == ''):
+            queryString = """SELECT * FROM Marketplace WHERE MarketID = %s ORDER BY MarketID ASC"""
+            cursor.execute(queryString, (id))
+            selection = cursor.fetchall()
+            cursor.close()
+            return selection
+        else:
+            return
+    
+    def MarketPlace_delete(self, market_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """DELETE FROM Marketplace WHERE MarketID = %s"""
+        cursor.execute(queryString, (market_id,))
+        dbconnection.commit()
         cursor.close()
-        return selection
+        dbconnection.close()
+
+    def MarketPlace_edit(self, name, address, authority, phonenumber, taxid, commission, market_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """UPDATE Marketplace SET name = %s, address = %s, authority = %s, phonenumber = %s, taxid = %s, commissionfee = %s  WHERE  MarketID = %s"""
+        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission, market_id))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()

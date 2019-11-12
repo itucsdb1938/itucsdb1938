@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Marketplace</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Marketplace ID</label>
+        <input type="text" name="market_id" value="{{market_id}}">
+        <label>Marketplace name</label>
+        <input type="text" name="market_name" value="{{market_name}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% if data %}
+<div>
+    <form method='POST'>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>address</th>
+                    <th>authority</th>
+                    <th>number</th>
+                    <th>taxid</th>
+                    <th>comission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td><input type="radio" name="options" value= "{{ item[0] }}"></input><br></td>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                    <td>{{ item[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" name="submit_button" value="Delete Selected">
+        <input type="submit" name="submit_button" value="Edit Selected">
+    </form>
+</div>
+{% endif %}
+{% endblock %}

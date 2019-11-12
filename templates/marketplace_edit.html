@@ -5,6 +5,35 @@
 {% block content %}
 <div>
     <form method='POST'>
+        Current data:
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>address</th>
+                    <th>authority</th>
+                    <th>number</th>
+                    <th>taxid</th>
+                    <th>comission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td><input type="radio" name="options" value="{{ item[0] }}"></input><br></td>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                    <td>{{ item[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
         <label>Marketplace name</label>
         <input type="text" name="market_name" value="{{market_name}}">
         <label>Marketplace Adress</label>
