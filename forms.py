@@ -1,7 +1,8 @@
 import psycopg2 as dbapi
 import os
 
-url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+# url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+url = os.getenv("DB_URL")
 
 class MarketPlace:
 
