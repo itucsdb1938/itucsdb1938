@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Employee</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Employee Name</label>
+        <input type="text" name="employee_name" value="{{employee_name}}">
+        <label>Employee Surname</label>
+        <input type="text" name="employee_surname" value="{{employee_surname}}">
+        <label>Employee Phone Number</label>
+        <input type="text" name="employee_phonenumber" value="{{employee_phonenumber}}">
+        <label>Employee E-mail</label>
+        <input type="text" name="employee_email" value="{{employee_email}}">
+        <label>Employee Working Hours</label>
+        <input type="text" name="employee_workinghours" value="{{employee_workinghours}}">
+        <label>Employee Working Days</label>
+        <input type="text" name="employee_workingdays" value="{{employee_workingdays}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% endblock %}

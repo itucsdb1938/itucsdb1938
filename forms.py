@@ -1,7 +1,7 @@
 import psycopg2 as dbapi
 import os
 
-# url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+#url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
 url = os.getenv("DB_URL")
 
 class MarketPlace:
@@ -123,6 +123,67 @@ class Provider:
         cursor = dbconnection.cursor()
         queryString = """UPDATE Provider SET Company = %s, Address = %s, Phone = %s, TaxID = %s, Authority = %s WHERE ProviderID = %s;"""
         cursor.execute(queryString, (company, address, phone, taxid, authority, provider_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+class Employee:
+    def Employee_add(self, name, surname, phonenumber, email, workinghours, workingdays):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """INSERT INTO Employee (name, surname, phonenumber, email, workinghours, workingdays) VALUES (%s, %s, %s, %s, %s, %s);"""
+        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+    
+    def Employee_select(self, employee_id, name):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        if (employee_id == '*' or name == '*'):
+            queryString = """SELECT * FROM Employee ORDER BY EmployeeID ASC;"""
+            cursor.execute(queryString)
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (employee_id == '' and name != ''):
+            queryString = """SELECT * FROM Employee WHERE name = %s ORDER BY EmployeeID ASC;"""
+            cursor.execute(queryString, (name,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (employee_id != '' and name == ''):
+            queryString = """SELECT * FROM Employee WHERE EmployeeID = %s ORDER BY EmployeeID ASC;"""
+            cursor.execute(queryString, (employee_id,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        else:
+            cursor.close()
+            dbconnection.commit()
+            dbconnection.close()
+            return
+
+    def Employee_delete(self,employee_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """DELETE FROM Employee WHERE EmployeeID = %s;"""
+        cursor.execute(queryString, (employee_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+    
+    def Employee_edit(self, employee_id, name, surname, phonenumber, email, workinghours, workingdays):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """UPDATE Employee SET name = %s, surname = %s, phonenumber = %s, email = %s, workinghours = %s, workingdays = %s  WHERE  employeeid = %s;"""
+        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays, employee_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Employee</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Employee ID</label>
+        <input type="text" name="employee_id" value="{{employee_id}}">
+        <label>Employee name</label>
+        <input type="text" name="employee_name" value="{{employee_name}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% if data %}
+<div>
+    <form method='POST'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Selection</th>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>surname</th>
+                    <th>phone number</th>
+                    <th>e-mail</th>
+                    <th>working hours</th>
+                    <th>working days</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td><input type="radio" name="options" value= "{{ item[0] }}"></input><br></td>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                    <td>{{ item[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" name="submit_button" value="Delete Selected">
+        <input type="submit" name="submit_button" value="Edit Selected">
+    </form>
+</div>
+{% endif %}
+{% endblock %}

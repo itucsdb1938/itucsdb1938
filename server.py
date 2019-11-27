@@ -27,6 +27,10 @@ def home_page():
             return redirect(url_for('provider_add'))
         elif (request.form['submit_button'] == 'Provider List'):
             return redirect(url_for('provider_list'))
+        elif (request.form['submit_button'] == 'Employee Add'):
+            return redirect(url_for('employee_add'))
+        elif (request.form['submit_button'] == 'Employee List'):
+            return redirect(url_for('employee_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
@@ -158,6 +162,73 @@ def provider_edit (provider_id):
             return redirect(url_for('provider_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+@app.route("/employee_add", methods=['GET', 'POST'])
+def employee_add ():
+    if request.method == 'GET':
+        return render_template('employee_add.html')
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Submit'):
+            employee_name = request.form.get('employee_name')
+            employee_surname = request.form.get('employee_surname')
+            employee_phonenumber = request.form.get('employee_phonenumber')
+            employee_email = request.form.get('employee_email')
+            employee_workinghours = request.form.get('employee_workinghours')
+            employee_workingdays = request.form.get('employee_workingdays')
+            obj = forms.Employee()
+            obj.Employee_add (employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+            return redirect(url_for('employee_add'))
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+@app.route("/employee_list",methods=['GET', 'POST'])
+def employee_list ():
+    if request.method == 'GET':
+        return render_template('employee_list.html')
+
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Delete Selected'):
+            option = request.form['options']
+            obj = forms.Employee()
+            obj.Employee_delete(option)
+            return redirect(url_for('employee_list'))
+
+        elif (request.form['submit_button'] == 'Edit Selected'):
+            option = request.form['options']
+            return redirect(url_for('employee_edit', employee_id = option))
+
+        elif (request.form['submit_button'] == 'Submit'):
+            employee_id = request.form.get('employee_id')
+            employee_name = request.form.get('employee_name')
+            obj = forms.Employee()
+            data = obj.Employee_select(employee_id, employee_name)
+            return render_template('employee_list.html', data = data)
+
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+@app.route("/employee_edit/<employee_id>", methods=['GET','POST'])
+def employee_edit(employee_id):
+    if request.method == 'GET':
+        obj = forms.Employee()
+        data = obj.Employee_select(employee_id, '')
+        return render_template('employee_edit.html', data = data)
+
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Submit'):
+            employee_name = request.form.get('employee_name')
+            employee_surname = request.form.get('employee_surname')
+            employee_phonenumber = request.form.get('employee_phonenumber')
+            employee_email = request.form.get('employee_email')
+            employee_workinghours = request.form.get('employee_workinghours')
+            employee_workingdays = request.form.get('employee_workingdays')
+            obj = forms.Employee()
+            obj.Employee_edit(employee_id, employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+            return redirect(url_for('employee_list'))
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+
 
 if __name__ == "__main__":
     app.run()
