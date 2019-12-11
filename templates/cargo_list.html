@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+<title>cargo</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Cargo ID</label>
+        <input type="text" name="cargo_id" value="{{cargo_id}}">
+        <label>Cargo company</label>
+        <input type="text" name="cargo_company" value="{{cargo_company}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% if data %}
+<div>
+    <form method='POST'>
+        <table>
+            <thead>
+                <th>Selection</th>
+                <th>Cargo ID</th>
+                <th>Cargo Company</th>
+                <th>Cargo Address</th>
+                <th>Cargo Price Per Kg</th>
+                <th>Cargo TaxID</th>
+                <th>Cargo Authority</th>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td><input type="radio" name="options" value="{{ item[0] }}"></input><br></td>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" name="submit_button" value="Delete Selected">
+        <input type="submit" name="submit_button" value="Edit Selected">
+    </form>
+</div>
+{% endif %}
+{% endblock %}

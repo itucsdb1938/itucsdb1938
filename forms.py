@@ -1,8 +1,8 @@
 import psycopg2 as dbapi
 import os
 
-#url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
-url = os.getenv("DB_URL")
+url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+#url = os.getenv("DB_URL")
 
 class MarketPlace:
 
@@ -184,6 +184,67 @@ class Employee:
         cursor = dbconnection.cursor()
         queryString = """UPDATE Employee SET name = %s, surname = %s, phonenumber = %s, email = %s, workinghours = %s, workingdays = %s  WHERE  employeeid = %s;"""
         cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays, employee_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+class CargoCompany:
+    def cargo_add(self, company, address, price, taxid, authority):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """INSERT INTO CargoCompany (Name, Address, Priceperkilo, TaxID, Authority) VALUES (%s, %s, %s, %s, %s);"""
+        cursor.execute(queryString, (company, address, price, taxid, authority,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+    
+    def cargo_select(self, cargo_id, company):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        if (cargo_id == '*' or company == '*'):
+            queryString = """SELECT * FROM CargoCompany;"""
+            cursor.execute(queryString)
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (cargo_id == '' and company != ''):
+            queryString = """SELECT * FROM CargoCompany WHERE Name = %s;"""
+            cursor.execute(queryString, (company,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (cargo_id != '' and company == ''):
+            queryString = """SELECT * FROM CargoCompany WHERE companyID = %s;"""
+            cursor.execute(queryString, (cargo_id,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        else:
+            cursor.close()
+            dbconnection.commit()
+            dbconnection.close()
+            return
+
+    def cargo_delete(self, cargo_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """DELETE FROM CargoCompany WHERE companyID = %s;"""
+        cursor.execute(queryString, (cargo_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+    def cargo_edit(self, cargo_id, company, address, price, taxid, authority):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """UPDATE CargoCompany SET Name = %s, Address = %s, Priceperkilo = %s, TaxID = %s, Authority = %s WHERE companyID = %s;"""
+        cursor.execute(queryString, (company, address, price, taxid, authority, cargo_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()

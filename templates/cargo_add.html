@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Cargo</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Cargo company</label>
+        <input type="text" name="cargo_company" value="{{cargo_company}}">
+        <label>Cargo Adress</label>
+        <input type="text" name="cargo_address" value="{{cargo_address}}">
+        <label>Cargo Phone number</label>
+        <input type="text" name="cargo_price" value="{{cargo_price}}">
+        <label>Cargo TaxID</label>
+        <input type="text" name="cargo_taxid" value="{{cargo_taxid}}">
+        <label>Cargo Authority</label>
+        <input type="text" name="cargo_authority" value="{{cargo_authority}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% endblock %}

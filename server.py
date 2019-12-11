@@ -6,8 +6,8 @@ import psycopg2 as dbapi2
 from flask import Flask, render_template, redirect, url_for, request, session, escape, jsonify
 
 
-#url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'" 
-url = os.getenv("DB_URL")
+url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'" 
+#url = os.getenv("DB_URL")
 
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def home_page():
 
     if (request.method == 'POST'):
         if (request.form['submit_button'] == 'Marketplace Add'):
-            return redirect(url_for('marketplace_add'))
+           return redirect(url_for('marketplace_add'))
         elif (request.form['submit_button'] == 'Marketplace List'):
             return redirect(url_for('marketplace_list'))
         elif (request.form['submit_button'] == 'Provider Add'):
@@ -31,8 +31,13 @@ def home_page():
             return redirect(url_for('employee_add'))
         elif (request.form['submit_button'] == 'Employee List'):
             return redirect(url_for('employee_list'))
+        elif (request.form['submit_button'] == 'Cargo Company Add'):
+            return redirect(url_for('cargo_add'))
+        elif (request.form['submit_button'] == 'Cargo Company List'):
+            return redirect(url_for('cargo_list'))                        
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
 
 @app.route("/marketplace_add", methods=['GET','POST'])
 def marketplace_add():
@@ -227,7 +232,68 @@ def employee_edit(employee_id):
             return redirect(url_for('employee_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+@app.route("/cargo_add", methods=['GET', 'POST'])
+def cargo_add ():
+    if request.method == 'GET':
+        return render_template('cargo_add.html')
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Submit'):
+            cargo_company = request.form.get('cargo_company')
+            cargo_address = request.form.get('cargo_address')
+            cargo_price = request.form.get('cargo_price')
+            cargo_taxid = request.form.get('cargo_taxid')
+            cargo_authority = request.form.get('cargo_authority')
+            obj = forms.CargoCompany()
+            obj.cargo_add(cargo_company, cargo_address, cargo_price, cargo_taxid, cargo_authority)
+            return redirect(url_for('cargo_add'))
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
 
+@app.route("/cargo_list",methods=['GET', 'POST'])
+def cargo_list ():
+    if request.method == 'GET':
+        return render_template('cargo_list.html')
+
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Delete Selected'):
+            option = request.form['options']
+            obj = forms.CargoCompany()
+            obj.cargo_delete(option)
+            return redirect(url_for('cargo_list'))
+
+        elif (request.form['submit_button'] == 'Edit Selected'):
+            option = request.form['options']
+            return redirect(url_for('cargo_edit', cargo_id = option))
+
+        elif (request.form['submit_button'] == 'Submit'):
+            cargo_id = request.form.get('cargo_id')
+            cargo_company = request.form.get('cargo_company')
+            obj = forms.CargoCompany()
+            data = obj.cargo_select(cargo_id, cargo_company)
+            return render_template('cargo_list.html', data = data)
+
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+@app.route("/cargo_edit/<cargo_id>",methods=['GET', 'POST'])
+def cargo_edit (cargo_id):
+    if request.method == 'GET':
+        obj = forms.CargoCompany()
+        data = obj.cargo_select(cargo_id, '')
+        return render_template('cargo_edit.html', data = data)
+
+    if request.method == 'POST':
+        if (request.form['submit_button'] == 'Submit'):
+            cargo_company = request.form.get('cargo_company')
+            cargo_address = request.form.get('cargo_address')
+            cargo_price = request.form.get('cargo_price')
+            cargo_taxid = request.form.get('cargo_taxid')
+            cargo_authority = request.form.get('cargo_authority')
+            obj = forms.CargoCompany()
+            obj.cargo_edit(cargo_id, cargo_company, cargo_address, cargo_price, cargo_taxid, cargo_authority)
+            return redirect(url_for('cargo_list'))
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
 
 
 if __name__ == "__main__":
