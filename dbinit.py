@@ -43,8 +43,8 @@ INIT_STATEMENTS = [
         ProductID serial PRIMARY KEY,
         Name varchar(255) NOT NULL,
         Brand varchar(255) NOT NULL,
-        Purchase integer NOT NULL,
-        Sale integer NOT NULL,
+        Buyprice integer NOT NULL,
+        Sellprice integer NOT NULL,
         ProviderID integer REFERENCES provider(providerid),
         Weight integer NOT NULL
     )""",

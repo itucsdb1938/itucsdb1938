@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Products</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Product Name</label>
+        <input type="text" name="product_name" value="{{product_name}}">
+        <label>Product Brand</label>
+        <input type="text" name="product_brand" value="{{product_brand}}">
+        <label>Buy Price</label>
+        <input type="text" name="product_buyprice" value="{{product_buyprice}}">
+        <label>Sell Price</label>
+        <input type="text" name="product_sellprice" value="{{product_sellprice}}">
+        <label>Provider</label>
+        <select name="provider_id">
+            {% for item in data %}
+                <option value="{{item[0]}}">{{item[1]}}</option>
+            {% endfor %}
+          </select>
+        <label>Prduct Weight</label>
+        <input type="text" name="product_weight" value="{{product_weight}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% endblock %}
