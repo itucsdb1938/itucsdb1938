@@ -11,7 +11,6 @@
                 <th>id</th>
                 <th>name</th>
                 <th>brand</th>
-                <th>buy price</th>
                 <th>sell price</th>
                 <th>provider</th>
                 <th>weight</th>
@@ -36,13 +35,11 @@
         <input type="text" name="product_name" value="{{product_name}}">
         <label>Product Brand</label>
         <input type="text" name="product_brand" value="{{product_brand}}">
-        <label>Buy Price</label>
-        <input type="text" name="product_buyprice" value="{{product_buyprice}}">
         <label>Sell Price</label>
         <input type="text" name="product_sellprice" value="{{product_sellprice}}">
         <label>Provider</label>
         <select name="provider_id">
-            {% for item in data[1] %}
+            {% for item in data[1][0] %}
                 {% for subitem in item %}    
                 <option value="{{subitem[0]}}">{{subitem[1]}}</option>
                 {% endfor %}

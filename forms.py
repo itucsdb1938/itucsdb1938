@@ -1,8 +1,8 @@
 import psycopg2 as dbapi
 import os
 
-#url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
-url = os.getenv("DB_URL")
+url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+#url = os.getenv("DB_URL")
 
 class MarketPlace:
 
@@ -67,6 +67,7 @@ class MarketPlace:
         dbconnection.close()
 
 class Provider:
+
     def Provider_add(self, company, address, phone, taxid, authority):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
@@ -139,6 +140,7 @@ class Provider:
         return selection
 
 class Employee:
+
     def Employee_add(self, name, surname, phonenumber, email, workinghours, workingdays):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
@@ -200,6 +202,7 @@ class Employee:
         dbconnection.close()
 
 class CargoCompany:
+
     def cargo_add(self, company, address, price, taxid, authority):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
@@ -261,11 +264,12 @@ class CargoCompany:
         dbconnection.close()
 
 class Product:
-    def Product_add(self, name, brand, buy_price, sell_price, provider_id, weight):
+
+    def Product_add(self, name, brand, sell_price, provider_id, weight):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """INSERT INTO Products (Name, Brand, Buyprice, Sellprice, ProviderID, Weight) VALUES (%s, %s, %s, %s, %s, %s);"""
-        cursor.execute(queryString, (name, brand, buy_price, sell_price, provider_id, weight,))
+        queryString = """INSERT INTO Products (Name, Brand, Sellprice, ProviderID, Weight) VALUES (%s, %s, %s, %s, %s);"""
+        cursor.execute(queryString, (name, brand, sell_price, provider_id, weight,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
@@ -283,7 +287,7 @@ class Product:
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
         if (product_id == '*' or name == '*'):
-            queryString = """SELECT productid, name, brand, buyprice, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid ORDER BY productID ASC;"""
+            queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid ORDER BY productID ASC;"""
             cursor.execute(queryString)
             selection = cursor.fetchall()
             dbconnection.commit()
@@ -291,7 +295,7 @@ class Product:
             dbconnection.close()
             return selection
         elif (product_id == '' and name != ''):
-            queryString = """SELECT productid, name, brand, buyprice, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE Name = %s ORDER BY productID ASC;"""
+            queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE Name = %s ORDER BY productID ASC;"""
             cursor.execute(queryString, (name,))
             selection = cursor.fetchall()
             dbconnection.commit()
@@ -299,7 +303,7 @@ class Product:
             dbconnection.close()
             return selection
         elif (product_id != '' and name == ''):
-            queryString = """SELECT productid, name, brand, buyprice, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE productID = %s ORDER BY productID ASC;"""
+            queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE productID = %s ORDER BY productID ASC;"""
             cursor.execute(queryString, (product_id,))
             selection = cursor.fetchall()
             dbconnection.commit()
@@ -312,11 +316,91 @@ class Product:
             dbconnection.close()
             return
 
-    def Product_edit(self, product_id, name, brand, buy_price, sell_price, provider_id, weight):
+    def Product_edit(self, product_id, name, brand, sell_price, provider_id, weight):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """UPDATE Products SET Name = %s, Brand = %s, Buyprice = %s, Sellprice = %s, ProviderID = %s, Weight = %s WHERE productID = %s;"""
-        cursor.execute(queryString, (name, brand, buy_price, sell_price, provider_id, weight, product_id,))
+        queryString = """UPDATE Products SET Name = %s, Brand = %s, Sellprice = %s, ProviderID = %s, Weight = %s WHERE productID = %s;"""
+        cursor.execute(queryString, (name, brand, sell_price, provider_id, weight, product_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+    def Product_name_select(self):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT productid, brand, name FROM Products;"""
+        cursor.execute(queryString)
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
+
+class Supply:
+    def Supply_add(self, provider_id, price, quantity, time, productID):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """INSERT INTO supply_order (providerid, price, quantity, time, productID) VALUES (%s, %s, %s, %s, %s);"""
+        cursor.execute(queryString, (provider_id, price, quantity, time, productID,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+    def Supply_delete(self,supply_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """DELETE FROM supply_order WHERE orderID = %s;"""
+        cursor.execute(queryString, (supply_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+    def Supply_select(self, supply_id, name, company):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        if (supply_id == '*' or name == '*' or company == '*'):
+            queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid ORDER BY orderID ASC;"""
+            cursor.execute(queryString)
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (supply_id == '' and name != '' and company == ''):
+            queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid WHERE supply_order.productid = %s ORDER BY orderID ASC;"""
+            cursor.execute(queryString, (name,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (supply_id != '' and name == '' and company == ''):
+            queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid WHERE orderID = %s ORDER BY orderID ASC;"""
+            cursor.execute(queryString, (supply_id,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (supply_id == '' and name == '' and company != ''):
+            queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid WHERE supply_order.providerid = %s ORDER BY orderID ASC;"""
+            cursor.execute(queryString, (company,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        else:
+            cursor.close()
+            dbconnection.commit()
+            dbconnection.close()
+            return
+
+    def Supply_edit (self, order_id, provider_id, price, quantity, time, productID):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """UPDATE supply_order SET providerID = %s, price = %s, quantity = %s, time = %s, productID = %s WHERE orderID = %s;"""
+        cursor.execute(queryString, (provider_id, price, quantity, time, productID, order_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()

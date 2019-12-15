@@ -9,14 +9,14 @@
         <input type="text" name="product_name" value="{{product_name}}">
         <label>Product Brand</label>
         <input type="text" name="product_brand" value="{{product_brand}}">
-        <label>Buy Price</label>
-        <input type="text" name="product_buyprice" value="{{product_buyprice}}">
         <label>Sell Price</label>
         <input type="text" name="product_sellprice" value="{{product_sellprice}}">
         <label>Provider</label>
         <select name="provider_id">
             {% for item in data %}
-                <option value="{{item[0]}}">{{item[1]}}</option>
+            {% for subitem in item %}
+                <option value="{{subitem[0]}}">{{subitem[1]}}</option>
+            {% endfor %} 
             {% endfor %}
           </select>
         <label>Prduct Weight</label>

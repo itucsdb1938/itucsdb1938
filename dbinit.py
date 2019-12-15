@@ -12,7 +12,7 @@ INIT_STATEMENTS = [
         Phone varchar(12) NOT NULL,
         TaxID varchar(10) NOT NULL,
         Authority text NOT NULL
-        )""",
+        );""",
     """CREATE TABLE IF NOT EXISTS Employee(
         EmployeeID serial PRIMARY KEY,
         Name varchar(40) NOT NULL,
@@ -21,7 +21,7 @@ INIT_STATEMENTS = [
         Email varchar(25) NOT NULL,
         WorkingHours varchar(255) NOT NULL,
         WorkingDays varchar(255) NOT NULL
-    )""",
+    );""",
     """CREATE TABLE IF NOT EXISTS CargoCompany(
         CompanyID serial PRIMARY KEY,
         Name varchar(255) NOT NULL,
@@ -29,7 +29,7 @@ INIT_STATEMENTS = [
         PricePerKilo integer NOT NULL,
         TaxID varchar(10) NOT NULL,
         Authority text NOT NULL
-    )""",
+    );""",
     """CREATE TABLE IF NOT EXISTS Marketplace(
         MarketID serial PRIMARY KEY,
         Name varchar(255) NOT NULL,
@@ -38,7 +38,7 @@ INIT_STATEMENTS = [
         Phonenumber varchar(12) NOT NULL,
         TaxID varchar(10) NOT NULL,
         Commissionfee integer NOT NULL
-    )""",
+    );""",
     """CREATE TABLE IF NOT EXISTS Products(
         ProductID serial PRIMARY KEY,
         Name varchar(255) NOT NULL,
@@ -47,7 +47,7 @@ INIT_STATEMENTS = [
         Sellprice integer NOT NULL,
         ProviderID integer REFERENCES provider(providerid),
         Weight integer NOT NULL
-    )""",
+    );""",
     """CREATE TABLE IF NOT EXISTS Stock(
         ID serial PRIMARY KEY,
         Location_x integer NOT NULL,
@@ -55,7 +55,7 @@ INIT_STATEMENTS = [
         Location_z integer NOT NULL,
         Productid integer REFERENCES products(productid),
         Quantity integer NOT NULL
-    )""",
+    );""",
     """CREATE TABLE IF NOT EXISTS Temporary_order(
         OrderID serial PRIMARY KEY,
         Marketplaceid integer REFERENCES marketplace(marketid),
@@ -63,32 +63,29 @@ INIT_STATEMENTS = [
         Order_time varchar(255) NOT NULL,
         Customer_name varchar(255) NOT NULL,
         Cargo_company integer REFERENCES cargocompany(companyid),
-        Product integer REFERENCES products(productid),
+        ProductID integer REFERENCES products(productid),
         Quantity integer NOT NULL,
-        Employee integer REFERENCES employee(employeeid),
+        EmployeeID integer REFERENCES employee(employeeid),
         IsDispatched bool NOT NULL
-    )""",
+    );""",
     """CREATE TABLE IF NOT EXISTS Orders(
         OrderID serial PRIMARY KEY,
-        Marketplaceid integer REFERENCES marketplace(marketid),
+        MarketplaceID integer REFERENCES marketplace(marketid),
         Shipaddress varchar(255) NOT NULL,
         Order_time varchar(255) NOT NULL,
         Customer_name varchar(255) NOT NULL,
-        Cargo_company integer REFERENCES cargocompany(companyid),
-        Product integer REFERENCES products(productid),
+        Cargo_companyID integer REFERENCES cargocompany(companyid),
+        ProductID integer REFERENCES products(productid),
         Quantity integer NOT NULL
-    )""",
+    );""",
     """CREATE TABLE IF NOT EXISTS Supply_order(
         OrderID serial PRIMARY KEY,
         ProviderID integer REFERENCES provider(ProviderID),
         Price integer NOT NULL,
         Quantity integer NOT NULL,
         Time varchar(255) NOT NULL,
-        Product_name varchar(255) NOT NULL,
-        Brand_name varchar(255) NOT NULL,
-        Weight integer NOT NULL
-
-    )""",
+        ProductID integer REFERENCES products(productid)
+    );""",
     """CREATE TABLE IF NOT EXISTS Financial(
         TransactionID serial PRIMARY KEY,
         OrderID integer REFERENCES orders(orderid),
@@ -96,9 +93,7 @@ INIT_STATEMENTS = [
         Transaction integer NOT NULL,
         Cargo_price integer NOT NULL,
         Total integer NOT NULL
-
-
-    )"""
+    );"""
 ]
 
 

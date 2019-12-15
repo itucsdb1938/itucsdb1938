@@ -2,14 +2,12 @@ import os
 import sys
 import forms
 import functions
-
+from datetime import datetime
 import psycopg2 as dbapi2
 from flask import Flask, render_template, redirect, url_for, request, session, escape, jsonify
 
-
-#url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'" 
-url = os.getenv("DB_URL")
-
+url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+#url = os.getenv("DB_URL")
 
 app = Flask(__name__)
 
@@ -21,7 +19,7 @@ def home_page():
 
     if (request.method == 'POST'):
         if (request.form['submit_button'] == 'Marketplace Add'):
-           return redirect(url_for('marketplace_add'))
+            return redirect(url_for('marketplace_add'))
         elif (request.form['submit_button'] == 'Marketplace List'):
             return redirect(url_for('marketplace_list'))
         elif (request.form['submit_button'] == 'Provider Add'):
@@ -35,16 +33,20 @@ def home_page():
         elif (request.form['submit_button'] == 'Cargo Company Add'):
             return redirect(url_for('cargo_add'))
         elif (request.form['submit_button'] == 'Cargo Company List'):
-            return redirect(url_for('cargo_list'))                        
+            return redirect(url_for('cargo_list'))
         elif (request.form['submit_button'] == 'Product Add'):
-            return redirect(url_for('product_add'))  
+            return redirect(url_for('product_add'))
         elif (request.form['submit_button'] == 'Product List'):
-            return redirect(url_for('product_list')) 
+            return redirect(url_for('product_list'))
+        elif (request.form['submit_button'] == 'Supply Add'):
+            return redirect(url_for('supply_add'))
+        elif (request.form['submit_button'] == 'Supply List'):
+            return redirect(url_for('supply_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
 
-@app.route("/marketplace_add", methods=['GET','POST'])
+@app.route("/marketplace_add", methods=['GET', 'POST'])
 def marketplace_add():
     if request.method == 'GET':
         return render_template('marketplace_add.html')
@@ -58,12 +60,15 @@ def marketplace_add():
             market_taxid = request.form.get('market_taxid')
             market_commisionfee = request.form.get('market_commission')
             obj = forms.MarketPlace()
-            obj.MarketPlace_add(market_name,market_address,market_authority,market_phonenumber,market_taxid,market_commisionfee)
+            obj.MarketPlace_add(market_name, market_address, market_authority,
+                                market_phonenumber, market_taxid,
+                                market_commisionfee)
             return redirect(url_for('marketplace_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
- 
-@app.route("/marketplace_list", methods=['GET','POST'])
+
+
+@app.route("/marketplace_list", methods=['GET', 'POST'])
 def marketplace_list():
     if request.method == 'GET':
         return render_template('marketplace_list.html')
@@ -77,24 +82,25 @@ def marketplace_list():
 
         elif (request.form['submit_button'] == 'Edit Selected'):
             option = request.form['options']
-            return redirect(url_for('marketplace_edit', market_id = option))
+            return redirect(url_for('marketplace_edit', market_id=option))
 
         elif (request.form['submit_button'] == 'Submit'):
             market_id = request.form.get('market_id')
             market_name = request.form.get('market_name')
             obj = forms.MarketPlace()
             data = obj.MarketPlace_select(market_id, market_name)
-            return render_template('marketplace_list.html', data = data)
+            return render_template('marketplace_list.html', data=data)
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/marketplace_edit/<market_id>", methods=['GET','POST'])
+
+@app.route("/marketplace_edit/<market_id>", methods=['GET', 'POST'])
 def marketplace_edit(market_id):
     if request.method == 'GET':
         obj = forms.MarketPlace()
         data = obj.MarketPlace_select(market_id, '')
-        return render_template('marketplace_edit.html', data = data)
+        return render_template('marketplace_edit.html', data=data)
 
     elif request.method == 'POST':
         if (request.form['submit_button'] == 'Submit'):
@@ -105,13 +111,16 @@ def marketplace_edit(market_id):
             market_taxid = request.form.get('market_taxid')
             market_commisionfee = request.form.get('market_commission')
             obj = forms.MarketPlace()
-            obj.MarketPlace_edit(market_id,market_name,market_address,market_authority,market_phonenumber,market_taxid,market_commisionfee)
+            obj.MarketPlace_edit(market_id, market_name, market_address,
+                                 market_authority, market_phonenumber,
+                                 market_taxid, market_commisionfee)
             return redirect(url_for('marketplace_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+
 @app.route("/provider_add", methods=['GET', 'POST'])
-def provider_add ():
+def provider_add():
     if request.method == 'GET':
         return render_template('provider_add.html')
     elif request.method == 'POST':
@@ -122,13 +131,16 @@ def provider_add ():
             provider_taxid = request.form.get('provider_taxid')
             provider_authority = request.form.get('provider_authority')
             obj = forms.Provider()
-            obj.Provider_add(provider_company, provider_address, provider_phonenumber, provider_taxid, provider_authority)
+            obj.Provider_add(provider_company, provider_address,
+                             provider_phonenumber, provider_taxid,
+                             provider_authority)
             return redirect(url_for('provider_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/provider_list",methods=['GET', 'POST'])
-def provider_list ():
+
+@app.route("/provider_list", methods=['GET', 'POST'])
+def provider_list():
     if request.method == 'GET':
         return render_template('provider_list.html')
 
@@ -141,24 +153,25 @@ def provider_list ():
 
         elif (request.form['submit_button'] == 'Edit Selected'):
             option = request.form['options']
-            return redirect(url_for('provider_edit', provider_id = option))
+            return redirect(url_for('provider_edit', provider_id=option))
 
         elif (request.form['submit_button'] == 'Submit'):
             provider_id = request.form.get('provider_id')
             provider_company = request.form.get('provider_company')
             obj = forms.Provider()
             data = obj.Provider_select(provider_id, provider_company)
-            return render_template('provider_list.html', data = data)
+            return render_template('provider_list.html', data=data)
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/provider_edit/<provider_id>",methods=['GET', 'POST'])
-def provider_edit (provider_id):
+
+@app.route("/provider_edit/<provider_id>", methods=['GET', 'POST'])
+def provider_edit(provider_id):
     if request.method == 'GET':
         obj = forms.Provider()
         data = obj.Provider_select(provider_id, '')
-        return render_template('provider_edit.html', data = data)
+        return render_template('provider_edit.html', data=data)
 
     if request.method == 'POST':
         if (request.form['submit_button'] == 'Submit'):
@@ -168,13 +181,16 @@ def provider_edit (provider_id):
             provider_taxid = request.form.get('provider_taxid')
             provider_authority = request.form.get('provider_authority')
             obj = forms.Provider()
-            obj.Provider_edit(provider_id, provider_company, provider_address, provider_phonenumber, provider_taxid, provider_authority)
+            obj.Provider_edit(provider_id, provider_company, provider_address,
+                              provider_phonenumber, provider_taxid,
+                              provider_authority)
             return redirect(url_for('provider_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+
 @app.route("/employee_add", methods=['GET', 'POST'])
-def employee_add ():
+def employee_add():
     if request.method == 'GET':
         return render_template('employee_add.html')
     elif request.method == 'POST':
@@ -186,13 +202,16 @@ def employee_add ():
             employee_workinghours = request.form.get('employee_workinghours')
             employee_workingdays = request.form.get('employee_workingdays')
             obj = forms.Employee()
-            obj.Employee_add (employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+            obj.Employee_add(employee_name, employee_surname,
+                             employee_phonenumber, employee_email,
+                             employee_workinghours, employee_workingdays)
             return redirect(url_for('employee_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/employee_list",methods=['GET', 'POST'])
-def employee_list ():
+
+@app.route("/employee_list", methods=['GET', 'POST'])
+def employee_list():
     if request.method == 'GET':
         return render_template('employee_list.html')
 
@@ -205,24 +224,25 @@ def employee_list ():
 
         elif (request.form['submit_button'] == 'Edit Selected'):
             option = request.form['options']
-            return redirect(url_for('employee_edit', employee_id = option))
+            return redirect(url_for('employee_edit', employee_id=option))
 
         elif (request.form['submit_button'] == 'Submit'):
             employee_id = request.form.get('employee_id')
             employee_name = request.form.get('employee_name')
             obj = forms.Employee()
             data = obj.Employee_select(employee_id, employee_name)
-            return render_template('employee_list.html', data = data)
+            return render_template('employee_list.html', data=data)
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/employee_edit/<employee_id>", methods=['GET','POST'])
+
+@app.route("/employee_edit/<employee_id>", methods=['GET', 'POST'])
 def employee_edit(employee_id):
     if request.method == 'GET':
         obj = forms.Employee()
         data = obj.Employee_select(employee_id, '')
-        return render_template('employee_edit.html', data = data)
+        return render_template('employee_edit.html', data=data)
 
     elif request.method == 'POST':
         if (request.form['submit_button'] == 'Submit'):
@@ -237,8 +257,10 @@ def employee_edit(employee_id):
             return redirect(url_for('employee_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+
 @app.route("/cargo_add", methods=['GET', 'POST'])
-def cargo_add ():
+def cargo_add():
     if request.method == 'GET':
         return render_template('cargo_add.html')
     elif request.method == 'POST':
@@ -249,13 +271,15 @@ def cargo_add ():
             cargo_taxid = request.form.get('cargo_taxid')
             cargo_authority = request.form.get('cargo_authority')
             obj = forms.CargoCompany()
-            obj.cargo_add(cargo_company, cargo_address, cargo_price, cargo_taxid, cargo_authority)
+            obj.cargo_add(cargo_company, cargo_address, cargo_price,
+                          cargo_taxid, cargo_authority)
             return redirect(url_for('cargo_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/cargo_list",methods=['GET', 'POST'])
-def cargo_list ():
+
+@app.route("/cargo_list", methods=['GET', 'POST'])
+def cargo_list():
     if request.method == 'GET':
         return render_template('cargo_list.html')
 
@@ -268,24 +292,25 @@ def cargo_list ():
 
         elif (request.form['submit_button'] == 'Edit Selected'):
             option = request.form['options']
-            return redirect(url_for('cargo_edit', cargo_id = option))
+            return redirect(url_for('cargo_edit', cargo_id=option))
 
         elif (request.form['submit_button'] == 'Submit'):
             cargo_id = request.form.get('cargo_id')
             cargo_company = request.form.get('cargo_company')
             obj = forms.CargoCompany()
             data = obj.cargo_select(cargo_id, cargo_company)
-            return render_template('cargo_list.html', data = data)
+            return render_template('cargo_list.html', data=data)
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/cargo_edit/<cargo_id>",methods=['GET', 'POST'])
-def cargo_edit (cargo_id):
+
+@app.route("/cargo_edit/<cargo_id>", methods=['GET', 'POST'])
+def cargo_edit(cargo_id):
     if request.method == 'GET':
         obj = forms.CargoCompany()
         data = obj.cargo_select(cargo_id, '')
-        return render_template('cargo_edit.html', data = data)
+        return render_template('cargo_edit.html', data=data)
 
     if request.method == 'POST':
         if (request.form['submit_button'] == 'Submit'):
@@ -295,34 +320,36 @@ def cargo_edit (cargo_id):
             cargo_taxid = request.form.get('cargo_taxid')
             cargo_authority = request.form.get('cargo_authority')
             obj = forms.CargoCompany()
-            obj.cargo_edit(cargo_id, cargo_company, cargo_address, cargo_price, cargo_taxid, cargo_authority)
+            obj.cargo_edit(cargo_id, cargo_company, cargo_address, cargo_price,
+                           cargo_taxid, cargo_authority)
             return redirect(url_for('cargo_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+
 @app.route("/product_add", methods=['GET', 'POST'])
-def product_add ():
+def product_add():
     if request.method == 'GET':
         obj = forms.Provider()
         data = obj.Provider_name_select()
         data = functions.group(data, 2)
-        return render_template('product_add.html', data = data)
+        return render_template('product_add.html', data=data)
     if request.method == 'POST':
         if (request.form['submit_button'] == 'Submit'):
             product_name = request.form.get('product_name')
             product_brand = request.form.get('product_brand')
-            product_buyprice = request.form.get('product_buyprice')
             product_sellprice = request.form.get('product_sellprice')
             provider_id = request.form.get('provider_id')
             product_weight = request.form.get('product_weight')
             obj = forms.Product()
-            obj.Product_add(product_name, product_brand, product_buyprice, product_sellprice, provider_id, product_weight)
+            obj.Product_add(product_name, product_brand, product_sellprice,provider_id, product_weight)
             return redirect(url_for('product_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+
 @app.route("/product_list", methods=['GET', 'POST'])
-def product_list ():
+def product_list():
     if request.method == 'GET':
         return render_template('product_list.html')
 
@@ -332,23 +359,24 @@ def product_list ():
             obj = forms.Product()
             obj.Product_delete(option)
             return redirect(url_for('product_list'))
-    
+
         elif (request.form['submit_button'] == 'Edit Selected'):
             option = request.form['options']
-            return redirect(url_for('product_edit', product_id = option))
-    
+            return redirect(url_for('product_edit', product_id=option))
+
         elif (request.form['submit_button'] == 'Submit'):
             product_id = request.form.get('product_id')
             product_name = request.form.get('product_name')
             obj = forms.Product()
             data = obj.Product_select(product_id, product_name)
-            return render_template('product_list.html', data = data)
+            return render_template('product_list.html', data=data)
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-@app.route("/product_edit/<product_id>",methods=['GET', 'POST'])
-def product_edit (product_id):
+
+@app.route("/product_edit/<product_id>", methods=['GET', 'POST'])
+def product_edit(product_id):
     if request.method == 'GET':
         obj = forms.Product()
         data = obj.Product_select(product_id, '')
@@ -356,25 +384,116 @@ def product_edit (product_id):
         data2 = obj2.Provider_name_select()
         data2 = functions.group(data2, 2)
         data = [[data], [data2]]
-        print(data)
         return render_template('product_Edit.html', data=data)
-    
+
     if request.method == 'POST':
         if (request.form['submit_button'] == 'Submit'):
             product_name = request.form.get('product_name')
             product_brand = request.form.get('product_brand')
-            product_buyprice = request.form.get('product_buyprice')
             product_sellprice = request.form.get('product_sellprice')
             provider_id = request.form.get('provider_id')
             product_weight = request.form.get('product_weight')
             obj = forms.Product()
-            obj.Product_edit(product_id, product_name, product_brand, product_buyprice, product_sellprice, provider_id, product_weight)
+            obj.Product_edit(product_id, product_name, product_brand,
+                             product_sellprice, provider_id, product_weight)
             return redirect(url_for('product_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
 
+@app.route("/supply_add", methods=['GET', 'POST'])
+def supply_add():
+    if request.method == 'GET':
+        obj = forms.Provider()
+        data = obj.Provider_name_select()
+        data = functions.group(data, 2)
+        obj2 = forms.Product()
+        data2 = obj2.Product_name_select()
+        data2 = functions.group(data2, 3)
+        print(data2)
+        data = [[data], [data2]]
+        return render_template('supply_add.html', data=data)
+    if (request.form['submit_button'] == 'Submit'):
+        provider_id = request.form.get('provider_id')
+        supply_price = request.form.get('supply_price')
+        supply_quantity = request.form.get('supply_quantity')
+        supply_time = datetime.now().strftime("%d/%m/%Y - %H:%M")
+        product_id = request.form.get('product_id')
+        obj = forms.Supply()
+        obj.Supply_add(provider_id, supply_price, supply_quantity, supply_time, product_id)
+        return redirect(url_for('supply_add'))
+    elif (request.form['submit_button'] == 'Homepage'):
+        return redirect(url_for('home_page'))
 
+@app.route("/supply_list",methods=['GET','POST'])
+def supply_list():
+    if request.method == 'GET':
+        obj = forms.Provider()
+        data = obj.Provider_name_select()
+        data = functions.group(data, 2)
+        obj2 = forms.Product()
+        data2 = obj2.Product_name_select()
+        data2 = functions.group(data2, 3)
+        data = [[data], [data2]]
+        return render_template('supply_list.html',data = data)
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Delete Selected'):
+            option = request.form['options']
+            obj = forms.Supply()
+            obj.Supply_delete(option)
+            return redirect(url_for('supply_list'))
+        elif (request.form['submit_button'] == 'Edit Selected'):
+                option = request.form['options']
+                return redirect(url_for('supply_edit', supply_id=option))
+        elif (request.form['submit_button'] == 'Submit'):
+            supply_id = request.form.get('supply_id')
+            product_id = request.form.get('product_id')
+            provider_id = request.form.get('provider_id')
+            obj = forms.Provider()
+            data = obj.Provider_name_select()
+            data = functions.group(data, 2)
+            obj2 = forms.Product()
+            data2 = obj2.Product_name_select()
+            data2 = functions.group(data2, 3)
+            obj3 = forms.Supply()
+            data3 = obj3.Supply_select(supply_id, product_id, provider_id)
+            if (type(data3) is not list or not data3):
+                data = [[data], [data2]]
+            else:
+                data = [[data], [data2], [data3]]
+            return render_template('supply_list.html', data=data)
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+@app.route("/supply_edit/<supply_id>",methods=['GET', 'POST'])
+def supply_edit(supply_id):
+    if request.method == 'GET':
+        obj = forms.Supply()
+        data = obj.Supply_select(supply_id, '', '')
+        obj2 = forms.Provider()
+        data2 = obj2.Provider_name_select()
+        data2 = functions.group(data2, 2)
+        obj3 = forms.Product()
+        data3 = obj3.Product_name_select()
+        data3 = functions.group(data3, 3)
+        data = [[data], [data2], [data3]]
+        return render_template('supply_edit.html', data=data)
+
+    if request.method == 'POST':
+        if (request.form['submit_button'] == 'Submit'):
+            provider_id = request.form.get('provider_id')
+            supply_price = request.form.get('supply_price')
+            supply_quantity = request.form.get('supply_quantity')
+            supply_time = datetime.now().strftime("%d/%m/%Y - %H:%M")
+            product_id = request.form.get('product_id')
+            obj = forms.Supply()
+            obj.Supply_edit(supply_id, provider_id, supply_price, supply_quantity, supply_time, product_id)
+            return redirect(url_for('supply_list'))
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+
+ 
 
 if __name__ == "__main__":
     app.run()

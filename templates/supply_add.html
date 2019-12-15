@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Supply Order</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        
+        <label>Provider</label>
+        <select name="provider_id">
+            {% for item in data[0][0][0] %}
+                <option value="{{item[0]}}">{{item[1]}}</option>
+            {% endfor %}
+        </select>
+        <label>Price</label>
+        <input type="text" name="supply_price" value="{{supply_price}}">
+        <label>Quantity</label>
+        <input type="text" name="supply_quantity" value="{{supply_quantity}}">
+        <label>Product</label>
+        <select name="product_id">
+            {% for item in data[1][0] %}
+                <option value="{{item[0]}}">{{item[1]}} - {{item[2]}}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% endblock %}
