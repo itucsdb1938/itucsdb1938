@@ -6,17 +6,34 @@
 <div>
     <form method='POST'>
         <label>Employee Name</label>
-        <input type="text" name="employee_name" value="{{employee_name}}">
+        <input type="text" name="employee_name" value="{{employee_name}}"><br>
         <label>Employee Surname</label>
-        <input type="text" name="employee_surname" value="{{employee_surname}}">
+        <input type="text" name="employee_surname" value="{{employee_surname}}"><br>
         <label>Employee Phone Number</label>
-        <input type="text" name="employee_phonenumber" value="{{employee_phonenumber}}">
+        <input type="text" name="employee_phonenumber" value="{{employee_phonenumber}}"><br>
         <label>Employee E-mail</label>
-        <input type="text" name="employee_email" value="{{employee_email}}">
-        <label>Employee Working Hours</label>
-        <input type="text" name="employee_workinghours" value="{{employee_workinghours}}">
+        <input type="text" name="employee_email" value="{{employee_email}}"><br>
+        <label>Employee Working Hour Start</label>
+        <select name="employee_workinghour1">
+            {% for n in range(24) %}
+            <option value="{{n}}">{{n}}</option>
+            {% endfor %}
+        </select>
+        <label>Employee Working Hour End</label>
+        <select name="employee_workinghour2">
+            {% for n in range(24) %}
+            <option value="{{n}}">{{n}}</option>
+            {% endfor %}
+        </select><br>
         <label>Employee Working Days</label>
-        <input type="text" name="employee_workingdays" value="{{employee_workingdays}}">
+        <input type="checkbox" name="employee_workingday1" value="1">Monday<br>
+        <input type="checkbox" name="employee_workingday2" value="2">Tuesday<br>
+        <input type="checkbox" name="employee_workingday3" value="3">Wednesday<br>
+        <input type="checkbox" name="employee_workingday4" value="4">Thursday<br>
+        <input type="checkbox" name="employee_workingday5" value="5">Friday<br>
+        <input type="checkbox" name="employee_workingday6" value="6">Saturday<br>
+        <input type="checkbox" name="employee_workingday7" value="7">Sunnday<br>
+        
         <input type="submit" name="submit_button" value="Submit">
     </form>
 </div>

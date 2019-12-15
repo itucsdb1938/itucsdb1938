@@ -8,3 +8,10 @@ def group (name,groupby):
             temp.append(name[i+j])
         args.append(temp)
     return args
+
+def commafy (str_to_comma):
+    res = ''
+    for i in str_to_comma:
+        res = res + i + ','
+    res = res[:-1]
+    return res

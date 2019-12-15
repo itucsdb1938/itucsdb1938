@@ -201,6 +201,28 @@ class Employee:
         cursor.close()
         dbconnection.close()
 
+    def Employee_select_id (self, week_day, time):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT employeeid FROM Employee WHERE %s > workinghours[1] AND %s < workinghours[2] AND %s = ANY(workingdays) ORDER BY EmployeeID ASC;"""
+        cursor.execute(queryString, (time, time, week_day,))
+        selection = cursor.fetchall()
+       
+        for i in range (1,8):
+            if (not selection):
+                if week_day+i == 8:
+                    week_day = week_day - 7
+                queryString = """SELECT employeeid FROM Employee WHERE %s = ANY(workingdays) ORDER BY EmployeeID ASC;"""
+                cursor.execute(queryString, (week_day+i,))
+                selection = cursor.fetchall()
+            else:
+                break
+                
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection  
+
 class CargoCompany:
 
     def cargo_add(self, company, address, price, taxid, authority):
@@ -336,6 +358,39 @@ class Product:
         dbconnection.close()
         return selection
 
+    def Product_select_name(self, product_id, name):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        if (product_id == '*' or name == '*'):
+            queryString = """SELECT productid, name FROM Products ORDER BY productID ASC;"""
+            cursor.execute(queryString)
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (product_id == '' and name != ''):
+            queryString = """SELECT productid, name WHERE Name = %s ORDER BY productID ASC;"""
+            cursor.execute(queryString, (name,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (product_id != '' and name == ''):
+            queryString = """SELECT productid, name WHERE productID = %s ORDER BY productID ASC;"""
+            cursor.execute(queryString, (product_id,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        else:
+            cursor.close()
+            dbconnection.commit()
+            dbconnection.close()
+            return
+
 class Supply:
     def Supply_add(self, provider_id, price, quantity, time, productID):
         dbconnection = dbapi.connect(url)
@@ -401,6 +456,43 @@ class Supply:
         cursor = dbconnection.cursor()
         queryString = """UPDATE supply_order SET providerID = %s, price = %s, quantity = %s, time = %s, productID = %s WHERE orderID = %s;"""
         cursor.execute(queryString, (provider_id, price, quantity, time, productID, order_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+class Order:
+    def temp_order(self, market_id, ship_address, order_date, customer_name, company_id, product_id, quantity, employee_id, order_time):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """INSERT INTO temporary_order (marketplaceid, shipaddress, order_date, customer_name, companyid, productid, quantity, employeeid, isdispatched, order_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'false', %s);"""
+        cursor.execute(queryString, (market_id, ship_address, order_date, customer_name, company_id, product_id, quantity, employee_id, order_time,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+    
+    def my_orders(self, employee_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT * FROM temporary_order WHERE employeeid = %s;"""
+        cursor.execute(queryString, (employee_id,))
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
+
+    def dispatch_order(self, order_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT * FROM temporary_order WHERE orderid = %s;"""
+        cursor.execute(queryString, (order_id,))
+        selection = cursor.fetchall()
+        queryString = """INSERT INTO orders (marketplaceid, shipaddress, order_date, customer_name, companyid, productid, quantity, order_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
+        print(selection)
+        print(selection[0])
+        cursor.execute(queryString, (selection[0][1],selection[0][2],selection[0][3],selection[0][4],selection[0][5],selection[0][6],selection[0][7],selection[0][10],))
+        queryString = """DELETE FROM temporary_order WHERE orderid = %s;"""
+        cursor.execute(queryString, (order_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()

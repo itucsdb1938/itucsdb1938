@@ -37,7 +37,7 @@
                     <td>{{ item[2] }}</td>
                     <td>{{ item[3] }}</td>
                     <td>{{ item[4] }}</td>
-                    <td>{{ item[5] }}</td>
+                    <td>[{{ (item[5][0] / 60)|int }}, {{ (item[5][1] / 60)|int }}]</td>
                     <td>{{ item[6] }}</td>
                 </tr>
                 {% endfor %}

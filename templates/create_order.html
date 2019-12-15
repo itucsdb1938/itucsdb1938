@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Order</title>
+{% endblock %}
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Item ID</label>
+        <input type="text" name="item_id" value="{{item_id}}">
+        <label>Item Name</label>
+        <input type="text" name="item_name" value="{{item_name}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+{% if data %}
+<div>
+    <form method='POST'>
+        <table>
+            <thead>
+                <th>Item Name</th>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td><input type="radio" name="options" value="{{ item[0] }}"></input><br></td>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[2] }} - {{ item[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" name="submit_button" value="Order Selected">
+    </form>
+</div>
+{% endif %}
+{% endblock %}

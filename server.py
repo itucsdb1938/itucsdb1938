@@ -42,6 +42,10 @@ def home_page():
             return redirect(url_for('supply_add'))
         elif (request.form['submit_button'] == 'Supply List'):
             return redirect(url_for('supply_list'))
+        elif (request.form['submit_button'] == 'Create Order'):
+            return redirect(url_for('create_order'))
+        elif (request.form['submit_button'] == 'My Orders'):
+            return redirect(url_for('my_orders'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
@@ -199,12 +203,30 @@ def employee_add():
             employee_surname = request.form.get('employee_surname')
             employee_phonenumber = request.form.get('employee_phonenumber')
             employee_email = request.form.get('employee_email')
-            employee_workinghours = request.form.get('employee_workinghours')
-            employee_workingdays = request.form.get('employee_workingdays')
+            employee_workinghours = '{'
+            if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
+                employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+            else:
+                employee_workinghours += '0,0}'
+            employee_workingdays = ''
+            if(type(request.form.get('employee_workingday1')) is str):
+                employee_workingdays += request.form.get('employee_workingday1')
+            if(type(request.form.get('employee_workingday2')) is str):
+                employee_workingdays += request.form.get('employee_workingday2')
+            if(type(request.form.get('employee_workingday3')) is str):
+                employee_workingdays += request.form.get('employee_workingday3')
+            if(type(request.form.get('employee_workingday4')) is str):
+                employee_workingdays += request.form.get('employee_workingday4')
+            if(type(request.form.get('employee_workingday5')) is str):
+                employee_workingdays += request.form.get('employee_workingday5')
+            if(type(request.form.get('employee_workingday6')) is str):
+                employee_workingdays += request.form.get('employee_workingday6')
+            if(type(request.form.get('employee_workingday7')) is str):
+                employee_workingdays += request.form.get('employee_workingday7')
+            employee_workingdays = functions.commafy(employee_workingdays)
+            employee_workingdays = '{' + employee_workingdays + '}'
             obj = forms.Employee()
-            obj.Employee_add(employee_name, employee_surname,
-                             employee_phonenumber, employee_email,
-                             employee_workinghours, employee_workingdays)
+            obj.Employee_add(employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
             return redirect(url_for('employee_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
@@ -250,8 +272,28 @@ def employee_edit(employee_id):
             employee_surname = request.form.get('employee_surname')
             employee_phonenumber = request.form.get('employee_phonenumber')
             employee_email = request.form.get('employee_email')
-            employee_workinghours = request.form.get('employee_workinghours')
-            employee_workingdays = request.form.get('employee_workingdays')
+            employee_workinghours = '{'
+            if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
+                employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+            else:
+                employee_workinghours += '0,0}'
+            employee_workingdays = ''
+            if(type(request.form.get('employee_workingday1')) is str):
+                employee_workingdays += request.form.get('employee_workingday1')
+            if(type(request.form.get('employee_workingday2')) is str):
+                employee_workingdays += request.form.get('employee_workingday2')
+            if(type(request.form.get('employee_workingday3')) is str):
+                employee_workingdays += request.form.get('employee_workingday3')
+            if(type(request.form.get('employee_workingday4')) is str):
+                employee_workingdays += request.form.get('employee_workingday4')
+            if(type(request.form.get('employee_workingday5')) is str):
+                employee_workingdays += request.form.get('employee_workingday5')
+            if(type(request.form.get('employee_workingday6')) is str):
+                employee_workingdays += request.form.get('employee_workingday6')
+            if(type(request.form.get('employee_workingday7')) is str):
+                employee_workingdays += request.form.get('employee_workingday7')
+            employee_workingdays = functions.commafy(employee_workingdays)
+            employee_workingdays = '{' + employee_workingdays + '}'
             obj = forms.Employee()
             obj.Employee_edit(employee_id, employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
             return redirect(url_for('employee_list'))
@@ -410,20 +452,20 @@ def supply_add():
         obj2 = forms.Product()
         data2 = obj2.Product_name_select()
         data2 = functions.group(data2, 3)
-        print(data2)
         data = [[data], [data2]]
         return render_template('supply_add.html', data=data)
-    if (request.form['submit_button'] == 'Submit'):
-        provider_id = request.form.get('provider_id')
-        supply_price = request.form.get('supply_price')
-        supply_quantity = request.form.get('supply_quantity')
-        supply_time = datetime.now().strftime("%d/%m/%Y - %H:%M")
-        product_id = request.form.get('product_id')
-        obj = forms.Supply()
-        obj.Supply_add(provider_id, supply_price, supply_quantity, supply_time, product_id)
-        return redirect(url_for('supply_add'))
-    elif (request.form['submit_button'] == 'Homepage'):
-        return redirect(url_for('home_page'))
+    if request.method == 'POST':
+        if (request.form['submit_button'] == 'Submit'):
+            provider_id = request.form.get('provider_id')
+            supply_price = request.form.get('supply_price')
+            supply_quantity = request.form.get('supply_quantity')
+            supply_time = datetime.now().strftime("%d/%m/%Y - %H:%M")
+            product_id = request.form.get('product_id')
+            obj = forms.Supply()
+            obj.Supply_add(provider_id, supply_price, supply_quantity, supply_time, product_id)
+            return redirect(url_for('supply_add'))
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
 
 @app.route("/supply_list",methods=['GET','POST'])
 def supply_list():
@@ -492,8 +534,80 @@ def supply_edit(supply_id):
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+@app.route("/create_order",methods=['GET', 'POST'])
+def create_order():
+    if request.method == 'GET':
+        return render_template('create_order.html')
+
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Order Selected'):
+            option = request.form['options']
+            return redirect(url_for('order_information', product_id=option))
+
+        elif (request.form['submit_button'] == 'Submit'):
+            item_id = request.form.get('item_id')
+            item_name = request.form.get('item_name')
+            obj = forms.Product()
+            data = obj.Product_select(item_id, item_name)
+            data = [data[0], data[1], data[2]]
+            return render_template('create_order.html', data=data)
+
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+@app.route ("/order_information/<product_id>",methods=['GET', 'POST'])
+def order_information(product_id):
+    if request.method == 'GET':
+        obj = forms.Product()
+        data = obj.Product_select(product_id, '')
+        data = [data[0][0], data[0][1], data[0][2]]
+        obj2 = forms.MarketPlace()
+        data2 = obj2.MarketPlace_select('*','')
+        obj3 = forms.CargoCompany()
+        data3 = obj3.cargo_select('*','')
+        data = [[data], [data2], [data3]]
+        print(data)
+        return render_template('order_information.html', data=data)
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Order'):
+            market_id = request.form.get('market_id')
+            cargo_id = request.form.get('cargo_id')
+            order_address = request.form.get('order_address')
+            customer_name = request.form.get('customer_name')
+            order_quantity = request.form.get('order_quantity')
+            order_date = datetime.now().strftime("%d/%m/%Y")
+            order_time = str(int(datetime.now().strftime("%H"))*60 + int(datetime.now().strftime("%M")))
+            order_week_day = datetime.today().weekday() + 1
+            obj1 = forms.Employee()
+            employee_id = obj1.Employee_select_id(order_week_day, order_time)[0]
+            obj2 = forms.Order()
+            obj2.temp_order(market_id, order_address, order_date, customer_name, cargo_id, product_id, order_quantity, employee_id, order_time)
+            return redirect(url_for('home_page'))
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
+@app.route ('/my_orders', methods= ['GET', 'POST'])
+def my_orders():
+    if request.method == 'GET':
+        return render_template('my_orders.html')
+    elif request.method == 'POST':
+        if (request.form['submit_button'] == 'Dispatch Selected'):
+            option = request.form['options']
+            ##Delete from temp orders -- add to orders
+            obj = forms.Order()
+            obj.dispatch_order(option)
+            return redirect(url_for('my_orders',))
+
+        elif (request.form['submit_button'] == 'Submit'):
+            employee_id = request.form.get('employee_id')
+            obj = forms.Order()
+            data = obj.my_orders(employee_id)
+            return render_template('my_orders.html', data=data)
+
+        elif (request.form['submit_button'] == 'Homepage'):
+            return redirect(url_for('home_page'))
+
 
  
-
 if __name__ == "__main__":
     app.run()
