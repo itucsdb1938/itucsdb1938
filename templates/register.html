@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Register</title>
+{% endblock %}
+
+{% block content %}
+<div>
+    <form method='POST'>
+        <label>Username</label>
+        <input type="text" name="add_username" value="{{add_username}}">
+        <label>Password</label>
+        <input type="text" name="add_password" value="{{add_password}}">
+        <label>Usertype</label>
+        <input type="text" name="add_type" value="{{add_type}}">
+        <input type="submit" name="submit_button" value="Submit">
+    </form>
+</div>
+<div><p>{{message}}</p></div>
+{% endblock %}

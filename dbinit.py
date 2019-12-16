@@ -93,7 +93,9 @@ INIT_STATEMENTS = [
         Transaction integer NOT NULL,
         Cargo_price integer NOT NULL,
         Total integer NOT NULL
-    );"""
+    );""",
+    """create table users(username varchar(50) PRIMARY KEY, password varchar(255) NOT NULL, EmployeeID integer REFERENCES Employee(EmployeeId) NOT NULL,usertype integer NOT NULL);
+""" #bu doğru
 ]
 
 
