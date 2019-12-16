@@ -496,3 +496,56 @@ class Order:
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
+
+class Stock():
+    def add_to_stock(self, product_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """INSERT INTO stock (productID, quantity) VALUES (%s, 0);"""
+        cursor.execute(queryString, (product_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+    
+    def get_productID (self, product_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT productid FROM stock WHERE productid=%s;"""
+        cursor.execute(queryString, (product_id,))
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        if (not selection):
+            return True
+        else:
+            return False
+
+    def get_quantity(self, stock_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT quantity FROM stock WHERE id = %s;"""
+        cursor.execute(queryString, (stock_id,))
+        selection = cursor.fetchall()[0]
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
+
+    def update_quantity(self, new_quantity, stock_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """UPDATE stock SET quantity = quantity + %s WHERE id = %s;"""
+        cursor.execute(queryString, (new_quantity, stock_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+    def update_location(self, x, y, z, stock_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """UPDATE stock SET location_x = %s, location_y = %s, location_z = %s WHERE id = %s;"""
+        cursor.execute(queryString, (x, y, z, stock_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
