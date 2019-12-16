@@ -551,7 +551,6 @@ class Stock():
         cursor.close()
         dbconnection.close()
 
-
 class Users():
     
 

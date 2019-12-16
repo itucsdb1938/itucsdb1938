@@ -17,9 +17,12 @@ app.secret_key = "sux"
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('register.html')
-    if request.method == 'POST':
+    else:
+        return redirect(url_for('home_page'))
+
+    if request.method == 'POST' and session['usertype']==1:
         username = request.form.get('add_username')
         password = request.form.get('add_password')
         usertype = request.form.get('add_type')
@@ -45,9 +48,6 @@ def login():
                 print(session['usertype'])
                 print(session['employeeid'])
                 return redirect(url_for('home_page'))
-
-        
-        
 
 
 @app.route("/", methods=['GET', 'POST'])
