@@ -500,6 +500,29 @@ class Order:
         dbconnection.close()
         return selection[0]
 
+    def get_order(self):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """select orderid, marketplaceid,shipaddress,order_date,concat_ws(':',order_time/60,order_time%60) as time,customer_name,cargocompany.name,concat_ws(' - ',products.brand,products.name) as product_info,quantity from orders inner join products on orders.productid = products.productid inner join cargocompany on orders.companyid=cargocompany.companyid;"""
+        cursor.execute(queryString,)
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
+
+    def get_orderID(self,product_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """select productid from orders where orderid = %s;"""
+        cursor.execute(queryString, (product_id,))
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection[0]
+        
+
 class Stock():
     def add_to_stock(self, product_id):
         dbconnection = dbapi.connect(url)

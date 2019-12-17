@@ -678,6 +678,8 @@ def my_orders():
             if obj.check_dispatch(option):
                 obj2 = forms.Stock()
                 obj2.update_quantity(-obj.check_dispatch(option)[0],obj2.get_ID(obj.check_dispatch(option)[2])[0][0])
+                obj3 = forms.Finance()
+                obj3.weSoldSmth(obj.get_orderID(obj.check_dispatch(option)[2]))
                 obj.dispatch_order(option)
                 return redirect(url_for('my_orders'))
             else:
@@ -691,6 +693,12 @@ def stock():
     obj = forms.Stock()
     data = obj.display_stock()
     return render_template('stock.html', data=data)
+
+@app.route('/all_orders',methods=['GET'])
+def all_orders():
+    obj = forms.Orders()
+    data = obj.get_order()
+    return render_template('all_orders.html',data=data)
 
 @app.route('/deneme',methods=['GET'])
 def finansdeneme():
