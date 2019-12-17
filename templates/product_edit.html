@@ -3,6 +3,54 @@
 <title>Product</title>
 {% endblock %}
 {% block content %}
+<<<<<<< HEAD
+<div>
+    Current data:
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>brand</th>
+                <th>sell price</th>
+                <th>provider</th>
+                <th>weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data[0] %}
+            <tr>
+                {% for subitem in item %}
+                {% for subsubitem in subitem %}
+                <td>{{ subsubitem }}</td>
+                {% endfor %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    <form method='POST'>
+        <label>Product Name</label>
+        <input type="text" name="product_name" value="{{product_name}}">
+        <label>Product Brand</label>
+        <input type="text" name="product_brand" value="{{product_brand}}">
+        <label>Sell Price</label>
+        <input type="text" name="product_sellprice" value="{{product_sellprice}}">
+        <label>Provider</label>
+        <select name="provider_id">
+            <option value="{{data[2]}}" selected disabled>{{data[0][0][0][4]}}</option>
+            {% for item in data[1][0] %}
+                {% for subitem in item %}    
+                <option value="{{subitem[0]}}">{{subitem[1]}}</option>
+                {% endfor %}
+            {% endfor %}
+          </select>
+        <label>Prduct Weight</label>
+        <input type="text" name="product_weight" value="{{product_weight}}">
+        <input type="submit" name="submit_button" value="Submit">
+=======
 
 <div class="row">
     <form method='POST' style="width: 100%;">
@@ -46,6 +94,7 @@
 
         <input class="form-control" class="form-control" type="submit" name="submit_button" value="Submit"
             style="width:30%;">
+>>>>>>> 0b6be63005eaaa14f54081a25a1560ebd6fd05e9
     </form>
 </div>
 {% endblock %}
