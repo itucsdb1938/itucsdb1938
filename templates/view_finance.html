@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+<title>View Finance</title>
+{% endblock %}
+
+{% block content %}
+<div>
+    <table cellspacing="40" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Location X</th>
+                <th>Location Y</th>
+                <th>Location Z</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        {% for item in data %}
+        <tr>
+            {% for subitem in item %}
+            <td>{{ subitem }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
