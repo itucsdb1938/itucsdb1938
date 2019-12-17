@@ -616,6 +616,7 @@ class Finance():
         cargoprice = int(weight) * int(perkilo)
         gain = int(sellprice)*int(howMany)
         netWorth = gain*(int(commission)/100)
+        netWorth = netWorth-cargoprice
 
         queryString = """SELECT MAX(TransactionID) FROM Financial;"""
         cursor.execute(queryString)
@@ -629,7 +630,7 @@ class Finance():
             lastTotal = 0
         newTotal = int(lastTotal) + netWorth
         queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) VALUES(%s,%s,%s,%s);"""
-        cursor.execute(queryString, (orderid,netWorth,newTotal,))    
+        cursor.execute(queryString, (orderid,netWorth,cargoprice,newTotal,))    
 
 
         dbconnection.commit()
