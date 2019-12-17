@@ -45,6 +45,7 @@
                                 <b class="caret"></b>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left">
+                                {% if 1==session['usertype']%}
                                 <a href="/register" class="dropdown-item">Register</a>
                                 <a href="/marketplace_add" class="dropdown-item">Marketplace Add</a>
                                 <a href="/marketplace_list"class="dropdown-item">Marketplace List</a>
@@ -58,8 +59,11 @@
                                 <a href="/product_list" class="dropdown-item">Product List</a>
                                 <a href="/supply_add" class="dropdown-item">Supply Add</a>
                                 <a href="/supply_list" class="dropdown-item">Supply List</a>
-                                <a href="/create_order" class="dropdown-item">Create Order</a>
+                                {% elif 2==session['usertype'] %}
                                 <a href="/my_orders" class="dropdown-item">My Orders</a>
+                                {% endif %}
+                                <a href="/create_order" class="dropdown-item">Create Order</a>
+
                             </div>
 
                 </div>
