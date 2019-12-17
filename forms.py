@@ -503,7 +503,7 @@ class Order:
     def get_order(self):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """select orderid, marketplaceid,shipaddress,order_date,concat_ws(':',order_time/60,order_time%60) as time,customer_name,cargocompany.name,concat_ws(' - ',products.brand,products.name) as product_info,quantity from orders inner join products on orders.productid = products.productid inner join cargocompany on orders.companyid=cargocompany.companyid;"""
+        queryString = """select orderid, marketplace.name,shipaddress,order_date,concat_ws(':',order_time/60,order_time%60) as time,customer_name,cargocompany.name,concat_ws(' - ',products.brand,products.name) as product_info,quantity from orders inner join products on orders.productid = products.productid inner join cargocompany on orders.companyid=cargocompany.companyid inner join marketplace on orders.marketplaceid = marketplace.marketid;"""
         cursor.execute(queryString,)
         selection = cursor.fetchall()
         dbconnection.commit()
@@ -670,9 +670,9 @@ class Finance():
         orderquery = cursor.fetchall()[0]
         commission = orderquery[0]
 
-        cargoprice = int(weight) * int(perkilo)
-        gain = int(sellprice)*int(howMany)
-        netWorth = gain*(int(commission)/100)
+        cargoprice = (float(weight)/1000) * float(perkilo)
+        gain = float(sellprice)*float(howMany)
+        netWorth = gain*(float(commission)/100)
         netWorth = netWorth-cargoprice
 
         queryString = """SELECT MAX(TransactionID) FROM Financial;"""
@@ -685,9 +685,9 @@ class Finance():
             lastTotal = isThereTotal[0][0]
         else:
             lastTotal = 0
-        newTotal = int(lastTotal) + netWorth
+        newTotal = float(lastTotal) + netWorth
         queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) VALUES(%s,%s,%s,%s);"""
-        cursor.execute(queryString, (orderid,netWorth,cargoprice,newTotal,))    
+        cursor.execute(queryString, (orderid,int(netWorth),cargoprice,newTotal,))    
 
 
         dbconnection.commit()
