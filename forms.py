@@ -579,7 +579,7 @@ class Finance():
         else:
             lastTotal = 0
         newTotal = int(lastTotal) + totalPay
-        queryString = """INSERT INTO Financial(Supply_orderID,Transaction,Cargo_price,Total) VALUES(%s,%s,0,%s)"""
+        queryString = """INSERT INTO Financial(Supply_orderID,Transaction,Cargo_price,Total) VALUES(%s,%s,0,%s);"""
         cursor.execute(queryString, (supplyid,totalPay,newTotal,))
         dbconnection.commit()
         cursor.close()
@@ -628,7 +628,7 @@ class Finance():
         else:
             lastTotal = 0
         newTotal = int(lastTotal) + netWorth
-        queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) VALUES(%s,%s,%s,%s)"""
+        queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) VALUES(%s,%s,%s,%s);"""
         cursor.execute(queryString, (orderid,netWorth,newTotal,))    
 
 
