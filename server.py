@@ -15,16 +15,29 @@ SESSION_TYPE = 'redis'
 app.secret_key = "sux"
 
 
+@app.route("/reset", methods=['GET'])
+def reset():
+    session['usertype'] = 0
+    session['employeeid'] = 0
+    return redirect(url_for('home_page'))
+
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
+        print(session['usertype'])
         return render_template('register.html')
-    if request.method == 'POST':
+    else:
+        print(session['usertype'])
+        return redirect(url_for('home_page'))
+
+    if request.method == 'POST' and session['usertype']==1:
         username = request.form.get('add_username')
         password = request.form.get('add_password')
+        employeeid = request.form.get('add_employeeid')
         usertype = request.form.get('add_type')
         obj = forms.Users()
-        obj.addUser(username,password,usertype)
+        obj.addUser(username,password,employeeid,usertype)
         return redirect(url_for('register'))
 
 @app.route("/login",methods=['GET','POST'])
@@ -45,9 +58,6 @@ def login():
                 print(session['usertype'])
                 print(session['employeeid'])
                 return redirect(url_for('home_page'))
-
-        
-        
 
 
 @app.route("/", methods=['GET', 'POST'])

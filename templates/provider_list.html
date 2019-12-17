@@ -3,13 +3,20 @@
 <title>Provider</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Provider ID</label>
-        <input type="text" name="provider_id" value="{{provider_id}}">
+        <input class="form-control" type="text" name="provider_id" value="{{provider_id}}">
+        </div></div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Provider company</label>
-        <input type="text" name="provider_company" value="{{provider_company}}">
-        <input type="submit" name="submit_button" value="Submit">
+        <input class="form-control" type="text" name="provider_company" value="{{provider_company}}">
+    </div></div>
+
+    <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
 {% if data %}

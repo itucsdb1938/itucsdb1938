@@ -3,67 +3,77 @@
 <title>Employee</title>
 {% endblock %}
 {% block content %}
-<div>
-    Current data:
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>surname</th>
-                <th>phone number</th>
-                <th>e-mail</th>
-                <th>working hours</th>
-                <th>working days</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in data %}
-            <tr>
-                <td>{{ item[0] }}</td>
-                <td>{{ item[1] }}</td>
-                <td>{{ item[2] }}</td>
-                <td>{{ item[3] }}</td>
-                <td>{{ item[4] }}</td>
-                <td>{{ item[5] }}</td>
-                <td>{{ item[6] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-<div>
-    <form method='POST'>
-        <label>Employee Name</label>
-        <input type="text" name="employee_name" value="{{employee_name}}"><br>
-        <label>Employee Surname</label>
-        <input type="text" name="employee_surname" value="{{employee_surname}}"><br>
-        <label>Employee Phone Number</label>
-        <input type="text" name="employee_phonenumber" value="{{employee_phonenumber}}"><br>
-        <label>Employee E-mail</label>
-        <input type="text" name="employee_email" value="{{employee_email}}"><br>
-        <label>Employee Working Hour Start</label>
-        <select name="employee_workinghour1">
-            {% for n in range(24) %}
-            <option value="{{n}}">{{n}}</option>
-            {% endfor %}
-        </select>
-        <label>Employee Working Hour End</label>
-        <select name="employee_workinghour2">
-            {% for n in range(24) %}
-            <option value="{{n}}">{{n}}</option>
-            {% endfor %}
-        </select><br>
-        <label>Employee Working Days</label>
-        <input type="checkbox" name="employee_workingday1" value="1">Monday<br>
-        <input type="checkbox" name="employee_workingday2" value="2">Tuesday<br>
-        <input type="checkbox" name="employee_workingday3" value="3">Wednesday<br>
-        <input type="checkbox" name="employee_workingday4" value="4">Thursday<br>
-        <input type="checkbox" name="employee_workingday5" value="5">Friday<br>
-        <input type="checkbox" name="employee_workingday6" value="6">Saturday<br>
-        <input type="checkbox" name="employee_workingday7" value="7">Sunnday<br>
-        
-        <input type="submit" name="submit_button" value="Submit">
+
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee Name</label>
+                <input class="form-control" type="text" name="employee_name" value="{{data[0][1]}}"><br>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee Surname</label>
+                <input class="form-control" type="text" name="employee_surname" value="{{data[0][2]}}"><br>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee Phone Number</label>
+                <input class="form-control" type="text" name="employee_phonenumber" value="{{data[0][3]}}"><br>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee E-mail</label>
+                <input class="form-control" type="text" name="employee_email" value="{{data[0][4]}}"><br>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee Working Hour Start</label>
+                <select class="form-control" name="employee_workinghour1">
+                    <option selected disabled value="{{(data[0][5][0]/60)|int}}">{{(data[0][5][0]/60)|int}}</option>
+                    {% for n in range(24) %}
+                    <option value="{{n}}">{{n}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee Working Hour End</label>
+                <select class="form-control" name="employee_workinghour2">
+                    <option selected disabled value="{{(data[0][5][1]/60)|int}}">{{(data[0][5][1]/60)|int}}</option>
+                    {% for n in range(24) %}
+                    <option value="{{n}}">{{n}}</option>
+                    {% endfor %}
+                </select><br>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee Working Days</label><br>
+                <input type="checkbox" name="employee_workingday1" value="1" {% if 1 in data[0][6]%} checked
+                    {%else%}{%endif%}>Monday<br>
+                <input type="checkbox" name="employee_workingday2" value="2" {% if 2 in data[0][6]%} checked
+                    {%else%}{%endif%}>Tuesday<br>
+                <input type="checkbox" name="employee_workingday3" value="3" {% if 3 in data[0][6]%} checked
+                    {%else%}{%endif%}>Wednesday<br>
+                <input type="checkbox" name="employee_workingday4" value="4" {% if 4 in data[0][6]%} checked
+                    {%else%}{%endif%}>Thursday<br>
+                <input type="checkbox" name="employee_workingday5" value="5" {% if 5 in data[0][6]%} checked
+                    {%else%}{%endif%}>Friday<br>
+                <input type="checkbox" name="employee_workingday6" value="6" {% if 6 in data[0][6]%} checked
+                    {%else%}{%endif%}>Saturday<br>
+                <input type="checkbox" name="employee_workingday7" value="7" {% if 7 in data[0][6]%} checked
+                    {%else%}{%endif%}>Sunday<br>
+            </div>
+        </div>
+
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
 {% endblock %}

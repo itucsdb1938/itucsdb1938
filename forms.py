@@ -534,13 +534,13 @@ class Users():
         dbconnection.close()
         return selection
 
-    def addUser(self,username,password,usertype):
+    def addUser(self,username,password,employeeid,usertype):
         server_salt = "CVca9QBtk4U8pfPb"
         db_password = password+server_salt
         h = hashlib.md5(db_password.encode())
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """INSERT INTO users (username,password,employeeid,usertype) VALUES (%s,%s,10,%s);"""
+        queryString = """INSERT INTO users (username,password,employeeid,usertype) VALUES (%s,%s,%s,%s);"""
         cursor.execute(queryString, (username,h.hexdigest(),usertype,))
         dbconnection.commit()
         cursor.close()
