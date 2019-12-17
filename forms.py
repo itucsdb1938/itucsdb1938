@@ -481,10 +481,24 @@ class Order:
         queryString = """select temp.quantity as temporary_quantity, stock.quantity, temp.productid, orderid from stock inner join temporary_order as temp on stock.productid = temp.productid where orderid = %s;"""
         cursor.execute(queryString, (orderid,))
         selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
         if (selection[0][0] > selection[0][1]):
             return False
         else:
-            return True
+            return selection[0]
+
+    def get_product_id(self,orderid):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """select productid from orders where orderid=%s;"""
+        cursor.execute(queryString, (orderid,))
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection[0]
 
 class Stock():
     def add_to_stock(self, product_id):
@@ -539,7 +553,7 @@ class Stock():
     def display_stock(self):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """SELECT * FROM stock;"""
+        queryString = """SELECT id,location_x,location_y,location_z,concat_ws(' - ',brand,name),quantity FROM stock inner join products on stock.productid=products.productid;"""
         cursor.execute(queryString,)
         selection = cursor.fetchall()
         dbconnection.commit()

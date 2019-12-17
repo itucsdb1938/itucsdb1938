@@ -632,7 +632,7 @@ def create_order():
 
 @app.route ("/order_information/<product_id>",methods=['GET', 'POST'])
 def order_information(product_id):
-    if request.method == 'GET' and session['usertype']==1:
+    if request.method == 'GET':
         obj = forms.Product()
         data = obj.Product_select(product_id, '')
         data = [data[0][0], data[0][1], data[0][2], data[0][3]]
@@ -643,7 +643,7 @@ def order_information(product_id):
         data = [[data], [data2], [data3]]
         print(data)
         return render_template('order_information.html', data=data)
-    elif request.method == 'POST' and session['usertype']==1:
+    elif request.method == 'POST':
         if (request.form['submit_button'] == 'Order'):
             market_id = request.form.get('market_id')
             cargo_id = request.form.get('cargo_id')
@@ -658,11 +658,6 @@ def order_information(product_id):
             obj2 = forms.Order()
             obj2.temp_order(market_id, order_address, order_date, customer_name, cargo_id, product_id, order_quantity, employee_id, order_time)
             return redirect(url_for('home_page'))
-        elif (request.form['submit_button'] == 'Homepage'):
-            return redirect(url_for('home_page'))
-
-    else:
-        return redirect(url_for('home_page',error='You are not Authorized'))
 
 @app.route ('/my_orders', methods= ['GET', 'POST'])
 def my_orders():
@@ -682,7 +677,7 @@ def my_orders():
             obj = forms.Order()
             if obj.check_dispatch(option):
                 obj2 = forms.Stock()
-                obj2.update_quantity()
+                obj2.update_quantity(-obj.check_dispatch(option)[0],obj2.get_ID(obj.check_dispatch(option)[2])[0][0])
                 obj.dispatch_order(option)
                 return redirect(url_for('my_orders'))
             else:
@@ -690,6 +685,12 @@ def my_orders():
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+@app.route('/stock',methods=['GET'])
+def stock():
+    obj = forms.Stock()
+    data = obj.display_stock()
+    return render_template('stock.html', data=data)
 
 @app.route('/deneme',methods=['GET'])
 def finansdeneme():
