@@ -479,7 +479,7 @@ class Order:
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
         queryString = """select temp.quantity as temporary_quantity, stock.quantity, temp.productid, orderid from stock inner join temporary_order as temp on stock.productid = temp.productid where orderid = %s;"""
-        cursor.execute(queryString, (order_id,))
+        cursor.execute(queryString, (orderid,))
         selection = cursor.fetchall()
         if (selection[0][0] > selection[0][1]):
             return False
