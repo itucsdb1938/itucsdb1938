@@ -517,12 +517,7 @@ class Stock():
         cursor.close()
         dbconnection.close()
 
-<<<<<<< HEAD
-class Users():
-    
-=======
 class Users():    
->>>>>>> 0b6be63005eaaa14f54081a25a1560ebd6fd05e9
 
     def getUser(self,username, password):
         dbconnection = dbapi.connect(url)
@@ -583,10 +578,49 @@ class Finance():
     def weSoldSmth(self,orderid):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """SELECT MarketplaceID,Cargo_companyID,ProductID,Quantity FROM Orders WHERE OrderID = %s;"""
+        queryString = """SELECT MarketplaceID,companyID,ProductID,Quantity FROM Orders WHERE OrderID = %s;"""
         cursor.execute(queryString, (orderid,))
         orderquery = cursor.fetchall()[0]
         print(orderquery)
+        marketplace = orderquery[0]
+        cargo = orderquery[1]
+        productid = orderquery[2]
+        howMany = orderquery[3]
+
+        queryString = """SELECT sellprice,weight FROM Products WHERE ProductID = %s;"""
+        cursor.execute(queryString, (productid,))
+        orderquery = cursor.fetchall()[0]
+        sellprice = orderquery[0]
+        weight = orderquery[1]
+
+        queryString = """SELECT priceperkilo FROM cargocompany WHERE companyid = %s;"""
+        cursor.execute(queryString, (cargo,))
+        orderquery = cursor.fetchall()[0]
+        perkilo = orderquery[0]
+
+        queryString = """SELECT commissionfee FROM marketplace WHERE marketid = %s;"""
+        cursor.execute(queryString, (marketplace,))
+        orderquery = cursor.fetchall()[0]
+        commission = orderquery[0]
+
+        cargoprice = int(weight) * int(perkilo)
+        gain = int(sellprice)*int(howMany)
+        netWorth = gain*(int(commission)/100)
+
+        queryString = """SELECT MAX(TransactionID) FROM Financial;"""
+        cursor.execute(queryString)
+        maxT = cursor.fetchall()[0]
+        queryString = """SELECT Total FROM Financial WHERE TransactionID = %s;"""
+        cursor.execute(queryString,(maxT,))
+        isThereTotal = cursor.fetchall()
+        if isThereTotal:
+            lastTotal = isThereTotal[0][0]
+        else:
+            lastTotal = 0
+        newTotal = int(lastTotal) + netWorth
+        queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) VALUES(%s,%s,0,%s)"""
+        cursor.execute(queryString, (orderid,netWorth,newTotal,))    
+
 
         dbconnection.commit()
         cursor.close()
