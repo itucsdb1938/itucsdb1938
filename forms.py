@@ -551,8 +551,7 @@ class Stock():
         cursor.close()
         dbconnection.close()
 
-class Users():
-    
+class Users():    
 
     def getUser(self,username, password):
         dbconnection = dbapi.connect(url)
@@ -575,7 +574,49 @@ class Users():
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
         queryString = """INSERT INTO users (username,password,employeeid,usertype) VALUES (%s,%s,%s,%s);"""
-        cursor.execute(queryString, (username,h.hexdigest(),usertype,))
+        cursor.execute(queryString, (username,h.hexdigest(),employeeid,usertype,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+class Finance():
+    
+    def weBoughtSmth(self,supplyid):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT Quantity,ProductID,Price FROM Supply_order WHERE OrderID = %s;"""
+        cursor.execute(queryString, (supplyid,))
+        results = cursor.fetchall()[0]
+        quantity = results[0]
+        proId = results[1]
+        buyPrice = results[2]
+        totalPay = int(quantity) * int(buyPrice)
+        totalPay = -1*totalPay
+        queryString = """SELECT MAX(TransactionID) FROM Financial;"""
+        cursor.execute(queryString)
+        maxT = cursor.fetchall()[0]
+        queryString = """SELECT Total FROM Financial WHERE TransactionID = %s;"""
+        cursor.execute(queryString,(maxT,))
+        isThereTotal = cursor.fetchall()
+        if isThereTotal:
+            lastTotal = isThereTotal[0][0]
+        else:
+            lastTotal = 0
+        newTotal = int(lastTotal) + totalPay
+        queryString = """INSERT INTO Financial(Supply_orderID,Transaction,Cargo_price,Total) VALUES(%s,%s,0,%s)"""
+        cursor.execute(queryString, (supplyid,totalPay,newTotal,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+    def weSoldSmth(self,orderid):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT MarketplaceID,Cargo_companyID,ProductID,Quantity FROM Orders WHERE OrderID = %s;"""
+        cursor.execute(queryString, (orderid,))
+        orderquery = cursor.fetchall()[0]
+        print(orderquery)
+
         dbconnection.commit()
         cursor.close()
         dbconnection.close()

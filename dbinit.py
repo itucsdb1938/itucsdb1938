@@ -85,7 +85,7 @@ INIT_STATEMENTS = [
         Quantity integer NOT NULL,
         Time varchar(255) NOT NULL,
         ProductID integer REFERENCES products(productid)
-    );""",
+    );""", #bi ürünü 10kya sattın hepsiburada %10 komisyon aldı burdan 10k - %10 ; ondan sonra nerden aldın hakan elektrik -> 7500 daha çıkar -> kargoyu da hesapla 
     """CREATE TABLE IF NOT EXISTS Financial(
         TransactionID serial PRIMARY KEY,
         OrderID integer REFERENCES orders(orderid),
@@ -93,9 +93,13 @@ INIT_STATEMENTS = [
         Transaction integer NOT NULL,
         Cargo_price integer NOT NULL,
         Total integer NOT NULL
-    );""",
-    """create table IF NOT EXISTS users(username varchar(50) PRIMARY KEY, password varchar(255) NOT NULL, EmployeeID integer REFERENCES Employee(EmployeeId) NOT NULL,usertype integer NOT NULL);
-""" #bu doğru
+    );""", #float olcak intler
+    """CREATE TABLE IF NOT EXISTS users(
+        username varchar(50) PRIMARY KEY, 
+        password varchar(255) NOT NULL, 
+        EmployeeID integer REFERENCES Employee(EmployeeId) NOT NULL
+        ,usertype integer NOT NULL);
+    """ #bu doğru
 ]
 
 
