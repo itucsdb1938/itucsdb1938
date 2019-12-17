@@ -700,11 +700,11 @@ def all_orders():
     data = obj.get_order()
     return render_template('all_orders.html',data=data)
 
-@app.route('/deneme',methods=['GET'])
-def finansdeneme():
+@app.route('/view_finance',methods=['GET'])
+def view_finance():
     obj = forms.Finance()
-    obj.weSoldSmth(1)
-    return redirect(url_for('home_page'))
+    data = obj.view_finance()
+    return render_template('view_finance.html',data=data)
 
 #kaç gram kargo gitmiş komisyon ne kadar marketplace kargoya kaç para veriyomuş
  

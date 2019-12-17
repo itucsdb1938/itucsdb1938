@@ -613,6 +613,18 @@ class Users():
         dbconnection.close()
 
 class Finance():
+
+    def view_finance(self):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT * FROM Financial;"""
+        cursor.execute(queryString)
+        results = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return results
+
     
     def weBoughtSmth(self,supplyid):
         dbconnection = dbapi.connect(url)
