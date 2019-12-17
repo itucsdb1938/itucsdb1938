@@ -6,15 +6,31 @@
 {% block content %}
 <div>
     <form method='POST'>
-        <label>Username</label>
-        <input type="text" name="add_username" value="{{add_username}}">
-        <label>Password</label>
-        <input type="text" name="add_password" value="{{add_password}}">
-        <label>Employee ID</label>
-        <input type="text" name="add_employeeid" value="{{add_employeeid}}">
-        <label>Usertype</label>
-        <input type="text" name="add_type" value="{{add_type}}">
-        <input type="submit" name="submit_button" value="Submit">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Username</label>
+                <input class="form-control" type="text" name="add_username" value="{{add_username}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" type="Password" name="add_password" value="{{add_password}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Employee ID</label>
+                <input class="form-control" type="text" name="add_employeeid" value="{{add_employeeid}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>User Type</label>
+                <input class="form-control" type="text" name="add_type" value="{{add_type}}">
+            </div>
+        </div>
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
 <div><p>{{message}}</p></div>
