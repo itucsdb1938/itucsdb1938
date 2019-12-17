@@ -15,7 +15,7 @@
         <tbody>
             {% for item in data[0] %}
             <tr>
-                
+                <label>{{item[3]}}</label>
                 <td>{{ item[2] }} - {{ item[1] }}</td>
             </tr>
             {% endfor %}
@@ -56,10 +56,19 @@
         <div class="col-lg-3 col-sm-4">
             <div class="form-group">
         <label>Quantity</label>
-        <input class="form-control" type="text" name="order_quantity" value="{{order_quantity}}"><br>
+        
+        <input class="form-control" type="text" name="order_quantity" id="1"value="{{order_quantity}}">
+        <label>Unit Price</label>
+        <input disabled class="form-control" type="text" id="2" value="{{data[0][0][3]}}">
+
+
+
+
+
             </div></div>
         <input class="form-control" type="submit" name="submit_button" value="Order">
     </form>
+    
 </div>
 {% endif %}
 {% endblock %}
