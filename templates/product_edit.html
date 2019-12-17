@@ -39,6 +39,7 @@
         <input type="text" name="product_sellprice" value="{{product_sellprice}}">
         <label>Provider</label>
         <select name="provider_id">
+            <option value="{{data[2]}}" selected disabled>{{data[0][0][0][4]}}</option>
             {% for item in data[1][0] %}
                 {% for subitem in item %}    
                 <option value="{{subitem[0]}}">{{subitem[1]}}</option>

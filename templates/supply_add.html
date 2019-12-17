@@ -8,7 +8,7 @@
         
         <label>Provider</label>
         <select name="provider_id">
-            {% for item in data[0][0][0] %}
+            {% for item in data[0][0] %}
                 <option value="{{item[0]}}">{{item[1]}}</option>
             {% endfor %}
         </select>
