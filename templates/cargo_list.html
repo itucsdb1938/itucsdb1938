@@ -3,19 +3,31 @@
 <title>Cargo</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
-        <label>Cargo ID</label>
-        <input type="text" name="cargo_id" value="{{cargo_id}}">
-        <label>Cargo company</label>
-        <input type="text" name="cargo_company" value="{{cargo_company}}">
-        <input type="submit" name="submit_button" value="Submit">
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Cargo ID</label>
+                <input class="form-control" type="text" name="cargo_id" value="{{cargo_id}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Cargo company</label>
+                <input class="form-control" type="text" name="cargo_company" value="{{cargo_company}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
+            </div>
+        </div>
     </form>
 </div>
 {% if data %}
 <div>
     <form method='POST'>
-        <table>
+        <table cellspacing="20" style="width: 100%;">
             <thead>
                 <th>Selection</th>
                 <th>Cargo ID</th>
@@ -42,6 +54,8 @@
         <input type="submit" name="submit_button" value="Delete Selected">
         <input type="submit" name="submit_button" value="Edit Selected">
     </form>
+    
+
 </div>
 {% endif %}
 {% endblock %}

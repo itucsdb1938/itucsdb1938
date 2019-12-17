@@ -435,6 +435,9 @@ def product_add():
             product_weight = request.form.get('product_weight')
             obj = forms.Product()
             obj.Product_add(product_name, product_brand, product_sellprice,provider_id, product_weight)
+            product_id = obj.Product_select('',product_name)[0][0]
+            obj2 = forms.Stock()
+            obj2.add_to_stock(product_id)
             return redirect(url_for('product_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
@@ -476,6 +479,7 @@ def product_edit(product_id):
         data2 = obj2.Provider_name_select()
         data2 = functions.group(data2, 2)
         data = [[data], [data2]]
+        data.append(obj.Product_provider_id(product_id))
         return render_template('product_Edit.html', data=data)
 
     if request.method == 'POST' and session['usertype']==1:
@@ -513,6 +517,8 @@ def supply_add():
             product_id = request.form.get('product_id')
             obj = forms.Supply()
             obj.Supply_add(provider_id, supply_price, supply_quantity, supply_time, product_id)
+            obj2 = forms.Stock()
+            obj2.update_quantity(supply_quantity,obj2.get_ID(product_id)[0][0])
             return redirect(url_for('supply_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
@@ -557,9 +563,14 @@ def supply_list():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+<<<<<<< HEAD
 @app.route("/supply_edit/<supply_id>",methods=['GET', 'POST'])
 def supply_edit(supply_id):
     if request.method == 'GET' and session['usertype']==1:
+=======
+
+    if request.method == 'GET':
+>>>>>>> 84f9a4d8c64c26ee700a2a25fcff177cc3aedaec
         obj = forms.Supply()
         data = obj.Supply_select(supply_id, '', '')
         obj2 = forms.Provider()
@@ -646,8 +657,8 @@ def my_orders():
         
     elif request.method == 'POST':
         if (request.form['submit_button'] == 'Dispatch Selected'):
-            option = request.form['options']
-            ##Delete from temp orders -- add to orders
+            option = request.form['options'] #order id burdan product_id yi cek product_id den stoka git ve stok durumunu cek
+    
             obj = forms.Order()
             obj.dispatch_order(option)
             return redirect(url_for('my_orders',))

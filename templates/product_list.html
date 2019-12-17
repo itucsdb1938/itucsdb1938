@@ -3,13 +3,21 @@
 <title>Product</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
-        <label>Product ID</label>
-        <input type="text" name="product_id" value="{{product_id}}">
-        <label>Product name</label>
-        <input type="text" name="product_name" value="{{product_name}}">
-        <input type="submit" name="submit_button" value="Submit">
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Product ID</label>
+                <input class="form-control" type="text" name="product_id" value="{{product_id}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Product name</label>
+                <input class="form-control" type="text" name="product_name" value="{{product_name}}">
+            </div>
+        </div>
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
 {% if data %}
@@ -30,7 +38,7 @@
             <tbody>
                 {% for item in data %}
                 <tr>
-                    <td><input type="radio" name="options" value= "{{ item[0] }}"></input><br></td>
+                    <td><input type="radio" name="options" value="{{ item[0] }}"></input><br></td>
                     {% for subitem in item %}
                     <td>{{ subitem }}</td>
                     {% endfor %}

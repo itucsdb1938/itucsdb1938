@@ -359,38 +359,16 @@ class Product:
         dbconnection.close()
         return selection
 
-    def Product_select_name(self, product_id, name):
+    def Product_provider_id(self,productid):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        if (product_id == '*' or name == '*'):
-            queryString = """SELECT productid, name FROM Products ORDER BY productID ASC;"""
-            cursor.execute(queryString)
-            selection = cursor.fetchall()
-            dbconnection.commit()
-            cursor.close()
-            dbconnection.close()
-            return selection
-        elif (product_id == '' and name != ''):
-            queryString = """SELECT productid, name WHERE Name = %s ORDER BY productID ASC;"""
-            cursor.execute(queryString, (name,))
-            selection = cursor.fetchall()
-            dbconnection.commit()
-            cursor.close()
-            dbconnection.close()
-            return selection
-        elif (product_id != '' and name == ''):
-            queryString = """SELECT productid, name WHERE productID = %s ORDER BY productID ASC;"""
-            cursor.execute(queryString, (product_id,))
-            selection = cursor.fetchall()
-            dbconnection.commit()
-            cursor.close()
-            dbconnection.close()
-            return selection
-        else:
-            cursor.close()
-            dbconnection.commit()
-            dbconnection.close()
-            return
+        queryString = """SELECT providerID FROM Products where productid = %s;"""
+        cursor.execute(queryString, (productid,))
+        selection = cursor.fetchall()[0][0]
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
 
 class Supply:
     def Supply_add(self, provider_id, price, quantity, time, productID):
@@ -452,15 +430,6 @@ class Supply:
             dbconnection.close()
             return
 
-    def Supply_edit (self, order_id, provider_id, price, quantity, time, productID):
-        dbconnection = dbapi.connect(url)
-        cursor = dbconnection.cursor()
-        queryString = """UPDATE supply_order SET providerID = %s, price = %s, quantity = %s, time = %s, productID = %s WHERE orderID = %s;"""
-        cursor.execute(queryString, (provider_id, price, quantity, time, productID, order_id,))
-        dbconnection.commit()
-        cursor.close()
-        dbconnection.close()
-
 class Order:
     def temp_order(self, market_id, ship_address, order_date, customer_name, company_id, product_id, quantity, employee_id, order_time):
         dbconnection = dbapi.connect(url)
@@ -508,19 +477,16 @@ class Stock():
         cursor.close()
         dbconnection.close()
     
-    def get_productID (self, product_id):
+    def get_ID (self, product_id):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """SELECT productid FROM stock WHERE productid=%s;"""
+        queryString = """SELECT ID FROM stock WHERE productid=%s;"""
         cursor.execute(queryString, (product_id,))
         selection = cursor.fetchall()
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
-        if (not selection):
-            return True
-        else:
-            return False
+        return selection
 
     def get_quantity(self, stock_id):
         dbconnection = dbapi.connect(url)
