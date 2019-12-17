@@ -3,25 +3,7 @@
 <title>Order</title>
 {% endblock %}
 {% block content %}
-<div>
-    Current data:<label>{{data}}</label>
-    <table>
-        <thead>
-            <tr>
-                
-                <th>Item Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in data[0] %}
-            <tr>
-                
-                <td>{{ item[2] }} - {{ item[1] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+
 {% if data %}
 <div class="row">
     <form method='POST' style="width: 100%;">
