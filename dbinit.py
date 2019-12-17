@@ -19,8 +19,8 @@ INIT_STATEMENTS = [
         Surname varchar(20) NOT NULL,
         Phonenumber varchar(12) NOT NULL,
         Email varchar(25) NOT NULL,
-        WorkingHours varchar(255) NOT NULL,
-        WorkingDays varchar(255) NOT NULL
+        WorkingHours integer[] NOT NULL,
+        WorkingDays integer[] NOT NULL
     );""",
     """CREATE TABLE IF NOT EXISTS CargoCompany(
         CompanyID serial PRIMARY KEY,
@@ -43,16 +43,15 @@ INIT_STATEMENTS = [
         ProductID serial PRIMARY KEY,
         Name varchar(255) NOT NULL,
         Brand varchar(255) NOT NULL,
-        Buyprice integer NOT NULL,
         Sellprice integer NOT NULL,
         ProviderID integer REFERENCES provider(providerid),
         Weight integer NOT NULL
     );""",
     """CREATE TABLE IF NOT EXISTS Stock(
         ID serial PRIMARY KEY,
-        Location_x integer NOT NULL,
-        Location_y integer NOT NULL,
-        Location_z integer NOT NULL,
+        Location_x integer,
+        Location_y integer,
+        Location_z integer,
         Productid integer REFERENCES products(productid),
         Quantity integer NOT NULL
     );""",
@@ -60,9 +59,9 @@ INIT_STATEMENTS = [
         OrderID serial PRIMARY KEY,
         Marketplaceid integer REFERENCES marketplace(marketid),
         Shipaddress varchar(255) NOT NULL,
-        Order_time varchar(255) NOT NULL,
+        Order_time integer NOT NULL,
         Customer_name varchar(255) NOT NULL,
-        Cargo_company integer REFERENCES cargocompany(companyid),
+        companyid integer REFERENCES cargocompany(companyid),
         ProductID integer REFERENCES products(productid),
         Quantity integer NOT NULL,
         EmployeeID integer REFERENCES employee(employeeid),
@@ -74,7 +73,7 @@ INIT_STATEMENTS = [
         Shipaddress varchar(255) NOT NULL,
         Order_time varchar(255) NOT NULL,
         Customer_name varchar(255) NOT NULL,
-        Cargo_companyID integer REFERENCES cargocompany(companyid),
+        companyID integer REFERENCES cargocompany(companyid),
         ProductID integer REFERENCES products(productid),
         Quantity integer NOT NULL
     );""",
@@ -85,7 +84,7 @@ INIT_STATEMENTS = [
         Quantity integer NOT NULL,
         Time varchar(255) NOT NULL,
         ProductID integer REFERENCES products(productid)
-    );""", #bi ürünü 10kya sattın hepsiburada %10 komisyon aldı burdan 10k - %10 ; ondan sonra nerden aldın hakan elektrik -> 7500 daha çıkar -> kargoyu da hesapla 
+    );""", 
     """CREATE TABLE IF NOT EXISTS Financial(
         TransactionID serial PRIMARY KEY,
         OrderID integer REFERENCES orders(orderid),
@@ -93,13 +92,13 @@ INIT_STATEMENTS = [
         Transaction integer NOT NULL,
         Cargo_price integer NOT NULL,
         Total integer NOT NULL
-    );""", #float olcak intler
+    );""", 
     """CREATE TABLE IF NOT EXISTS users(
         username varchar(50) PRIMARY KEY, 
         password varchar(255) NOT NULL, 
         EmployeeID integer REFERENCES Employee(EmployeeId) NOT NULL
         ,usertype integer NOT NULL);
-    """ #bu doğru
+    """ 
 ]
 
 
