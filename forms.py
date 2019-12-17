@@ -1,5 +1,6 @@
 import psycopg2 as dbapi
 import os
+import hashlib
 
 url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
 #url = os.getenv("DB_URL")
@@ -546,6 +547,35 @@ class Stock():
         cursor = dbconnection.cursor()
         queryString = """UPDATE stock SET location_x = %s, location_y = %s, location_z = %s WHERE id = %s;"""
         cursor.execute(queryString, (x, y, z, stock_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+class Users():
+    
+
+    def getUser(self,username, password):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        server_salt = "CVca9QBtk4U8pfPb"
+        db_password = password+server_salt
+        h = hashlib.md5(db_password.encode())
+        queryString = """SELECT usertype, EmployeeID FROM users WHERE username = %s AND password = %s;"""
+        cursor.execute(queryString, (username, h.hexdigest(),))
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
+
+    def addUser(self,username,password,employeeid,usertype):
+        server_salt = "CVca9QBtk4U8pfPb"
+        db_password = password+server_salt
+        h = hashlib.md5(db_password.encode())
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """INSERT INTO users (username,password,employeeid,usertype) VALUES (%s,%s,%s,%s);"""
+        cursor.execute(queryString, (username,h.hexdigest(),usertype,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()

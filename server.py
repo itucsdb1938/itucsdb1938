@@ -5,11 +5,59 @@ import functions
 from datetime import datetime
 import psycopg2 as dbapi2
 from flask import Flask, render_template, redirect, url_for, request, session, escape, jsonify
+import hashlib
 
 url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
 #url = os.getenv("DB_URL")
 
 app = Flask(__name__)
+SESSION_TYPE = 'redis'
+app.secret_key = "sux"
+
+
+@app.route("/reset", methods=['GET'])
+def reset():
+    session['usertype'] = 0
+    session['employeeid'] = 0
+    return redirect(url_for('home_page'))
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    if request.method == 'GET' and session['usertype']==1:
+        print(session['usertype'])
+        return render_template('register.html')
+    else:
+        print(session['usertype'])
+        return redirect(url_for('home_page'))
+
+    if request.method == 'POST' and session['usertype']==1:
+        username = request.form.get('add_username')
+        password = request.form.get('add_password')
+        employeeid = request.form.get('add_employeeid')
+        usertype = request.form.get('add_type')
+        obj = forms.Users()
+        obj.addUser(username,password,employeeid,usertype)
+        return redirect(url_for('register'))
+
+@app.route("/login",methods=['GET','POST'])
+def login():
+    if(request.method == 'GET'):
+        return render_template('login.html')
+    else:
+        if(request.form['submit_button']) == 'Submit':
+            username = request.form.get('login_username')
+            password = request.form.get('login_password')
+            obj = forms.Users()
+            data = obj.getUser(username, password)
+            if (not data):
+                return redirect(url_for('login',message='LOGIN FAILED'))
+            else:
+                session['usertype'] = data[0][0]
+                session['employeeid'] = data[0][1]
+                print(session['usertype'])
+                print(session['employeeid'])
+                return redirect(url_for('home_page'))
 
 
 @app.route("/", methods=['GET', 'POST'])
