@@ -9,17 +9,10 @@
         <thead>
             <tr>
                 
-                <th>Item Name</th>
+                <th>Item Name:</th>
+                <th>{{ data[0][0][2] }} - {{ data[0][0][1] }}</th>
             </tr>
         </thead>
-        <tbody>
-            {% for item in data[0] %}
-            <tr>
-                <label>{{item[3]}}</label>
-                <td>{{ item[2] }} - {{ item[1] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
     </table>
 </div>
 {% if data %}

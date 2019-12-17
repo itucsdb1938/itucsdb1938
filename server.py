@@ -624,7 +624,6 @@ def create_order():
             item_name = request.form.get('item_name')
             obj = forms.Product()
             data = obj.Product_select(item_id, item_name)
-            data = [data[0], data[1], data[2]]
             return render_template('create_order.html', data=data)
 
         elif (request.form['submit_button'] == 'Homepage'):
