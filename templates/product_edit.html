@@ -3,6 +3,7 @@
 <title>Product</title>
 {% endblock %}
 {% block content %}
+<<<<<<< HEAD
 <div>
     Current data:
     <table>
@@ -49,6 +50,51 @@
         <label>Prduct Weight</label>
         <input type="text" name="product_weight" value="{{product_weight}}">
         <input type="submit" name="submit_button" value="Submit">
+=======
+
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input class="form-control" type="text" name="product_name" value="{{data[0][0][0][1]}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Product Brand</label>
+                <input class="form-control" type="text" name="product_brand" value="{{data[0][0][0][2]}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Sell Price</label>
+                <input class="form-control" type="text" name="product_sellprice" value="{{data[0][0][0][3]}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Provider</label>
+                <select class="form-control" name="provider_id">
+                    <option value="{{data[2]}}" selected disabled>{{data[0][0][0][4]}}</option>
+                    {% for item in data[1] %}
+                    {% for subitem in item %}
+                    <option value="{{subitem[0]}}">{{subitem[1]}}</option>
+                    {% endfor %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Prduct Weight</label>
+                <input class="form-control" type="text" name="product_weight" value="{{data[0][0][0][5]}}">
+            </div>
+        </div>
+
+        <input class="form-control" class="form-control" type="submit" name="submit_button" value="Submit"
+            style="width:30%;">
+>>>>>>> 0b6be63005eaaa14f54081a25a1560ebd6fd05e9
     </form>
 </div>
 {% endblock %}

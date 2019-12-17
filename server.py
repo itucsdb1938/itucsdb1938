@@ -12,24 +12,39 @@ url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' pass
 
 app = Flask(__name__)
 SESSION_TYPE = 'redis'
-app.secret_key = "sux"
+app.secret_key = "kenandogulu"
+
+@app.route("/logout", methods=['GET'])
+def logout():
+    session['usertype'] = 0
+    session['employeeid'] = 0
+    return redirect(url_for('home_page'))
 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
+        print(session['usertype'])
         return render_template('register.html')
-    if request.method == 'POST':
+
+    elif request.method == 'POST' and session['usertype']==1:
         username = request.form.get('add_username')
         password = request.form.get('add_password')
+        employeeid = request.form.get('add_employeeid')
         usertype = request.form.get('add_type')
+        print(username,password,employeeid,usertype)
         obj = forms.Users()
-        obj.addUser(username,password,usertype)
+        obj.addUser(username,password,employeeid,usertype)
         return redirect(url_for('register'))
+
+    else:
+        print(session['usertype'])
+        return redirect(url_for('home_page'))
+
 
 @app.route("/login",methods=['GET','POST'])
 def login():
-    if(request.method == 'GET'):
+    if(request.method == 'GET') :
         return render_template('login.html')
     else:
         if(request.form['submit_button']) == 'Submit':
@@ -45,9 +60,6 @@ def login():
                 print(session['usertype'])
                 print(session['employeeid'])
                 return redirect(url_for('home_page'))
-
-        
-        
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -90,10 +102,10 @@ def home_page():
 
 @app.route("/marketplace_add", methods=['GET', 'POST'])
 def marketplace_add():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('marketplace_add.html')
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             market_name = request.form.get('market_name')
             market_address = request.form.get('market_address')
@@ -112,10 +124,10 @@ def marketplace_add():
 
 @app.route("/marketplace_list", methods=['GET', 'POST'])
 def marketplace_list():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('marketplace_list.html')
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Delete Selected'):
             option = request.form['options']
             obj = forms.MarketPlace()
@@ -139,12 +151,12 @@ def marketplace_list():
 
 @app.route("/marketplace_edit/<market_id>", methods=['GET', 'POST'])
 def marketplace_edit(market_id):
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.MarketPlace()
         data = obj.MarketPlace_select(market_id, '')
         return render_template('marketplace_edit.html', data=data)
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             market_name = request.form.get('market_name')
             market_address = request.form.get('market_address')
@@ -163,9 +175,9 @@ def marketplace_edit(market_id):
 
 @app.route("/provider_add", methods=['GET', 'POST'])
 def provider_add():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('provider_add.html')
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             provider_company = request.form.get('provider_company')
             provider_address = request.form.get('provider_address')
@@ -183,10 +195,10 @@ def provider_add():
 
 @app.route("/provider_list", methods=['GET', 'POST'])
 def provider_list():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('provider_list.html')
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Delete Selected'):
             option = request.form['options']
             obj = forms.Provider()
@@ -210,12 +222,12 @@ def provider_list():
 
 @app.route("/provider_edit/<provider_id>", methods=['GET', 'POST'])
 def provider_edit(provider_id):
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.Provider()
         data = obj.Provider_select(provider_id, '')
         return render_template('provider_edit.html', data=data)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             provider_company = request.form.get('provider_company')
             provider_address = request.form.get('provider_address')
@@ -233,9 +245,9 @@ def provider_edit(provider_id):
 
 @app.route("/employee_add", methods=['GET', 'POST'])
 def employee_add():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('employee_add.html')
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             employee_name = request.form.get('employee_name')
             employee_surname = request.form.get('employee_surname')
@@ -272,10 +284,10 @@ def employee_add():
 
 @app.route("/employee_list", methods=['GET', 'POST'])
 def employee_list():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('employee_list.html')
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Delete Selected'):
             option = request.form['options']
             obj = forms.Employee()
@@ -299,12 +311,12 @@ def employee_list():
 
 @app.route("/employee_edit/<employee_id>", methods=['GET', 'POST'])
 def employee_edit(employee_id):
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.Employee()
         data = obj.Employee_select(employee_id, '')
         return render_template('employee_edit.html', data=data)
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             employee_name = request.form.get('employee_name')
             employee_surname = request.form.get('employee_surname')
@@ -341,9 +353,9 @@ def employee_edit(employee_id):
 
 @app.route("/cargo_add", methods=['GET', 'POST'])
 def cargo_add():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('cargo_add.html')
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             cargo_company = request.form.get('cargo_company')
             cargo_address = request.form.get('cargo_address')
@@ -360,10 +372,10 @@ def cargo_add():
 
 @app.route("/cargo_list", methods=['GET', 'POST'])
 def cargo_list():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('cargo_list.html')
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Delete Selected'):
             option = request.form['options']
             obj = forms.CargoCompany()
@@ -387,12 +399,12 @@ def cargo_list():
 
 @app.route("/cargo_edit/<cargo_id>", methods=['GET', 'POST'])
 def cargo_edit(cargo_id):
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.CargoCompany()
         data = obj.cargo_select(cargo_id, '')
         return render_template('cargo_edit.html', data=data)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             cargo_company = request.form.get('cargo_company')
             cargo_address = request.form.get('cargo_address')
@@ -409,12 +421,12 @@ def cargo_edit(cargo_id):
 
 @app.route("/product_add", methods=['GET', 'POST'])
 def product_add():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.Provider()
         data = obj.Provider_name_select()
         data = functions.group(data, 2)
         return render_template('product_add.html', data=data)
-    if request.method == 'POST':
+    if request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             product_name = request.form.get('product_name')
             product_brand = request.form.get('product_brand')
@@ -433,10 +445,10 @@ def product_add():
 
 @app.route("/product_list", methods=['GET', 'POST'])
 def product_list():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('product_list.html')
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Delete Selected'):
             option = request.form['options']
             obj = forms.Product()
@@ -460,7 +472,7 @@ def product_list():
 
 @app.route("/product_edit/<product_id>", methods=['GET', 'POST'])
 def product_edit(product_id):
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.Product()
         data = obj.Product_select(product_id, '')
         obj2 = forms.Provider()
@@ -470,7 +482,7 @@ def product_edit(product_id):
         data.append(obj.Product_provider_id(product_id))
         return render_template('product_Edit.html', data=data)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             product_name = request.form.get('product_name')
             product_brand = request.form.get('product_brand')
@@ -487,7 +499,7 @@ def product_edit(product_id):
 
 @app.route("/supply_add", methods=['GET', 'POST'])
 def supply_add():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.Provider()
         data = obj.Provider_name_select()
         data = functions.group(data, 2)
@@ -496,7 +508,7 @@ def supply_add():
         data2 = functions.group(data2, 3)
         data = [[data], [data2]]
         return render_template('supply_add.html', data=data)
-    if request.method == 'POST':
+    if request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             provider_id = request.form.get('provider_id')
             supply_price = request.form.get('supply_price')
@@ -513,7 +525,7 @@ def supply_add():
 
 @app.route("/supply_list",methods=['GET','POST'])
 def supply_list():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.Provider()
         data = obj.Provider_name_select()
         data = functions.group(data, 2)
@@ -522,7 +534,7 @@ def supply_list():
         data2 = functions.group(data2, 3)
         data = [[data], [data2]]
         return render_template('supply_list.html',data = data)
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Delete Selected'):
             option = request.form['options']
             obj = forms.Supply()
@@ -551,8 +563,17 @@ def supply_list():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+@app.route("/supply_edit/<supply_id>",methods=['GET', 'POST'])
+def supply_edit(supply_id):
+    if request.method == 'GET' and session['usertype']==1:
+=======
+>>>>>>> 0b6be63005eaaa14f54081a25a1560ebd6fd05e9
 
     if request.method == 'GET':
+>>>>>>> 84f9a4d8c64c26ee700a2a25fcff177cc3aedaec
         obj = forms.Supply()
         data = obj.Supply_select(supply_id, '', '')
         obj2 = forms.Provider()
@@ -564,7 +585,7 @@ def supply_list():
         data = [[data], [data2], [data3]]
         return render_template('supply_edit.html', data=data)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Submit'):
             provider_id = request.form.get('provider_id')
             supply_price = request.form.get('supply_price')
@@ -579,10 +600,10 @@ def supply_list():
 
 @app.route("/create_order",methods=['GET', 'POST'])
 def create_order():
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         return render_template('create_order.html')
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Order Selected'):
             option = request.form['options']
             return redirect(url_for('order_information', product_id=option))
@@ -600,7 +621,7 @@ def create_order():
 
 @app.route ("/order_information/<product_id>",methods=['GET', 'POST'])
 def order_information(product_id):
-    if request.method == 'GET':
+    if request.method == 'GET' and session['usertype']==1:
         obj = forms.Product()
         data = obj.Product_select(product_id, '')
         data = [data[0][0], data[0][1], data[0][2]]
@@ -611,7 +632,7 @@ def order_information(product_id):
         data = [[data], [data2], [data3]]
         print(data)
         return render_template('order_information.html', data=data)
-    elif request.method == 'POST':
+    elif request.method == 'POST' and session['usertype']==1:
         if (request.form['submit_button'] == 'Order'):
             market_id = request.form.get('market_id')
             cargo_id = request.form.get('cargo_id')
@@ -632,7 +653,11 @@ def order_information(product_id):
 @app.route ('/my_orders', methods= ['GET', 'POST'])
 def my_orders():
     if request.method == 'GET':
-        return render_template('my_orders.html')
+        employee_id = session['employeeid']
+        obj = forms.Order()
+        data = obj.my_orders(employee_id)
+        return render_template('my_orders.html', data=data)
+        
     elif request.method == 'POST':
         if (request.form['submit_button'] == 'Dispatch Selected'):
             option = request.form['options'] #order id burdan product_id yi cek product_id den stoka git ve stok durumunu cek
@@ -641,16 +666,16 @@ def my_orders():
             obj.dispatch_order(option)
             return redirect(url_for('my_orders',))
 
-        elif (request.form['submit_button'] == 'Submit'):
-            employee_id = request.form.get('employee_id')
-            obj = forms.Order()
-            data = obj.my_orders(employee_id)
-            return render_template('my_orders.html', data=data)
-
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+@app.route('/deneme',methods=['GET'])
+def finansdeneme():
+    obj = forms.Finance()
+    obj.weSoldSmth(1)
+    return redirect(url_for('home_page'))
 
+#kaç gram kargo gitmiş komisyon ne kadar marketplace kargoya kaç para veriyomuş
  
 if __name__ == "__main__":
     app.run()

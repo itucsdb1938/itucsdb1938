@@ -3,19 +3,63 @@
 <title>Provider</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
-        <label>Provider company</label>
-        <input type="text" name="provider_company" value="{{provider_company}}">
-        <label>Provider Adress</label>
-        <input type="text" name="provider_address" value="{{provider_address}}">
-        <label>Provider Phone number</label>
-        <input type="text" name="provider_phonenumber" value="{{provider_phonenumber}}">
-        <label>Provider TaxID</label>
-        <input type="text" name="provider_taxid" value="{{provider_taxid}}">
-        <label>Provider Authority</label>
-        <input type="text" name="provider_authority" value="{{provider_authority}}">
-        <input type="submit" name="submit_button" value="Submit">
+
+
+
+<div class="row">
+    <form method="POST" style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <input class="form-control" type="text" name="provider_company" value="{{provider_company}}">
+                <label class="form-control-placeholder">Provider company</label>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <input class="form-control" type="text" name="provider_address" value="{{provider_address}}">
+                <label class="form-control-placeholder">Provider Adress</label>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <input class="form-control" type="text" name="provider_phonenumber" value="{{provider_phonenumber}}">
+                <label class="form-control-placeholder">Provider Phone number</label>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <input class="form-control" type="text" name="provider_taxid" value="{{provider_taxid}}">
+                <label class="form-control-placeholder">Provider TaxID</label>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <input class="form-control" type="text" name="provider_authority" value="{{provider_authority}}">
+                <label class="form-control-placeholder">Provider Authority</label>
+            </div>
+        </div>
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

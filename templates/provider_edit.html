@@ -3,44 +3,50 @@
 <title>Provider</title>
 {% endblock %}
 {% block content %}
-<div>
-    Current data:
-    <table>
-        <thead>
-            <th>Provider ID</th>
-            <th>Provider Company</th>
-            <th>Provider Address</th>
-            <th>Provider Phone Number</th>
-            <th>Provider TaxID</th>
-            <th>Provider Authority</th>
-        </thead>
-        <tbody>
-            {% for item in data %}
-            <tr>
-                <td>{{ item[0] }}</td>
-                <td>{{ item[1] }}</td>
-                <td>{{ item[2] }}</td>
-                <td>{{ item[3] }}</td>
-                <td>{{ item[4] }}</td>
-                <td>{{ item[5] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-<div>
-    <form method='POST'>
-        <label>Provider company</label>
-        <input type="text" name="provider_company" value="{{provider_company}}">
-        <label>Provider Adress</label>
-        <input type="text" name="provider_address" value="{{provider_address}}">
-        <label>Provider Phone number</label>
-        <input type="text" name="provider_phonenumber" value="{{provider_phonenumber}}">
-        <label>Provider TaxID</label>
-        <input type="text" name="provider_taxid" value="{{provider_taxid}}">
-        <label>Provider Authority</label>
-        <input type="text" name="provider_authority" value="{{provider_authority}}">
-        <input type="submit" name="submit_button" value="Submit">
+
+
+
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Provider company</label>
+                <input class="form-control" type="text" name="provider_company"
+                    value="{{ data[0][1] }}">
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Provider Adress</label>
+                <input class="form-control" type="text" name="provider_address" value="{{ data[0][2] }}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Provider Phone number</label>
+                <input class="form-control" type="text" name="provider_phonenumber" value="{{ data[0][3] }}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Provider TaxID</label>
+                <input class="form-control" type="text" name="provider_taxid" value="{{ data[0][4] }}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Provider Authority</label>
+                <input class="form-control" type="text" name="provider_authority" value="{{ data[0][5] }}">
+            </div>
+        </div>
+
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
+
+
+
+
+
 {% endblock %}

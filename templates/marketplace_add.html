@@ -3,21 +3,40 @@
 <title>Marketplace</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Marketplace name</label>
-        <input type="text" name="market_name" value="{{market_name}}">
+        <input class="form-control" type="text" name="market_name" value="{{market_name}}">
+    </div></div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Marketplace Adress</label>
-        <input type="text" name="market_address" value="{{market_address}}">
+        <input class="form-control" type="text" name="market_address" value="{{market_address}}">
+    </div></div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Marketplace Authority</label>
-        <input type="text" name="market_authority" value="{{market_authority}}">
+        <input class="form-control" type="text" name="market_authority" value="{{market_authority}}">
+    </div></div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Marketplace Phone number</label>
-        <input type="text" name="market_phonenumber" value="{{market_phonenumber}}">
+        <input class="form-control" type="text" name="market_phonenumber" value="{{market_phonenumber}}">
+    </div></div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Marketplace TaxID</label>
-        <input type="text" name="market_taxid" value="{{market_taxid}}">
+        <input class="form-control" type="text" name="market_taxid" value="{{market_taxid}}">
+    </div></div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
         <label>Marketplace Commission Fee</label>
-        <input type="text" name="market_commission" value="{{market_commission}}">
-        <input type="submit" name="submit_button" value="Submit">
+        <input class="form-control" type="text" name="market_commission" value="{{market_commission}}">
+
+        </div></div>
+        <input class="form-control" class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
 {% endblock %}
