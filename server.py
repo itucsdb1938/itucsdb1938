@@ -702,9 +702,12 @@ def all_orders():
 
 @app.route('/view_finance',methods=['GET'])
 def view_finance():
-    obj = forms.Finance()
-    data = obj.view_finance()
-    return render_template('view_finance.html',data=data)
+    if session['usertype']==1:
+        obj = forms.Finance()
+        data = obj.view_finance()
+        return render_template('view_finance.html',data=data)
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 #kaç gram kargo gitmiş komisyon ne kadar marketplace kargoya kaç para veriyomuş
  
