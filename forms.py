@@ -430,6 +430,17 @@ class Supply:
             dbconnection.close()
             return
 
+    def get_supplyID (self):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT MAX(orderID) FROM supply_order;"""
+        cursor.execute(queryString)
+        selection = cursor.fetchall()[0]
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
+
 #Since given order cannot be changed, edit function of supplies have been excluded from code.
 #    def Supply_edit (self, order_id, provider_id, price, quantity, time, productID):
 #        dbconnection = dbapi.connect(url)
@@ -511,11 +522,11 @@ class Order:
         dbconnection.close()
         return selection
 
-    def get_orderID(self,product_id):
+    def get_orderID(self):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """select productid from orders where orderid = %s;"""
-        cursor.execute(queryString, (product_id,))
+        queryString = """SELECT MAX(orderid) FROM orders; """
+        cursor.execute(queryString)
         selection = cursor.fetchall()
         dbconnection.commit()
         cursor.close()
@@ -684,7 +695,7 @@ class Finance():
 
         cargoprice = (float(weight)/1000) * float(perkilo)
         gain = float(sellprice)*float(howMany)
-        netWorth = gain*(float(commission)/100)
+        netWorth = gain-gain*(float(commission)/100)
         netWorth = netWorth-cargoprice
 
         queryString = """SELECT MAX(TransactionID) FROM Financial;"""

@@ -529,7 +529,7 @@ def supply_add():
             obj2 = forms.Stock()
             obj2.update_quantity(supply_quantity,obj2.get_ID(product_id)[0][0])
             obj3 = forms.Finance()
-            obj3.weBoughtSmth(obj2.get_ID(product_id)[0][0])
+            obj3.weBoughtSmth(obj.get_supplyID())
             return redirect(url_for('supply_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
@@ -677,9 +677,9 @@ def my_orders():
             if obj.check_dispatch(option):
                 obj2 = forms.Stock()
                 obj2.update_quantity(-obj.check_dispatch(option)[0],obj2.get_ID(obj.check_dispatch(option)[2])[0][0])
-                obj3 = forms.Finance()
-                obj3.weSoldSmth(obj.get_orderID(obj.check_dispatch(option)[2]))
                 obj.dispatch_order(option)
+                obj3 = forms.Finance()
+                obj3.weSoldSmth(obj.get_orderID())
                 return redirect(url_for('my_orders'))
             else:
                 return redirect(url_for('my_orders',error='NO STOCK!'))
@@ -695,7 +695,7 @@ def stock():
 
 @app.route('/all_orders',methods=['GET'])
 def all_orders():
-    obj = forms.Orders()
+    obj = forms.Order()
     data = obj.get_order()
     return render_template('all_orders.html',data=data)
 
