@@ -3,19 +3,40 @@
 <title>Cargo</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
-        <label>Cargo company</label>
-        <input type="text" name="cargo_company" value="{{cargo_company}}">
-        <label>Cargo Adress</label>
-        <input type="text" name="cargo_address" value="{{cargo_address}}">
-        <label>Cargo Phone number</label>
-        <input type="text" name="cargo_price" value="{{cargo_price}}">
-        <label>Cargo TaxID</label>
-        <input type="text" name="cargo_taxid" value="{{cargo_taxid}}">
-        <label>Cargo Authority</label>
-        <input type="text" name="cargo_authority" value="{{cargo_authority}}">
-        <input type="submit" name="submit_button" value="Submit">
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Cargo company</label>
+                <input class="form-control" type="text" name="cargo_company" value="{{cargo_company}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Cargo Adress</label>
+                <input class="form-control" type="text" name="cargo_address" value="{{cargo_address}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Cargo Phone number</label>
+                <input class="form-control" type="text" name="cargo_price" value="{{cargo_price}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Cargo TaxID</label>
+                <input class="form-control" type="text" name="cargo_taxid" value="{{cargo_taxid}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Cargo Authority</label>
+                <input class="form-control" type="text" name="cargo_authority" value="{{cargo_authority}}">
+
+            </div>
+        </div>
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width:30%;">
     </form>
 </div>
 {% endblock %}
