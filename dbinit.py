@@ -3,6 +3,8 @@ import sys
 
 import psycopg2 as dbapi2
 
+#url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+url = os.getenv("DB_URL")
 
 INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS Provider (
@@ -111,4 +113,8 @@ def initialize(url):
 
 
 if __name__ == "__main__":
-    initialize("dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'")
+    url = os.getenv("DB_URL")
+    if url is None:
+        print("Usage: DB_URL=url python dbinit.py", file=sys.stdout)
+        sys.exit(1)
+    initialize(url)

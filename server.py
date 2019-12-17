@@ -7,8 +7,8 @@ import psycopg2 as dbapi2
 from flask import Flask, render_template, redirect, url_for, request, session, escape, jsonify
 import hashlib
 
-url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
-#url = os.getenv("DB_URL")
+#url = "dbname='snlvpekr' user='snlvpekr' host='balarama.db.elephantsql.com' password='Yez7qmHLmlsFw3UM_4WENR3k6ktjTiEC'"
+url = os.getenv("DB_URL")
 
 app = Flask(__name__)
 SESSION_TYPE = 'redis'
