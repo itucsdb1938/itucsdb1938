@@ -453,7 +453,7 @@ class Order:
     def my_orders(self, employee_id):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """SELECT * FROM temporary_order WHERE employeeid = %s;"""
+        queryString = """select orderid,shipaddress,location_x,location_y,location_z, customer_name, concat_ws(' - ',brand,name), a.quantity, (a.quantity*sellprice) as price from temporary_order a inner join stock b on a.productid = b.productid inner join products c on c.productid = a.productid WHERE employeeid = %s;"""
         cursor.execute(queryString, (employee_id,))
         selection = cursor.fetchall()
         dbconnection.commit()
@@ -468,14 +468,23 @@ class Order:
         cursor.execute(queryString, (order_id,))
         selection = cursor.fetchall()
         queryString = """INSERT INTO orders (marketplaceid, shipaddress, order_date, customer_name, companyid, productid, quantity, order_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
-        print(selection)
-        print(selection[0])
         cursor.execute(queryString, (selection[0][1],selection[0][2],selection[0][3],selection[0][4],selection[0][5],selection[0][6],selection[0][7],selection[0][10],))
         queryString = """DELETE FROM temporary_order WHERE orderid = %s;"""
         cursor.execute(queryString, (order_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
+
+    def check_dispatch (self, orderid):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """select temp.quantity as temporary_quantity, stock.quantity, temp.productid, orderid from stock inner join temporary_order as temp on stock.productid = temp.productid where orderid = %s;"""
+        cursor.execute(queryString, (order_id,))
+        selection = cursor.fetchall()
+        if (selection[0][0] > selection[0][1]):
+            return False
+        else:
+            return True
 
 class Stock():
     def add_to_stock(self, product_id):
@@ -526,6 +535,17 @@ class Stock():
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
+
+    def display_stock(self):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT * FROM stock;"""
+        cursor.execute(queryString,)
+        selection = cursor.fetchall()
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection
 
 class Users():    
 

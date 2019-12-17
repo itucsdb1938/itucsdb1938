@@ -10,7 +10,7 @@
         <label>Product</label>
         <select name="product_id">
             <option value=""> -- select an option -- </option>
-            {% for item in data[1][0] %}
+            {% for item in data[1][0][0] %}
             <option value="{{item[0]}}">{{item[1]}} - {{item[2]}}</option>
             {% endfor %}
         </select>
@@ -49,7 +49,6 @@
             </tbody>
         </table>
         <input type="submit" name="submit_button" value="Delete Selected">
-        <input type="submit" name="submit_button" value="Edit Selected">
     </form>
 </div>
 {% endif %}

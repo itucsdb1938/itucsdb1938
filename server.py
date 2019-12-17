@@ -487,6 +487,8 @@ def supply_add():
             obj.Supply_add(provider_id, supply_price, supply_quantity, supply_time, product_id)
             obj2 = forms.Stock()
             obj2.update_quantity(supply_quantity,obj2.get_ID(product_id)[0][0])
+            obj3 = forms.Finance()
+            obj3.weBoughtSmth(obj2.get_ID(product_id)[0][0])
             return redirect(url_for('supply_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
