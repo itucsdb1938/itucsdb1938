@@ -515,7 +515,6 @@ def supply_add():
         data = functions.group(data, 2)
         obj2 = forms.Product()
         data2 = obj2.Product_name_select()
-        data2 = functions.group(data2, 3)
         data = [[data], [data2]]
         return render_template('supply_add.html', data=data)
     if request.method == 'POST' and session['usertype']==1:
@@ -612,10 +611,10 @@ def supply_list():
 
 @app.route("/create_order",methods=['GET', 'POST'])
 def create_order():
-    if request.method == 'GET' and session['usertype']==1:
+    if request.method == 'GET':
         return render_template('create_order.html')
 
-    elif request.method == 'POST' and session['usertype']==1:
+    elif request.method == 'POST':
         if (request.form['submit_button'] == 'Order Selected'):
             option = request.form['options']
             return redirect(url_for('order_information', product_id=option))
@@ -631,15 +630,12 @@ def create_order():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-    else:
-        return redirect(url_for('home_page',error='You are not Authorized'))
-
 @app.route ("/order_information/<product_id>",methods=['GET', 'POST'])
 def order_information(product_id):
     if request.method == 'GET' and session['usertype']==1:
         obj = forms.Product()
         data = obj.Product_select(product_id, '')
-        data = [data[0][0], data[0][1], data[0][2]]
+        data = [data[0][0], data[0][1], data[0][2], data[0][3]]
         obj2 = forms.MarketPlace()
         data2 = obj2.MarketPlace_select('*','')
         obj3 = forms.CargoCompany()
@@ -671,18 +667,26 @@ def order_information(product_id):
 @app.route ('/my_orders', methods= ['GET', 'POST'])
 def my_orders():
     if request.method == 'GET':
+        
         employee_id = session['employeeid']
         obj = forms.Order()
         data = obj.my_orders(employee_id)
-        return render_template('my_orders.html', data=data)
+        if request.args.get('error'):
+            return render_template('my_orders.html', data=data, message=request.args.get('error'))
+        else:
+            return render_template('my_orders.html', data=data)
         
     elif request.method == 'POST':
         if (request.form['submit_button'] == 'Dispatch Selected'):
             option = request.form['options'] #order id burdan product_id yi cek product_id den stoka git ve stok durumunu cek
-    
             obj = forms.Order()
-            obj.dispatch_order(option)
-            return redirect(url_for('my_orders',))
+            if obj.check_dispatch(option):
+                obj2 = forms.Stock()
+                obj2.update_quantity()
+                obj.dispatch_order(option)
+                return redirect(url_for('my_orders'))
+            else:
+                return redirect(url_for('my_orders',error='NO STOCK!'))
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
