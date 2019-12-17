@@ -40,7 +40,7 @@
             <tbody>
                 {% for item in data[2][0] %}
                 <tr>
-                    <td><input type="radio" name="options" value="{{ item[0] }}"></input><br></td>
+                    <td><input type="radio" name="options" value="{{ item[0] }}"><br></td>
                     {% for subitem in item %}
                     <td>{{ subitem }}</td>
                     {% endfor %}
@@ -49,6 +49,7 @@
             </tbody>
         </table>
         <input type="submit" name="submit_button" value="Delete Selected">
+        <input type="submit" name="submit_button" value="Edit Selected">
     </form>
 </div>
 {% endif %}

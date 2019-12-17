@@ -430,6 +430,16 @@ class Supply:
             dbconnection.close()
             return
 
+#Since given order cannot be changed, edit function of supplies have been excluded from code.
+#    def Supply_edit (self, order_id, provider_id, price, quantity, time, productID):
+#        dbconnection = dbapi.connect(url)
+#        cursor = dbconnection.cursor()
+#        queryString = """UPDATE supply_order SET providerID = %s, price = %s, quantity = %s, time = %s, productID = %s WHERE orderID = %s;"""
+#        cursor.execute(queryString, (provider_id, price, quantity, time, productID, order_id,))
+#        dbconnection.commit()
+#        cursor.close()
+#        dbconnection.close()
+
 class Order:
     def temp_order(self, market_id, ship_address, order_date, customer_name, company_id, product_id, quantity, employee_id, order_time):
         dbconnection = dbapi.connect(url)

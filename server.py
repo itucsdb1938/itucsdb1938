@@ -563,47 +563,35 @@ def supply_list():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-<<<<<<< HEAD
 
-@app.route("/supply_edit/<supply_id>",methods=['GET', 'POST'])
-def supply_edit(supply_id):
-    if request.method == 'GET' and session['usertype']==1:
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-@app.route("/supply_edit/<supply_id>",methods=['GET', 'POST'])
-def supply_edit(supply_id):
-    if request.method == 'GET' and session['usertype']==1:
-=======
->>>>>>> 0b6be63005eaaa14f54081a25a1560ebd6fd05e9
 
-    if request.method == 'GET':
->>>>>>> 84f9a4d8c64c26ee700a2a25fcff177cc3aedaec
->>>>>>> c792c63aa767eef5ec583f8e22d72261f408ff2b
-        obj = forms.Supply()
-        data = obj.Supply_select(supply_id, '', '')
-        obj2 = forms.Provider()
-        data2 = obj2.Provider_name_select()
-        data2 = functions.group(data2, 2)
-        obj3 = forms.Product()
-        data3 = obj3.Product_name_select()
-        data3 = functions.group(data3, 3)
-        data = [[data], [data2], [data3]]
-        return render_template('supply_edit.html', data=data)
+#Since given order cannot be changed, edit function of supplies have been excluded from code.
+#@app.route("/supply_edit/<supply_id>",methods=['GET', 'POST'])
+#def supply_edit(supply_id):
+#    if request.method == 'GET' and session['usertype']==1:
+#        obj = forms.Supply()
+#        data = obj.Supply_select(supply_id, '', '')
+#        obj2 = forms.Provider()
+#        data2 = obj2.Provider_name_select()
+#        data2 = functions.group(data2, 2)
+#        obj3 = forms.Product()
+#        data3 = obj3.Product_name_select()
+#        data3 = functions.group(data3, 3)
+#        data = [[data], [data2], [data3]]
+#        return render_template('supply_edit.html', data=data)
 
-    if request.method == 'POST' and session['usertype']==1:
-        if (request.form['submit_button'] == 'Submit'):
-            provider_id = request.form.get('provider_id')
-            supply_price = request.form.get('supply_price')
-            supply_quantity = request.form.get('supply_quantity')
-            supply_time = datetime.now().strftime("%d/%m/%Y - %H:%M")
-            product_id = request.form.get('product_id')
-            obj = forms.Supply()
-            obj.Supply_edit(supply_id, provider_id, supply_price, supply_quantity, supply_time, product_id)
-            return redirect(url_for('supply_list'))
-        elif (request.form['submit_button'] == 'Homepage'):
-            return redirect(url_for('home_page'))
+#    if request.method == 'POST' and session['usertype']==1:
+#        if (request.form['submit_button'] == 'Submit'):
+#            provider_id = request.form.get('provider_id')
+#            supply_price = request.form.get('supply_price')
+#            supply_quantity = request.form.get('supply_quantity')
+#            supply_time = datetime.now().strftime("%d/%m/%Y - %H:%M")
+#            product_id = request.form.get('product_id')
+#            obj = forms.Supply()
+#            obj.Supply_edit(supply_id, provider_id, supply_price, supply_quantity, supply_time, product_id)
+#            return redirect(url_for('supply_list'))
+#        elif (request.form['submit_button'] == 'Homepage'):
+#            return redirect(url_for('home_page'))
 
 @app.route("/create_order",methods=['GET', 'POST'])
 def create_order():
