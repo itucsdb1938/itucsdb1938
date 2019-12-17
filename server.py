@@ -62,42 +62,10 @@ def login():
                 return redirect(url_for('home_page'))
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['GET'])
 def home_page():
     if (request.method == 'GET'):
         return render_template('homepage.html')
-
-    if (request.method == 'POST'):
-        if (request.form['submit_button'] == 'Marketplace Add'):
-            return redirect(url_for('marketplace_add'))
-        elif (request.form['submit_button'] == 'Marketplace List'):
-            return redirect(url_for('marketplace_list'))
-        elif (request.form['submit_button'] == 'Provider Add'):
-            return redirect(url_for('provider_add'))
-        elif (request.form['submit_button'] == 'Provider List'):
-            return redirect(url_for('provider_list'))
-        elif (request.form['submit_button'] == 'Employee Add'):
-            return redirect(url_for('employee_add'))
-        elif (request.form['submit_button'] == 'Employee List'):
-            return redirect(url_for('employee_list'))
-        elif (request.form['submit_button'] == 'Cargo Company Add'):
-            return redirect(url_for('cargo_add'))
-        elif (request.form['submit_button'] == 'Cargo Company List'):
-            return redirect(url_for('cargo_list'))
-        elif (request.form['submit_button'] == 'Product Add'):
-            return redirect(url_for('product_add'))
-        elif (request.form['submit_button'] == 'Product List'):
-            return redirect(url_for('product_list'))
-        elif (request.form['submit_button'] == 'Supply Add'):
-            return redirect(url_for('supply_add'))
-        elif (request.form['submit_button'] == 'Supply List'):
-            return redirect(url_for('supply_list'))
-        elif (request.form['submit_button'] == 'Create Order'):
-            return redirect(url_for('create_order'))
-        elif (request.form['submit_button'] == 'My Orders'):
-            return redirect(url_for('my_orders'))
-        elif (request.form['submit_button'] == 'Homepage'):
-            return redirect(url_for('home_page'))
 
 
 @app.route("/marketplace_add", methods=['GET', 'POST'])
