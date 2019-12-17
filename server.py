@@ -23,6 +23,7 @@ def logout():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+
     if request.method == 'GET' and session['usertype']==1:
         print(session['usertype'])
         return render_template('register.html')
@@ -36,10 +37,9 @@ def register():
         obj = forms.Users()
         obj.addUser(username,password,employeeid,usertype)
         return redirect(url_for('register'))
-
+        
     else:
-        print(session['usertype'])
-        return redirect(url_for('home_page'))
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/login",methods=['GET','POST'])
@@ -65,6 +65,8 @@ def login():
 @app.route("/", methods=['GET'])
 def home_page():
     if (request.method == 'GET'):
+        if request.args.get('error') != None:
+            return render_template('homepage.html',message=request.args.get('error'))
         return render_template('homepage.html')
 
 
@@ -88,6 +90,8 @@ def marketplace_add():
             return redirect(url_for('marketplace_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/marketplace_list", methods=['GET', 'POST'])
@@ -115,6 +119,8 @@ def marketplace_list():
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/marketplace_edit/<market_id>", methods=['GET', 'POST'])
@@ -139,6 +145,9 @@ def marketplace_edit(market_id):
             return redirect(url_for('marketplace_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/provider_add", methods=['GET', 'POST'])
@@ -159,6 +168,9 @@ def provider_add():
             return redirect(url_for('provider_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/provider_list", methods=['GET', 'POST'])
@@ -187,6 +199,9 @@ def provider_list():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
+
 
 @app.route("/provider_edit/<provider_id>", methods=['GET', 'POST'])
 def provider_edit(provider_id):
@@ -209,6 +224,9 @@ def provider_edit(provider_id):
             return redirect(url_for('provider_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/employee_add", methods=['GET', 'POST'])
@@ -248,6 +266,8 @@ def employee_add():
             return redirect(url_for('employee_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/employee_list", methods=['GET', 'POST'])
@@ -275,6 +295,8 @@ def employee_list():
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/employee_edit/<employee_id>", methods=['GET', 'POST'])
@@ -317,6 +339,8 @@ def employee_edit(employee_id):
             return redirect(url_for('employee_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/cargo_add", methods=['GET', 'POST'])
@@ -336,6 +360,9 @@ def cargo_add():
             return redirect(url_for('cargo_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/cargo_list", methods=['GET', 'POST'])
@@ -363,6 +390,9 @@ def cargo_list():
 
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/cargo_edit/<cargo_id>", methods=['GET', 'POST'])
@@ -385,6 +415,9 @@ def cargo_edit(cargo_id):
             return redirect(url_for('cargo_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/product_add", methods=['GET', 'POST'])
@@ -409,6 +442,9 @@ def product_add():
             return redirect(url_for('product_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/product_list", methods=['GET', 'POST'])
@@ -437,6 +473,9 @@ def product_list():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
+
 
 @app.route("/product_edit/<product_id>", methods=['GET', 'POST'])
 def product_edit(product_id):
@@ -463,6 +502,9 @@ def product_edit(product_id):
             return redirect(url_for('product_list'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 @app.route("/supply_add", methods=['GET', 'POST'])
@@ -492,6 +534,9 @@ def supply_add():
             return redirect(url_for('supply_add'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 @app.route("/supply_list",methods=['GET','POST'])
 def supply_list():
@@ -532,6 +577,8 @@ def supply_list():
             return render_template('supply_list.html', data=data)
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 
 
@@ -584,6 +631,9 @@ def create_order():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
+
 @app.route ("/order_information/<product_id>",methods=['GET', 'POST'])
 def order_information(product_id):
     if request.method == 'GET' and session['usertype']==1:
@@ -614,6 +664,9 @@ def order_information(product_id):
             return redirect(url_for('home_page'))
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
+
+    else:
+        return redirect(url_for('home_page',error='You are not Authorized'))
 
 @app.route ('/my_orders', methods= ['GET', 'POST'])
 def my_orders():
