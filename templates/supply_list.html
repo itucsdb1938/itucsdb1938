@@ -3,31 +3,44 @@
 <title>Supply Order</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
-        <label>Order ID</label>
-        <input type="text" name="supply_id" value="{{supply_id}}">
-        <label>Product</label>
-        <select name="product_id">
-            <option value=""> -- select an option -- </option>
-            {% for item in data[1][0][0] %}
-            <option value="{{item[0]}}">{{item[1]}} - {{item[2]}}</option>
-            {% endfor %}
-        </select>
-        <label>Provider</label>
-        <select name="provider_id">
-            <option value=""> -- select an option -- </option>
-            {% for item in data[0][0] %}
-            <option value="{{item[0]}}">{{item[1]}}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" name="submit_button" value="Submit">
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Order ID</label>
+                <input class="form-control" type="text" name="supply_id" value="{{supply_id}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Product</label>
+                <select class="form-control" name="product_id">
+                    <option value=""> -- select an option -- </option>
+                    {% for item in data[1][0][0] %}
+                    <option value="{{item[0]}}">{{item[1]}} - {{item[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Provider</label>
+                <select class="form-control" name="provider_id">
+                    <option value=""> -- select an option -- </option>
+                    {% for item in data[0][0] %}
+                    <option value="{{item[0]}}">{{item[1]}}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+        </div>
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width: 30%;">
     </form>
 </div>
 {% if data[2] %}
 <div>
     <form method='POST'>
-        <table>
+        <table cellspacing="20" style="width: 100%;">
             <thead>
                 <th>Selection</th>
                 <th>Order ID</th>

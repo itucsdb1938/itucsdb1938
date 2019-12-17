@@ -3,27 +3,42 @@
 <title>Supply Order</title>
 {% endblock %}
 {% block content %}
-<div>
-    <form method='POST'>
-        
-        <label>Provider</label>
-        <select name="provider_id">
-            {% for item in data[0][0] %}
-                <option value="{{item[0]}}">{{item[1]}}</option>
-            {% endfor %}
-        </select>
-        <label>Price</label>
-        <input type="text" name="supply_price" value="{{supply_price}}">
-        <label>Quantity</label>
-        <input type="text" name="supply_quantity" value="{{supply_quantity}}">
-        <label>Product</label>
-        <select name="product_id">
-            {% for item in data[1][0][0] %}
-                <option value="{{item[0]}}">{{item[1]}} - {{item[2]}}</option>
-            {% endfor %}
-        </select>
+<div class="row">
+    <form method='POST' style="width: 100%;">
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
 
-        <input type="submit" name="submit_button" value="Submit">
+                <label>Provider</label>
+                <select class="form-control" name="provider_id">
+                    {% for item in data[0][0] %}
+                    <option value="{{item[0]}}">{{item[1]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" type="text" name="supply_price" value="{{supply_price}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Quantity</label>
+                <input class="form-control" type="text" name="supply_quantity" value="{{supply_quantity}}">
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="form-group">
+                <label>Product</label>
+                <select class="form-control" name="product_id">
+                    {% for item in data[1][0][0] %}
+                    <option value="{{item[0]}}">{{item[1]}} - {{item[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <input class="form-control" type="submit" name="submit_button" value="Submit" style="width: 30%;">
     </form>
 </div>
 {% endblock %}
