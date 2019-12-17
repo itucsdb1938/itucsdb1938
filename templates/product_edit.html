@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label>Provider</label>
                 <select class="form-control" name="provider_id">
-                    <option value="{{data[2]}}" selected disabled>{{data[0][0][0][4]}}</option>
+                    <option value="{{data[2]}}" selected>{{data[0][0][0][4]}}</option>
                     {% for item in data[1] %}
                     {% for subitem in item %}
                     <option value="{{subitem[0]}}">{{subitem[1]}}</option>

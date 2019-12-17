@@ -563,14 +563,10 @@ def supply_list():
         elif (request.form['submit_button'] == 'Homepage'):
             return redirect(url_for('home_page'))
 
-<<<<<<< HEAD
+
 @app.route("/supply_edit/<supply_id>",methods=['GET', 'POST'])
 def supply_edit(supply_id):
     if request.method == 'GET' and session['usertype']==1:
-=======
-
-    if request.method == 'GET':
->>>>>>> 84f9a4d8c64c26ee700a2a25fcff177cc3aedaec
         obj = forms.Supply()
         data = obj.Supply_select(supply_id, '', '')
         obj2 = forms.Provider()

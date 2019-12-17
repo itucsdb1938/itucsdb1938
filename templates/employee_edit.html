@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label>Employee Working Hour Start</label>
                 <select class="form-control" name="employee_workinghour1">
-                    <option selected disabled value="{{(data[0][5][0]/60)|int}}">{{(data[0][5][0]/60)|int}}</option>
+                    <option selected value="{{(data[0][5][0]/60)|int}}">{{(data[0][5][0]/60)|int}}</option>
                     {% for n in range(24) %}
                     <option value="{{n}}">{{n}}</option>
                     {% endfor %}
@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label>Employee Working Hour End</label>
                 <select class="form-control" name="employee_workinghour2">
-                    <option selected disabled value="{{(data[0][5][1]/60)|int}}">{{(data[0][5][1]/60)|int}}</option>
+                    <option selected value="{{(data[0][5][1]/60)|int}}">{{(data[0][5][1]/60)|int}}</option>
                     {% for n in range(24) %}
                     <option value="{{n}}">{{n}}</option>
                     {% endfor %}
