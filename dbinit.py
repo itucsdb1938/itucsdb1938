@@ -61,23 +61,25 @@ INIT_STATEMENTS = [
         OrderID serial PRIMARY KEY,
         Marketplaceid integer REFERENCES marketplace(marketid),
         Shipaddress varchar(255) NOT NULL,
-        Order_time integer NOT NULL,
+        Order_date varchar(255) NOT NULL,
         Customer_name varchar(255) NOT NULL,
         companyid integer REFERENCES cargocompany(companyid),
         ProductID integer REFERENCES products(productid),
         Quantity integer NOT NULL,
         EmployeeID integer REFERENCES employee(employeeid),
-        IsDispatched bool NOT NULL
+        IsDispatched bool NOT NULL,
+	order_time integer
     );""",
     """CREATE TABLE IF NOT EXISTS Orders(
         OrderID serial PRIMARY KEY,
         MarketplaceID integer REFERENCES marketplace(marketid),
         Shipaddress varchar(255) NOT NULL,
-        Order_time varchar(255) NOT NULL,
+        Order_date varchar(255) NOT NULL,
         Customer_name varchar(255) NOT NULL,
         companyID integer REFERENCES cargocompany(companyid),
         ProductID integer REFERENCES products(productid),
-        Quantity integer NOT NULL
+        Quantity integer NOT NULL,
+	Order_time integer
     );""",
     """CREATE TABLE IF NOT EXISTS Supply_order(
         OrderID serial PRIMARY KEY,
