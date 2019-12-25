@@ -1,17 +1,21 @@
 Welcome to itucsdbNN's documentation!
 =====================================
 
-:Team: Team Name
+:Team: ITUCSDB1938
 
 :Members:
 
-   * Member 1
-   * Member 2
-   * Member 3
-   * Member 4
-   * Member 5
+   * Yavuz Ege Okumuş
+   * Egehan Orta
+   * Yiğitcan Çoban
 
-**project description goes here (a few paragraphs)**
+Warehouse Management System manages the basic needs of a warehouse. Goods supply, stock and employee management, financial tables and shipping.
+
+
+App: http://itucsdb1938.herokuapp.com/
+
+Github Page: https://github.com/itucsdb1938/itucsdb1938
+
 
 Contents:
 
