@@ -9,7 +9,7 @@ Welcome to itucsdb1938's documentation!
    * Egehan Orta
    * Yiğitcan Çoban
 
-Warehouse Management System manages the basic needs of a warehouse. Goods supply, stock and employee management, financial tables and shipping.
+Warehouse Management System manages the basic needs of a warehouse. Goods supply, stock and employee management, financial tables and shipping
 
 
 App: http://itucsdb1938.herokuapp.com/
