@@ -78,84 +78,85 @@ MarketPlace_delete: Delete data from table with its id.
 *From server.py*
 
 .. code-block:: python
-   @app.route("/marketplace_add", methods=['GET', 'POST'])
-   def marketplace_add():
-       if request.method == 'GET' and session['usertype']==1:
-           return render_template('marketplace_add.html')
+   .. code-block:: python
+    @app.route("/marketplace_add", methods=['GET', 'POST'])
+    def marketplace_add():
+        if request.method == 'GET' and session['usertype']==1:
+			return render_template('marketplace_add.html')
 
-       elif request.method == 'POST' and session['usertype']==1:
-           if (request.form['submit_button'] == 'Submit'):
-               market_name = request.form.get('market_name')
-               market_address = request.form.get('market_address')
-               market_authority = request.form.get('market_authority')
-               market_phonenumber = request.form.get('market_phonenumber')
-               market_taxid = request.form.get('market_taxid')
-               market_commisionfee = request.form.get('market_commission')
-               obj = forms.MarketPlace()
-               obj.MarketPlace_add(market_name, market_address, market_authority,
+        elif request.method == 'POST' and session['usertype']==1:
+            if (request.form['submit_button'] == 'Submit'):
+                market_name = request.form.get('market_name')
+                market_address = request.form.get('market_address')
+                market_authority = request.form.get('market_authority')
+                market_phonenumber = request.form.get('market_phonenumber')
+                market_taxid = request.form.get('market_taxid')
+                market_commisionfee = request.form.get('market_commission')
+                obj = forms.MarketPlace()
+                obj.MarketPlace_add(market_name, market_address, market_authority,
                                    market_phonenumber, market_taxid,
                                    market_commisionfee)
-               return redirect(url_for('marketplace_add'))
-           elif (request.form['submit_button'] == 'Homepage'):
-               return redirect(url_for('home_page'))
-       else:
+				return redirect(url_for('marketplace_add'))
+            elif (request.form['submit_button'] == 'Homepage'):
+				return redirect(url_for('home_page'))
+        else:
            return redirect(url_for('home_page',error='You are not Authorized'))
 
 
-   @app.route("/marketplace_list", methods=['GET', 'POST'])
-   def marketplace_list():
-       if request.method == 'GET' and session['usertype']==1:
-           return render_template('marketplace_list.html')
+    @app.route("/marketplace_list", methods=['GET', 'POST'])
+    def marketplace_list():
+        if request.method == 'GET' and session['usertype']==1:
+			return render_template('marketplace_list.html')
 
-       elif request.method == 'POST' and session['usertype']==1:
-           if (request.form['submit_button'] == 'Delete Selected'):
-               option = request.form['options']
-               obj = forms.MarketPlace()
-               obj.MarketPlace_delete(option)
-               return redirect(url_for('marketplace_list'))
+        elif request.method == 'POST' and session['usertype']==1:
+            if (request.form['submit_button'] == 'Delete Selected'):
+                option = request.form['options']
+                obj = forms.MarketPlace()
+                obj.MarketPlace_delete(option)
+				return redirect(url_for('marketplace_list'))
 
-           elif (request.form['submit_button'] == 'Edit Selected'):
-               option = request.form['options']
-               return redirect(url_for('marketplace_edit', market_id=option))
+            elif (request.form['submit_button'] == 'Edit Selected'):
+				option = request.form['options']
+				return redirect(url_for('marketplace_edit', market_id=option))
 
-           elif (request.form['submit_button'] == 'Submit'):
-               market_id = request.form.get('market_id')
-               market_name = request.form.get('market_name')
-               obj = forms.MarketPlace()
-               data = obj.MarketPlace_select(market_id, market_name)
-               return render_template('marketplace_list.html', data=data)
+            elif (request.form['submit_button'] == 'Submit'):
+                market_id = request.form.get('market_id')
+                market_name = request.form.get('market_name')
+                obj = forms.MarketPlace()
+                data = obj.MarketPlace_select(market_id, market_name)
+				return render_template('marketplace_list.html', data=data)
 
-           elif (request.form['submit_button'] == 'Homepage'):
-               return redirect(url_for('home_page'))
-       else:
-           return redirect(url_for('home_page',error='You are not Authorized'))
+            elif (request.form['submit_button'] == 'Homepage'):
+				return redirect(url_for('home_page'))
+        else:
+			return redirect(url_for('home_page',error='You are not Authorized'))
 
 
-   @app.route("/marketplace_edit/<market_id>", methods=['GET', 'POST'])
-   def marketplace_edit(market_id):
-       if request.method == 'GET' and session['usertype']==1:
-           obj = forms.MarketPlace()
-           data = obj.MarketPlace_select(market_id, '')
-           return render_template('marketplace_edit.html', data=data)
+    @app.route("/marketplace_edit/<market_id>", methods=['GET', 'POST'])
+    def marketplace_edit(market_id):
+        if request.method == 'GET' and session['usertype']==1:
+			obj = forms.MarketPlace()
+			data = obj.MarketPlace_select(market_id, '')
+			return render_template('marketplace_edit.html', data=data)
 
-       elif request.method == 'POST' and session['usertype']==1:
-           if (request.form['submit_button'] == 'Submit'):
-               market_name = request.form.get('market_name')
-               market_address = request.form.get('market_address')
-               market_authority = request.form.get('market_authority')
-               market_phonenumber = request.form.get('market_phonenumber')
-               market_taxid = request.form.get('market_taxid')
-               market_commisionfee = request.form.get('market_commission')
-               obj = forms.MarketPlace()
-               obj.MarketPlace_edit(market_id, market_name, market_address,
+        elif request.method == 'POST' and session['usertype']==1:
+            if (request.form['submit_button'] == 'Submit'):
+                market_name = request.form.get('market_name')
+                market_address = request.form.get('market_address')
+                market_authority = request.form.get('market_authority')
+                market_phonenumber = request.form.get('market_phonenumber')
+                market_taxid = request.form.get('market_taxid')
+                market_commisionfee = request.form.get('market_commission')
+                obj = forms.MarketPlace()
+				obj.MarketPlace_edit(market_id, market_name, market_address,
                                     market_authority, market_phonenumber,
                                     market_taxid, market_commisionfee)
-               return redirect(url_for('marketplace_list'))
-           elif (request.form['submit_button'] == 'Homepage'):
-               return redirect(url_for('home_page'))
+                return redirect(url_for('marketplace_list'))
+            elif (request.form['submit_button'] == 'Homepage'):
+				return redirect(url_for('home_page'))
 
-       else:
-           return redirect(url_for('home_page',error='You are not Authorized'))
+        else:
+			return redirect(url_for('home_page',error='You are not Authorized'))
            
 marketplace_add: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request if POST, MarketPlace object will be crated and MarketPlace_add function will be called.
 
