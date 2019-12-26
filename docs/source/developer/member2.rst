@@ -162,7 +162,7 @@ MarketPlace_edit: Edit existing row by using its id.
            
 marketplace_add: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request if POST, MarketPlace object will be crated and MarketPlace_add function will be called.
 
-marketplace_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 3 options. If Submit button is used for POST request, app calls MarketPlace_select function from *forms.py* and lists them. If Edit button is used for POST request app redirects page for marketplace_edit. If Delete button clicked for POST request, MarketPlace_delete is called from *forms.py*.
+marketplace_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls MarketPlace_select function from *forms.py* and lists them. If Edit button is used for POST request app redirects page for marketplace_edit. If Delete button clicked for POST request, MarketPlace_delete is called from *forms.py*. Since template of that page does not contain Hompage button as form element, it is just a junk code.
 
 marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given marketid. If Submit button is used for POST request MarketPlace_edit function will be called from *forms.py*. Since template of that page does not contain Hompage button as form element, it is just a junk code.
 
