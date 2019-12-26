@@ -78,7 +78,6 @@ MarketPlace_delete: Delete data from table with its id.
 *From server.py*
 
 .. code-block:: python
-   .. code-block:: python
     @app.route("/marketplace_add", methods=['GET', 'POST'])
     def marketplace_add():
         if request.method == 'GET' and session['usertype']==1:
