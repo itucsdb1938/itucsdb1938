@@ -388,3 +388,122 @@ employee_add: If usertype is 1 (admin) page opens, otherwise app redirects for h
 employee_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls Employee_select function from *forms.py* and lists them. If Edit button is used for POST request app redirects page for employee_edit. If Delete button clicked for POST request, employee_delete is called from *forms.py*. Since template of that page does not contain Hompage button as form element, it is just a junk code.
 
 employee_edit: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given employeeid. If Submit button is used for POST request employee_edit function will be called from *forms.py*. Since template of that page does not contain Hompage button as form element, it is just a junk code.
+
+**For Stock**
+
+*From forms.py*
+
+.. code-block:: python
+
+    class Stock():
+		def add_to_stock(self, product_id):
+			dbconnection = dbapi.connect(url)
+			cursor = dbconnection.cursor()
+			queryString = """INSERT INTO stock (productID, quantity) VALUES (%s, 0);"""
+			cursor.execute(queryString, (product_id,))
+			dbconnection.commit()
+			cursor.close()
+			dbconnection.close()
+		
+		def get_ID (self, product_id):
+			dbconnection = dbapi.connect(url)
+			cursor = dbconnection.cursor()
+			queryString = """SELECT ID FROM stock WHERE productid=%s;"""
+			cursor.execute(queryString, (product_id,))
+			selection = cursor.fetchall()
+			dbconnection.commit()
+			cursor.close()
+			dbconnection.close()
+			return selection
+
+		def get_quantity(self, stock_id):
+			dbconnection = dbapi.connect(url)
+			cursor = dbconnection.cursor()
+			queryString = """SELECT quantity FROM stock WHERE id = %s;"""
+			cursor.execute(queryString, (stock_id,))
+			selection = cursor.fetchall()[0]
+			dbconnection.commit()
+			cursor.close()
+			dbconnection.close()
+			return selection
+
+		def update_quantity(self, new_quantity, stock_id):
+			dbconnection = dbapi.connect(url)
+			cursor = dbconnection.cursor()
+			queryString = """UPDATE stock SET quantity = quantity + %s WHERE id = %s;"""
+			cursor.execute(queryString, (new_quantity, stock_id,))
+			dbconnection.commit()
+			cursor.close()
+			dbconnection.close()
+
+		def update_location(self, x, y, z, stock_id):
+			dbconnection = dbapi.connect(url)
+			cursor = dbconnection.cursor()
+			queryString = """UPDATE stock SET location_x = %s, location_y = %s, location_z = %s WHERE id = %s;"""
+			cursor.execute(queryString, (x, y, z, stock_id,))
+			dbconnection.commit()
+			cursor.close()
+			dbconnection.close()
+
+		def display_stock(self):
+			dbconnection = dbapi.connect(url)
+			cursor = dbconnection.cursor()
+			queryString = """SELECT id,location_x,location_y,location_z,concat_ws(' - ',brand,name),quantity FROM stock inner join products on stock.productid=products.productid;"""
+			cursor.execute(queryString,)
+			selection = cursor.fetchall()
+			dbconnection.commit()
+			cursor.close()
+			dbconnection.close()
+			return selection
+        
+add_to_stock: Used for adding initial data to database.
+
+get_ID: Select id by using its productID.
+
+get_quantity: Select quantity by using its id.
+
+update_quantity: Update quantity by using its id.
+
+update_location: Select employeeID by using its workingdays and workinghours.
+
+display_stock: Displays stock status by getting product name using inner join.
+
+*From server.py*
+
+.. code-block:: python
+
+   	@app.route('/stock',methods=['GET'])
+	def stock():
+		obj = forms.Stock()
+		data = obj.display_stock()
+		return render_template('stock.html', data=data)
+
+stock: Shows the all stock conditions.
+
+**For some features**
+
+*From forms.py*
+
+.. code-block:: python
+
+    def group (name,groupby):
+		args=[]
+		if (len(name)%groupby != 0):
+			return name
+		for i in range (0,len(name)-groupby+1,groupby):
+			temp = []
+			for j in range (0,groupby):
+				temp.append(name[i+j])
+			args.append(temp)
+		return args
+
+	def commafy (str_to_comma):
+		res = ''
+		for i in str_to_comma:
+			res = res + i + ','
+		res = res[:-1]
+		return res
+		
+group: Gorups given array by desired pairs.
+
+commafy: Adds comma between all characters.
