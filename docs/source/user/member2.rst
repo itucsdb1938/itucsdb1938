@@ -6,13 +6,13 @@ In this part employee, marketplace and stock tables used.
    :scale: 50 %
    :alt: map to buried treasure
 
-   Employee adding page.
+   -Employee adding page-
    
 .. figure:: employee_add2.png
    :scale: 50 %
    :alt: map to buried treasure
 
-   Employeee adding page (continue).
+   -Employeee adding page (continue)-
    
 In above page, admins of warehouse can add new employee to the system.
    
@@ -20,7 +20,7 @@ In above page, admins of warehouse can add new employee to the system.
    :scale: 50 %
    :alt: map to buried treasure
    
-   Employee listing page.
+   -Employee listing page-
    
 In above page, admins of warehouse can list the employees, edit or delete the selected employee.
 
@@ -28,13 +28,13 @@ In above page, admins of warehouse can list the employees, edit or delete the se
    :scale: 50 %
    :alt: map to buried treasure
    
-   Employee editing page.
+   -Employee editing page-
    
 .. figure:: employee_edit2.png
    :scale: 50 %
    :alt: map to buried treasure
    
-   Employee editing page (continue).
+   -Employee editing page (continue)-
    
 In above page, admins can edit the information about employee.
 
@@ -42,7 +42,7 @@ In above page, admins can edit the information about employee.
    :scale: 50 %
    :alt: map to buried treasure
    
-   Marketplace adding page.
+   -Marketplace adding page-
    
 In above page, admins of warehouse can add new marketplaces to the system.
 
@@ -50,7 +50,7 @@ In above page, admins of warehouse can add new marketplaces to the system.
    :scale: 50 %
    :alt: map to buried treasure
    
-   Marketplace listing page.
+   -Marketplace listing page-
    
 In above page, admins of warehouse can list the marketplaces and delete or edit the selected marketplace.
 
@@ -59,7 +59,7 @@ In above page, admins of warehouse can list the marketplaces and delete or edit 
    :scale: 50 %
    :alt: map to buried treasure
    
-   Marketplace listing page.
+   -Marketplace listing page-
    
 In above page, admins of warehouse can edit the information about marketplace.
 
@@ -67,6 +67,6 @@ In above page, admins of warehouse can edit the information about marketplace.
    :scale: 50 %
    :alt: map to buried treasure
    
-   Stock listing page.
+   -Stock listing page-
    
 In above page, admins can see the current stock status. Since stocks are updating automatically by supply orders and customer orders, stock does not have an option for deletion or editing.
