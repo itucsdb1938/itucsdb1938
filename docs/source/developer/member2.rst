@@ -166,3 +166,225 @@ marketplace_list: If usertype is 1 (admin) page opens, otherwise app redirects f
 
 marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given marketid. If Submit button is used for POST request MarketPlace_edit function will be called from *forms.py*. Since template of that page does not contain Hompage button as form element, it is just a junk code.
 
+**For Employee**
+
+*From forms.py*
+
+.. code-block:: python
+
+   class Employee:
+
+    def Employee_add(self, name, surname, phonenumber, email, workinghours, workingdays):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """INSERT INTO Employee (name, surname, phonenumber, email, workinghours, workingdays) VALUES (%s, %s, %s, %s, %s, %s);"""
+        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+    
+    def Employee_select(self, employee_id, name):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        if (employee_id == '*' or name == '*'):
+            queryString = """SELECT * FROM Employee ORDER BY EmployeeID ASC;"""
+            cursor.execute(queryString)
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (employee_id == '' and name != ''):
+            queryString = """SELECT * FROM Employee WHERE name = %s ORDER BY EmployeeID ASC;"""
+            cursor.execute(queryString, (name,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        elif (employee_id != '' and name == ''):
+            queryString = """SELECT * FROM Employee WHERE EmployeeID = %s ORDER BY EmployeeID ASC;"""
+            cursor.execute(queryString, (employee_id,))
+            selection = cursor.fetchall()
+            dbconnection.commit()
+            cursor.close()
+            dbconnection.close()
+            return selection
+        else:
+            cursor.close()
+            dbconnection.commit()
+            dbconnection.close()
+            return
+
+    def Employee_delete(self,employee_id):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """DELETE FROM Employee WHERE EmployeeID = %s;"""
+        cursor.execute(queryString, (employee_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+    
+    def Employee_edit(self, employee_id, name, surname, phonenumber, email, workinghours, workingdays):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """UPDATE Employee SET name = %s, surname = %s, phonenumber = %s, email = %s, workinghours = %s, workingdays = %s  WHERE  employeeid = %s;"""
+        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays, employee_id,))
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+
+    def Employee_select_id (self, week_day, time):
+        dbconnection = dbapi.connect(url)
+        cursor = dbconnection.cursor()
+        queryString = """SELECT employeeid FROM Employee WHERE %s > workinghours[1] AND %s < workinghours[2] AND %s = ANY(workingdays) ORDER BY EmployeeID ASC;"""
+        cursor.execute(queryString, (time, time, week_day,))
+        selection = cursor.fetchall()
+       
+        for i in range (1,8):
+            if (not selection):
+                if week_day+i == 8:
+                    week_day = week_day - 7
+                queryString = """SELECT employeeid FROM Employee WHERE %s = ANY(workingdays) ORDER BY EmployeeID ASC;"""
+                cursor.execute(queryString, (week_day+i,))
+                selection = cursor.fetchall()
+            else:
+                break
+                
+        dbconnection.commit()
+        cursor.close()
+        dbconnection.close()
+        return selection  
+        
+Employee_add: Used for adding data to database.
+
+Employee_select: Selecting data from table according to id or name.
+
+Employee_delete: Delete data from table with its id.
+
+Employee_edit: Edit existing row by using its id.
+
+Employee_select_id: Select employeeID by using its workingdays and workinghours.
+
+*From server.py*
+
+.. code-block:: python
+
+   	@app.route("/employee_add", methods=['GET', 'POST'])
+	def employee_add():
+		if request.method == 'GET' and session['usertype']==1:
+			return render_template('employee_add.html')
+		elif request.method == 'POST' and session['usertype']==1:
+			if (request.form['submit_button'] == 'Submit'):
+				employee_name = request.form.get('employee_name')
+				employee_surname = request.form.get('employee_surname')
+				employee_phonenumber = request.form.get('employee_phonenumber')
+				employee_email = request.form.get('employee_email')
+				employee_workinghours = '{'
+				if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
+					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+				else:
+					employee_workinghours += '0,0}'
+				employee_workingdays = ''
+				if(type(request.form.get('employee_workingday1')) is str):
+					employee_workingdays += request.form.get('employee_workingday1')
+				if(type(request.form.get('employee_workingday2')) is str):
+					employee_workingdays += request.form.get('employee_workingday2')
+				if(type(request.form.get('employee_workingday3')) is str):
+					employee_workingdays += request.form.get('employee_workingday3')
+				if(type(request.form.get('employee_workingday4')) is str):
+					employee_workingdays += request.form.get('employee_workingday4')
+				if(type(request.form.get('employee_workingday5')) is str):
+					employee_workingdays += request.form.get('employee_workingday5')
+				if(type(request.form.get('employee_workingday6')) is str):
+					employee_workingdays += request.form.get('employee_workingday6')
+				if(type(request.form.get('employee_workingday7')) is str):
+					employee_workingdays += request.form.get('employee_workingday7')
+				employee_workingdays = functions.commafy(employee_workingdays)
+				employee_workingdays = '{' + employee_workingdays + '}'
+				obj = forms.Employee()
+				obj.Employee_add(employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+				return redirect(url_for('employee_add'))
+			elif (request.form['submit_button'] == 'Homepage'):
+				return redirect(url_for('home_page'))
+		else:
+			return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+	@app.route("/employee_list", methods=['GET', 'POST'])
+	def employee_list():
+		if request.method == 'GET' and session['usertype']==1:
+			return render_template('employee_list.html')
+
+		elif request.method == 'POST' and session['usertype']==1:
+			if (request.form['submit_button'] == 'Delete Selected'):
+				option = request.form['options']
+				obj = forms.Employee()
+				obj.Employee_delete(option)
+				return redirect(url_for('employee_list'))
+
+			elif (request.form['submit_button'] == 'Edit Selected'):
+				option = request.form['options']
+				return redirect(url_for('employee_edit', employee_id=option))
+
+			elif (request.form['submit_button'] == 'Submit'):
+				employee_id = request.form.get('employee_id')
+				employee_name = request.form.get('employee_name')
+				obj = forms.Employee()
+				data = obj.Employee_select(employee_id, employee_name)
+				return render_template('employee_list.html', data=data)
+
+			elif (request.form['submit_button'] == 'Homepage'):
+				return redirect(url_for('home_page'))
+		else:
+			return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+	@app.route("/employee_edit/<employee_id>", methods=['GET', 'POST'])
+	def employee_edit(employee_id):
+		if request.method == 'GET' and session['usertype']==1:
+			obj = forms.Employee()
+			data = obj.Employee_select(employee_id, '')
+			return render_template('employee_edit.html', data=data)
+
+		elif request.method == 'POST' and session['usertype']==1:
+			if (request.form['submit_button'] == 'Submit'):
+				employee_name = request.form.get('employee_name')
+				employee_surname = request.form.get('employee_surname')
+				employee_phonenumber = request.form.get('employee_phonenumber')
+				employee_email = request.form.get('employee_email')
+				employee_workinghours = '{'
+				if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
+					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+				else:
+					employee_workinghours += '0,0}'
+				employee_workingdays = ''
+				if(type(request.form.get('employee_workingday1')) is str):
+					employee_workingdays += request.form.get('employee_workingday1')
+				if(type(request.form.get('employee_workingday2')) is str):
+					employee_workingdays += request.form.get('employee_workingday2')
+				if(type(request.form.get('employee_workingday3')) is str):
+					employee_workingdays += request.form.get('employee_workingday3')
+				if(type(request.form.get('employee_workingday4')) is str):
+					employee_workingdays += request.form.get('employee_workingday4')
+				if(type(request.form.get('employee_workingday5')) is str):
+					employee_workingdays += request.form.get('employee_workingday5')
+				if(type(request.form.get('employee_workingday6')) is str):
+					employee_workingdays += request.form.get('employee_workingday6')
+				if(type(request.form.get('employee_workingday7')) is str):
+					employee_workingdays += request.form.get('employee_workingday7')
+				employee_workingdays = functions.commafy(employee_workingdays)
+				employee_workingdays = '{' + employee_workingdays + '}'
+				obj = forms.Employee()
+				obj.Employee_edit(employee_id, employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+				return redirect(url_for('employee_list'))
+			elif (request.form['submit_button'] == 'Homepage'):
+				return redirect(url_for('home_page'))
+		else:
+			return redirect(url_for('home_page',error='You are not Authorized'))
+
+employee_add: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request if POST, Employee object will be crated and Employee_add function will be called.
+
+employee_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls Employee_select function from *forms.py* and lists them. If Edit button is used for POST request app redirects page for employee_edit. If Delete button clicked for POST request, employee_delete is called from *forms.py*. Since template of that page does not contain Hompage button as form element, it is just a junk code.
+
+employee_edit: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given employeeid. If Submit button is used for POST request employee_edit function will be called from *forms.py*. Since template of that page does not contain Hompage button as form element, it is just a junk code.
