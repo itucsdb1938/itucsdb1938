@@ -75,6 +75,8 @@ MarketPlace_select: Selecting data from table according to id or name.
 
 MarketPlace_delete: Delete data from table with its id.
 
+MarketPlace_edit: Edit existing row by using its id.
+
 *From server.py*
 
 .. code-block:: python
