@@ -20,7 +20,7 @@ Parts Implemented by Yiğitcan Çoban
    
 --> This page shows all orders made in this system. 
    
-.. figure:: TempOrder.png
+.. figure:: TempOrd.png
    :scale: 50 %
    :alt: map to buried treasure
    
