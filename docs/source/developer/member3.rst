@@ -560,6 +560,7 @@ Calls all of the finance table and renders them for user to see
            dbconnection.close()
            
 getUser : Checks the username and hashed password, if it matches with any row, returns usertype and EmployeeID of that row
+
 addUser : Saves the user information which are passed as arguments, to the users table
 
 
@@ -615,5 +616,8 @@ addUser : Saves the user information which are passed as arguments, to the users
                    return redirect(url_for('home_page'))
                    
 Logout : Resets the sessions stored in local files of users computer
+
 LogIn : Gets the data from form at /login, then checks if datas are related to a user. If it finds a user, then creates sessions accordingly
+
 Register : Adds a new user to users table if there are no duplicate users. 'GET' method returns the form. You need to be admin to use this page.
+
