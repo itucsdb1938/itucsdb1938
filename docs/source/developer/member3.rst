@@ -106,6 +106,7 @@ get_orderID: Returns recently added Order ID of orders table
 **This Server.py Section is for Temporary Orders and Orders Together**
 
 *From server.py*
+
 .. code-block:: python
     @app.route("/create_order",methods=['GET', 'POST'])
     def create_order():
