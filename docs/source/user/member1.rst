@@ -50,3 +50,18 @@ In the screenshot above, the provider list can be seen. There admins can select 
    
 In the screenshot above, the cargo company editing page can be seen. There admins can edit the cargo company they selected in the previous page and submit their changes.
  
+
+ .. figure:: supply_add.png
+   :scale: 50 %
+   :alt: Supply Order  page
+In the screenshot above, the warehouse can order supplies from an already added provider and indicate which product to order with the information of the price and quantity.
+
+.. figure:: supply_search.png
+   :scale: 50 %
+   :alt: Supply searching page
+In the screenshot above, the supply searching can be seen. There admins can search for a supply order by typing in their ID or name or can list them all by typing '*' in the ID section. 
+
+.. figure:: supply_list.png
+   :scale: 50 %
+   :alt: Supply listing page
+In the screenshot above, the supply listing and deleting can be seen. There admins can only view and delete an order since a given order cannot be edited logically but only be deleted due to some errors during ordering. 
