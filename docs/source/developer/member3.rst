@@ -108,25 +108,23 @@ get_orderID: Returns recently added Order ID of orders table
 *From server.py*
 
 .. code-block:: python
-    @app.route("/create_order",methods=['GET', 'POST'])
-    def create_order():
-        if request.method == 'GET':
-            return render_template('create_order.html')
-
+    
+   @app.route("/create_order",methods=['GET', 'POST'])
+   def create_order():
+       if request.method == 'GET':
+           return render_template('create_order.html')
         elif request.method == 'POST':
-            if (request.form['submit_button'] == 'Order Selected'):
-                option = request.form['options']
-                return redirect(url_for('order_information', product_id=option))
-
+           if (request.form['submit_button'] == 'Order Selected'):
+               option = request.form['options']
+               return redirect(url_for('order_information', product_id=option))
             elif (request.form['submit_button'] == 'Submit'):
-                item_id = request.form.get('item_id')
-                item_name = request.form.get('item_name')
-                obj = forms.Product()
-                data = obj.Product_select(item_id, item_name)
-                return render_template('create_order.html', data=data)
-
+               item_id = request.form.get('item_id')
+               item_name = request.form.get('item_name')
+               obj = forms.Product()
+               data = obj.Product_select(item_id, item_name)
+               return render_template('create_order.html', data=data)
             elif (request.form['submit_button'] == 'Homepage'):
-                return redirect(url_for('home_page'))
+               return redirect(url_for('home_page'))
 
 create_order: 'GET' method shows the create order form page. For 'POST', on the page, there are 2 text input boxes which are for searching items. If there are items match with those criterias, you can select one of them with option box and redirects user to order_information page with that items informations.
 
