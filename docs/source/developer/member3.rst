@@ -7,11 +7,15 @@ Parts Implemented by Yiğitcan Çoban
 .. code-block:: python
 
    class Order:
-    def temp_order(self, market_id, ship_address, order_date, customer_name, company_id, product_id, quantity, employee_id, order_time):
+    def temp_order(self, market_id, ship_address, order_date, customer_name, company_id, 
+    product_id, quantity, employee_id, order_time):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """INSERT INTO temporary_order (marketplaceid, shipaddress, order_date, customer_name, companyid, productid, quantity, employeeid, isdispatched, order_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'false', %s);"""
-        cursor.execute(queryString, (market_id, ship_address, order_date, customer_name, company_id, product_id, quantity, employee_id, order_time,))
+        queryString = """INSERT INTO temporary_order (marketplaceid, shipaddress, order_date, 
+        customer_name, companyid, productid, quantity, employeeid, isdispatched, order_time) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'false', %s);"""
+        cursor.execute(queryString, (market_id, ship_address, order_date, customer_name, 
+        company_id, product_id, quantity, employee_id, order_time,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
@@ -19,7 +23,10 @@ Parts Implemented by Yiğitcan Çoban
     def my_orders(self, employee_id):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """select orderid,shipaddress,location_x,location_y,location_z, customer_name, concat_ws(' - ',brand,name), a.quantity, (a.quantity*sellprice) as price from temporary_order a inner join stock b on a.productid = b.productid inner join products c on c.productid = a.productid WHERE employeeid = %s;"""
+        queryString = """select orderid,shipaddress,location_x,location_y,location_z, 
+        customer_name, concat_ws(' - ',brand,name), a.quantity, (a.quantity*sellprice) 
+        as price from temporary_order a inner join stock b on a.productid = b.productid 
+        inner join products c on c.productid = a.productid WHERE employeeid = %s;"""
         cursor.execute(queryString, (employee_id,))
         selection = cursor.fetchall()
         dbconnection.commit()
@@ -33,8 +40,10 @@ Parts Implemented by Yiğitcan Çoban
         queryString = """SELECT * FROM temporary_order WHERE orderid = %s;"""
         cursor.execute(queryString, (order_id,))
         selection = cursor.fetchall()
-        queryString = """INSERT INTO orders (marketplaceid, shipaddress, order_date, customer_name, companyid, productid, quantity, order_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
-        cursor.execute(queryString, (selection[0][1],selection[0][2],selection[0][3],selection[0][4],selection[0][5],selection[0][6],selection[0][7],selection[0][10],))
+        queryString = """INSERT INTO orders (marketplaceid, shipaddress, order_date, customer_name, 
+        companyid, productid, quantity, order_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
+        cursor.execute(queryString, (selection[0][1],selection[0][2],selection[0][3],
+        selection[0][4],selection[0][5],selection[0][6],selection[0][7],selection[0][10],))
         queryString = """DELETE FROM temporary_order WHERE orderid = %s;"""
         cursor.execute(queryString, (order_id,))
         dbconnection.commit()
@@ -44,7 +53,9 @@ Parts Implemented by Yiğitcan Çoban
     def check_dispatch (self, orderid):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """select temp.quantity as temporary_quantity, stock.quantity, temp.productid, orderid from stock inner join temporary_order as temp on stock.productid = temp.productid where orderid = %s;"""
+        queryString = """select temp.quantity as temporary_quantity, stock.quantity, 
+        temp.productid, orderid from stock inner join temporary_order as temp on 
+        stock.productid = temp.productid where orderid = %s;"""
         cursor.execute(queryString, (orderid,))
         selection = cursor.fetchall()
         dbconnection.commit()
@@ -69,7 +80,12 @@ Parts Implemented by Yiğitcan Çoban
     def get_order(self):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """select orderid, marketplace.name,shipaddress,order_date,concat_ws(':',order_time/60,order_time%60) as time,customer_name,cargocompany.name,concat_ws(' - ',products.brand,products.name) as product_info,quantity from orders inner join products on orders.productid = products.productid inner join cargocompany on orders.companyid=cargocompany.companyid inner join marketplace on orders.marketplaceid = marketplace.marketid;"""
+        queryString = """select orderid, marketplace.name,shipaddress,order_date,concat_ws
+        (':',order_time/60,order_time%60) as time,customer_name,cargocompany.name,concat_ws
+        (' - ',products.brand,products.name) as product_info,quantity from orders inner join 
+        products on orders.productid = products.productid inner join cargocompany on 
+        orders.companyid=cargocompany.companyid inner join marketplace on orders.marketplaceid 
+        = marketplace.marketid;"""
         cursor.execute(queryString,)
         selection = cursor.fetchall()
         dbconnection.commit()
@@ -147,12 +163,14 @@ get_orderID: Returns recently added Order ID of orders table
                customer_name = request.form.get('customer_name')
                order_quantity = request.form.get('order_quantity')
                order_date = datetime.now().strftime("%d/%m/%Y")
-               order_time = str(int(datetime.now().strftime("%H"))*60 + int(datetime.now().strftime("%M")))
+               order_time = str(int(datetime.now().strftime("%H"))*60 + 
+               int(datetime.now().strftime("%M")))
                order_week_day = datetime.today().weekday() + 1
                obj1 = forms.Employee()
                employee_id = obj1.Employee_select_id(order_week_day, order_time)[0]
                obj2 = forms.Order()
-               obj2.temp_order(market_id, order_address, order_date, customer_name, cargo_id, product_id, order_quantity, employee_id, order_time)
+               obj2.temp_order(market_id, order_address, order_date, customer_name, 
+               cargo_id, product_id, order_quantity, employee_id, order_time)
                return redirect(url_for('home_page'))
                
    @app.route ('/my_orders', methods= ['GET', 'POST'])
@@ -163,7 +181,8 @@ get_orderID: Returns recently added Order ID of orders table
            obj = forms.Order()
            data = obj.my_orders(employee_id)
            if request.args.get('error'):
-               return render_template('my_orders.html', data=data, message=request.args.get('error'))
+               return render_template('my_orders.html', data=data, 
+               message=request.args.get('error'))
            else:
                return render_template('my_orders.html', data=data)
 
@@ -173,7 +192,8 @@ get_orderID: Returns recently added Order ID of orders table
                obj = forms.Order()
                if obj.check_dispatch(option):
                    obj2 = forms.Stock()
-                   obj2.update_quantity(-obj.check_dispatch(option)[0],obj2.get_ID(obj.check_dispatch(option)[2])[0][0])
+                   obj2.update_quantity(-obj.check_dispatch(option)[0],
+                   obj2.get_ID(obj.check_dispatch(option)[2])[0][0])
                    obj.dispatch_order(option)
                    obj3 = forms.Finance()
                    obj3.weSoldSmth(obj.get_orderID())
@@ -210,7 +230,8 @@ all_orders: Shows user all order data
        def Product_add(self, name, brand, sell_price, provider_id, weight):
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
-           queryString = """INSERT INTO Products (Name, Brand, Sellprice, ProviderID, Weight) VALUES (%s, %s, %s, %s, %s);"""
+           queryString = """INSERT INTO Products (Name, Brand, Sellprice, 
+           ProviderID, Weight) VALUES (%s, %s, %s, %s, %s);"""
            cursor.execute(queryString, (name, brand, sell_price, provider_id, weight,))
            dbconnection.commit()
            cursor.close()
@@ -229,7 +250,9 @@ all_orders: Shows user all order data
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
            if (product_id == '*' or name == '*'):
-               queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid ORDER BY productID ASC;"""
+               queryString = """SELECT productid, name, brand, sellprice, company, 
+               weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) 
+               AS prov ON products.providerid = prov.providerid ORDER BY productID ASC;"""
                cursor.execute(queryString)
                selection = cursor.fetchall()
                dbconnection.commit()
@@ -237,7 +260,9 @@ all_orders: Shows user all order data
                dbconnection.close()
                return selection
            elif (product_id == '' and name != ''):
-               queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE Name = %s ORDER BY productID ASC;"""
+               queryString = """SELECT productid, name, brand, sellprice, company, weight 
+               FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov
+               ON products.providerid = prov.providerid WHERE Name = %s ORDER BY productID ASC;"""
                cursor.execute(queryString, (name,))
                selection = cursor.fetchall()
                dbconnection.commit()
@@ -245,7 +270,10 @@ all_orders: Shows user all order data
                dbconnection.close()
                return selection
            elif (product_id != '' and name == ''):
-               queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE productID = %s ORDER BY productID ASC;"""
+               queryString = """SELECT productid, name, brand, sellprice, company, weight
+               FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov 
+               ON products.providerid = prov.providerid WHERE productID = %s 
+               ORDER BY productID ASC;"""
                cursor.execute(queryString, (product_id,))
                selection = cursor.fetchall()
                dbconnection.commit()
@@ -261,8 +289,10 @@ all_orders: Shows user all order data
        def Product_edit(self, product_id, name, brand, sell_price, provider_id, weight):
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
-           queryString = """UPDATE Products SET Name = %s, Brand = %s, Sellprice = %s, ProviderID = %s, Weight = %s WHERE productID = %s;"""
-           cursor.execute(queryString, (name, brand, sell_price, provider_id, weight, product_id,))
+           queryString = """UPDATE Products SET Name = %s, Brand = %s, Sellprice = %s, 
+           ProviderID = %s, Weight = %s WHERE productID = %s;"""
+           cursor.execute(queryString, (name, brand, sell_price, provider_id, weight, 
+           product_id,))
            dbconnection.commit()
            cursor.close()
            dbconnection.close()
@@ -324,7 +354,8 @@ Product_provider_id: returns provider ID of row specified by Product ID
                provider_id = request.form.get('provider_id')
                product_weight = request.form.get('product_weight')
                obj = forms.Product()
-               obj.Product_add(product_name, product_brand, product_sellprice,provider_id, product_weight)
+               obj.Product_add(product_name, product_brand, product_sellprice,
+               provider_id, product_weight)
                product_id = obj.Product_select('',product_name)[0][0]
                obj2 = forms.Stock()
                obj2.add_to_stock(product_id)
@@ -426,7 +457,8 @@ product_edit : This page is reached after product_list page. On this page you ca
        def weBoughtSmth(self,supplyid):
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
-           queryString = """SELECT Quantity,ProductID,Price FROM Supply_order WHERE OrderID = %s;"""
+           queryString = """SELECT Quantity,ProductID,Price FROM Supply_order 
+           WHERE OrderID = %s;"""
            cursor.execute(queryString, (supplyid,))
            results = cursor.fetchall()[0]
            quantity = results[0]
@@ -445,7 +477,8 @@ product_edit : This page is reached after product_list page. On this page you ca
            else:
                lastTotal = 0
            newTotal = int(lastTotal) + totalPay
-           queryString = """INSERT INTO Financial(Supply_orderID,Transaction,Cargo_price,Total) VALUES(%s,%s,0,%s);"""
+           queryString = """INSERT INTO Financial(Supply_orderID,Transaction,Cargo_price,Total) 
+           VALUES(%s,%s,0,%s);"""
            cursor.execute(queryString, (supplyid,totalPay,newTotal,))
            dbconnection.commit()
            cursor.close()
@@ -454,7 +487,8 @@ product_edit : This page is reached after product_list page. On this page you ca
        def weSoldSmth(self,orderid):
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
-           queryString = """SELECT MarketplaceID,companyID,ProductID,Quantity FROM Orders WHERE OrderID = %s;"""
+           queryString = """SELECT MarketplaceID,companyID,ProductID,Quantity FROM Orders 
+           WHERE OrderID = %s;"""
            cursor.execute(queryString, (orderid,))
            orderquery = cursor.fetchall()[0]
            print(orderquery)
@@ -495,7 +529,8 @@ product_edit : This page is reached after product_list page. On this page you ca
            else:
                lastTotal = 0
            newTotal = float(lastTotal) + netWorth
-           queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) VALUES(%s,%s,%s,%s);"""
+           queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) 
+           VALUES(%s,%s,%s,%s);"""
            cursor.execute(queryString, (orderid,int(netWorth),cargoprice,newTotal,))    
 
 
@@ -539,7 +574,8 @@ Calls all of the finance table and renders them for user to see
            server_salt = "CVca9QBtk4U8pfPb"
            db_password = password+server_salt
            h = hashlib.md5(db_password.encode())
-           queryString = """SELECT usertype, EmployeeID FROM users WHERE username = %s AND password = %s;"""
+           queryString = """SELECT usertype, EmployeeID FROM users WHERE username = %s
+           AND password = %s;"""
            cursor.execute(queryString, (username, h.hexdigest(),))
            selection = cursor.fetchall()
            dbconnection.commit()
@@ -553,7 +589,8 @@ Calls all of the finance table and renders them for user to see
            h = hashlib.md5(db_password.encode())
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
-           queryString = """INSERT INTO users (username,password,employeeid,usertype) VALUES (%s,%s,%s,%s);"""
+           queryString = """INSERT INTO users (username,password,employeeid,usertype) 
+           VALUES (%s,%s,%s,%s);"""
            cursor.execute(queryString, (username,h.hexdigest(),employeeid,usertype,))
            dbconnection.commit()
            cursor.close()
