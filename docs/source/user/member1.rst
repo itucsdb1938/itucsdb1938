@@ -1,4 +1,4 @@
-Parts Implemented by Yavuz Ege Okumuş
+Parts Implemented by Yavuz Ege Okumus
 ================================
 In this part Provider, CargoCompany and Supply_Order tables are used
 
