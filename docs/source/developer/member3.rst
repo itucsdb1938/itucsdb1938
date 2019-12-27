@@ -1,4 +1,4 @@
-Parts Implemented by Yiğitcan Çoban
+Parts Implemented by Yigitcan Coban
 ================================
 **This Forms Section is for Temporary Orders and Orders Together**
 
