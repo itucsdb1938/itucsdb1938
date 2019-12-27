@@ -1,6 +1,8 @@
 Parts Implemented by Yavuz Ege Okumuş
 ================================
 
+**For Provider**
+*From forms.py*
 
 .. code-block:: python
 
