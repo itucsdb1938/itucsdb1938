@@ -346,7 +346,8 @@ cargo_edit:If usertype is 1 (admin) page opens, otherwise app redirects for home
            def Supply_add(self, provider_id, price, quantity, time, productID):
                dbconnection = dbapi.connect(url)
                cursor = dbconnection.cursor()
-               queryString = """INSERT INTO supply_order (providerid, price, quantity, time, productID) VALUES (%s, %s, %s, %s, %s);"""
+               queryString = """INSERT INTO supply_order (providerid, price, quantity, time, productID) 
+                     VALUES (%s, %s, %s, %s, %s);"""
                cursor.execute(queryString, (provider_id, price, quantity, time, productID,))
                dbconnection.commit()
                cursor.close()
