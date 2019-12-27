@@ -293,6 +293,105 @@ Product_name_select: Returns all product id, brand and name
 
 Product_provider_id: returns provider ID of row specified by Product ID
 
+**Codes related to Products in server.py**
+
+*From server.py*
+
+
+.. code-block:: python
+
+   @app.route("/product_add", methods=['GET', 'POST'])
+   def product_add():
+       if request.method == 'GET' and session['usertype']==1:
+           obj = forms.Provider()
+           data = obj.Provider_name_select()
+           data = functions.group(data, 2)
+           return render_template('product_add.html', data=data)
+       if request.method == 'POST' and session['usertype']==1:
+           if (request.form['submit_button'] == 'Submit'):
+               product_name = request.form.get('product_name')
+               product_brand = request.form.get('product_brand')
+               product_sellprice = request.form.get('product_sellprice')
+               provider_id = request.form.get('provider_id')
+               product_weight = request.form.get('product_weight')
+               obj = forms.Product()
+               obj.Product_add(product_name, product_brand, product_sellprice,provider_id, product_weight)
+               product_id = obj.Product_select('',product_name)[0][0]
+               obj2 = forms.Stock()
+               obj2.add_to_stock(product_id)
+               return redirect(url_for('product_add'))
+           elif (request.form['submit_button'] == 'Homepage'):
+               return redirect(url_for('home_page'))
+
+       else:
+           return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+   @app.route("/product_list", methods=['GET', 'POST'])
+   def product_list():
+       if request.method == 'GET' and session['usertype']==1:
+           return render_template('product_list.html')
+
+       elif request.method == 'POST' and session['usertype']==1:
+           if (request.form['submit_button'] == 'Delete Selected'):
+               option = request.form['options']
+               obj = forms.Product()
+               obj.Product_delete(option)
+               return redirect(url_for('product_list'))
+
+           elif (request.form['submit_button'] == 'Edit Selected'):
+               option = request.form['options']
+               return redirect(url_for('product_edit', product_id=option))
+
+           elif (request.form['submit_button'] == 'Submit'):
+               product_id = request.form.get('product_id')
+               product_name = request.form.get('product_name')
+               obj = forms.Product()
+               data = obj.Product_select(product_id, product_name)
+               return render_template('product_list.html', data=data)
+
+           elif (request.form['submit_button'] == 'Homepage'):
+               return redirect(url_for('home_page'))
+
+       else:
+           return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+   @app.route("/product_edit/<product_id>", methods=['GET', 'POST'])
+   def product_edit(product_id):
+       if request.method == 'GET' and session['usertype']==1:
+           obj = forms.Product()
+           data = obj.Product_select(product_id, '')
+           obj2 = forms.Provider()
+           data2 = obj2.Provider_name_select()
+           data2 = functions.group(data2, 2)
+           data = [[data], [data2]]
+           data.append(obj.Product_provider_id(product_id))
+           return render_template('product_Edit.html', data=data)
+
+       if request.method == 'POST' and session['usertype']==1:
+           if (request.form['submit_button'] == 'Submit'):
+               product_name = request.form.get('product_name')
+               product_brand = request.form.get('product_brand')
+               product_sellprice = request.form.get('product_sellprice')
+               provider_id = request.form.get('provider_id')
+               product_weight = request.form.get('product_weight')
+               obj = forms.Product()
+               obj.Product_edit(product_id, product_name, product_brand,
+                                product_sellprice, provider_id, product_weight)
+               return redirect(url_for('product_list'))
+           elif (request.form['submit_button'] == 'Homepage'):
+               return redirect(url_for('home_page'))
+
+       else:
+           return redirect(url_for('home_page',error='You are not Authorized'))
+
+product_add : Page is responsible for showing form in 'GET' method and sending it to database for 'POST' method. When filled with correct informations and this page is reached by a correct user type, adds a row to product table
+
+product_list : On this page, you can see all products you are associated with and edit or delete them one by one 
+
+product_edit : This page is reached after product_list page. On this page you can fill the form to edit specified row. 
+
 
 
 
