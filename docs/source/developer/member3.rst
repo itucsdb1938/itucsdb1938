@@ -108,7 +108,7 @@ get_orderID: Returns recently added Order ID of orders table
 *From server.py*
 .. code-block:: python
 
-      @app.route("/create_order",methods=['GET', 'POST'])
+   @app.route("/create_order",methods=['GET', 'POST'])
       def create_order():
           if request.method == 'GET':
               return render_template('create_order.html')
