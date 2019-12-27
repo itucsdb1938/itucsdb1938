@@ -5,9 +5,9 @@ Welcome to itucsdb1938's documentation!
 
 :Members:
 
-   * Yavuz Ege Okumuş
+   * Yavuz Ege Okumus
    * Egehan Orta
-   * Yiğitcan Çoban
+   * Yigitcan Coban
 
 Warehouse Management System manages the basic needs of a warehouse. Goods supply, stock and employee management, financial tables and shipping
 
