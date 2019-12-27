@@ -334,4 +334,163 @@ cargo_list: If usertype is 1 (admin) page opens, otherwise app redirects for hom
 
 cargo_edit:If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given cargoid. If Submit button is used for POST request cargo_edit function will be called from *forms.py*. 
 
+**For Supply_order**
+*From forms.py*
 
+.. code-block:: python
+
+       class Supply:
+           def Supply_add(self, provider_id, price, quantity, time, productID):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               queryString = """INSERT INTO supply_order (providerid, price, quantity, time, productID) VALUES (%s, %s, %s, %s, %s);"""
+               cursor.execute(queryString, (provider_id, price, quantity, time, productID,))
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+
+           def Supply_delete(self,supply_id):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               queryString = """DELETE FROM supply_order WHERE orderID = %s;"""
+               cursor.execute(queryString, (supply_id,))
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+
+           def Supply_select(self, supply_id, name, company):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               if (supply_id == '*' or name == '*' or company == '*'):
+                   queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid ORDER BY orderID ASC;"""
+                   cursor.execute(queryString)
+                   selection = cursor.fetchall()
+                   dbconnection.commit()
+                   cursor.close()
+                   dbconnection.close()
+                   return selection
+               elif (supply_id == '' and name != '' and company == ''):
+                   queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid WHERE supply_order.productid = %s ORDER BY orderID ASC;"""
+                   cursor.execute(queryString, (name,))
+                   selection = cursor.fetchall()
+                   dbconnection.commit()
+                   cursor.close()
+                   dbconnection.close()
+                   return selection
+               elif (supply_id != '' and name == '' and company == ''):
+                   queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid WHERE orderID = %s ORDER BY orderID ASC;"""
+                   cursor.execute(queryString, (supply_id,))
+                   selection = cursor.fetchall()
+                   dbconnection.commit()
+                   cursor.close()
+                   dbconnection.close()
+                   return selection
+               elif (supply_id == '' and name == '' and company != ''):
+                   queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid WHERE supply_order.providerid = %s ORDER BY orderID ASC;"""
+                   cursor.execute(queryString, (company,))
+                   selection = cursor.fetchall()
+                   dbconnection.commit()
+                   cursor.close()
+                   dbconnection.close()
+                   return selection
+               else:
+                   cursor.close()
+                   dbconnection.commit()
+                   dbconnection.close()
+                   return
+
+           def get_supplyID (self):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               queryString = """SELECT MAX(orderID) FROM supply_order;"""
+               cursor.execute(queryString)
+               selection = cursor.fetchall()[0]
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+               return selection
+               
+               
+supply_add: Used to order supplies .
+supply_select: Getting data of a supply order according to the id or name.
+supply_delete: Deletes a supply order with using its id.
+get_supplyID:gets the id of the most recent supply order.    
+
+
+*From server.py*
+
+.. code-block:: python
+
+       @app.route("/supply_add", methods=['GET', 'POST'])
+       def supply_add():
+           if request.method == 'GET' and session['usertype']==1:
+               obj = forms.Provider()
+               data = obj.Provider_name_select()
+               data = functions.group(data, 2)
+               obj2 = forms.Product()
+               data2 = obj2.Product_name_select()
+               data = [[data], [data2]]
+               return render_template('supply_add.html', data=data)
+           if request.method == 'POST' and session['usertype']==1:
+               if (request.form['submit_button'] == 'Submit'):
+                   provider_id = request.form.get('provider_id')
+                   supply_price = request.form.get('supply_price')
+                   supply_quantity = request.form.get('supply_quantity')
+                   supply_time = datetime.now().strftime("%d/%m/%Y - %H:%M")
+                   product_id = request.form.get('product_id')
+                   obj = forms.Supply()
+                   obj.Supply_add(provider_id, supply_price, supply_quantity, supply_time, product_id)
+                   obj2 = forms.Stock()
+                   obj2.update_quantity(supply_quantity,obj2.get_ID(product_id)[0][0])
+                   obj3 = forms.Finance()
+                   obj3.weBoughtSmth(obj.get_supplyID())
+                   return redirect(url_for('supply_add'))
+               elif (request.form['submit_button'] == 'Homepage'):
+                   return redirect(url_for('home_page'))
+
+           else:
+               return redirect(url_for('home_page',error='You are not Authorized'))
+
+       @app.route("/supply_list",methods=['GET','POST'])
+       def supply_list():
+           if request.method == 'GET' and session['usertype']==1:
+               obj = forms.Provider()
+               data = obj.Provider_name_select()
+               data = functions.group(data, 2)
+               obj2 = forms.Product()
+               data2 = obj2.Product_name_select()
+               data2 = functions.group(data2, 3)
+               data = [[data], [data2]]
+               return render_template('supply_list.html',data = data)
+           elif request.method == 'POST' and session['usertype']==1:
+               if (request.form['submit_button'] == 'Delete Selected'):
+                   option = request.form['options']
+                   obj = forms.Supply()
+                   obj.Supply_delete(option)
+                   return redirect(url_for('supply_list'))
+               elif (request.form['submit_button'] == 'Edit Selected'):
+                       option = request.form['options']
+                       return redirect(url_for('supply_edit', supply_id=option))
+               elif (request.form['submit_button'] == 'Submit'):
+                   supply_id = request.form.get('supply_id')
+                   product_id = request.form.get('product_id')
+                   provider_id = request.form.get('provider_id')
+                   obj = forms.Provider()
+                   data = obj.Provider_name_select()
+                   data = functions.group(data, 2)
+                   obj2 = forms.Product()
+                   data2 = obj2.Product_name_select()
+                   data2 = functions.group(data2, 3)
+                   obj3 = forms.Supply()
+                   data3 = obj3.Supply_select(supply_id, product_id, provider_id)
+                   if (type(data3) is not list or not data3):
+                       data = [[data], [data2]]
+                   else:
+                       data = [[data], [data2], [data3]]
+                   return render_template('supply_list.html', data=data)
+               elif (request.form['submit_button'] == 'Homepage'):
+                   return redirect(url_for('home_page'))
+           else:
+               return redirect(url_for('home_page',error='You are not Authorized'))
+supply_add:If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request if POST, supply object will be crated and supply_add function will be called.
+supply_list:If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls supply_select function from *forms.py* and lists them. If Edit button is used for POST request app redirects page for supply_edit. If Delete button clicked for POST request, supply_delete is called from *forms.py*. 
