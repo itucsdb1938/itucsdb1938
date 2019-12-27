@@ -125,6 +125,35 @@ get_orderID: Returns recently added Order ID of orders table
                return render_template('create_order.html', data=data)
             elif (request.form['submit_button'] == 'Homepage'):
                return redirect(url_for('home_page'))
+               
+   @app.route ("/order_information/<product_id>",methods=['GET', 'POST'])
+   def order_information(product_id):
+       if request.method == 'GET':
+           obj = forms.Product()
+           data = obj.Product_select(product_id, '')
+           data = [data[0][0], data[0][1], data[0][2], data[0][3]]
+           obj2 = forms.MarketPlace()
+           data2 = obj2.MarketPlace_select('*','')
+           obj3 = forms.CargoCompany()
+           data3 = obj3.cargo_select('*','')
+           data = [[data], [data2], [data3]]
+           print(data)
+           return render_template('order_information.html', data=data)
+       elif request.method == 'POST':
+           if (request.form['submit_button'] == 'Order'):
+               market_id = request.form.get('market_id')
+               cargo_id = request.form.get('cargo_id')
+               order_address = request.form.get('order_address')
+               customer_name = request.form.get('customer_name')
+               order_quantity = request.form.get('order_quantity')
+               order_date = datetime.now().strftime("%d/%m/%Y")
+               order_time = str(int(datetime.now().strftime("%H"))*60 + int(datetime.now().strftime("%M")))
+               order_week_day = datetime.today().weekday() + 1
+               obj1 = forms.Employee()
+               employee_id = obj1.Employee_select_id(order_week_day, order_time)[0]
+               obj2 = forms.Order()
+               obj2.temp_order(market_id, order_address, order_date, customer_name, cargo_id, product_id, order_quantity, employee_id, order_time)
+               return redirect(url_for('home_page'))
 
 create_order: 'GET' method shows the create order form page. For 'POST', on the page, there are 2 text input boxes which are for searching items. If there are items match with those criterias, you can select one of them with option box and redirects user to order_information page with that items informations.
 
