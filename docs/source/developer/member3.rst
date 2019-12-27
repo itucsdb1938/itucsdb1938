@@ -279,3 +279,11 @@ order_information: On this page, 'GET' method processes the given product_id and
            cursor.close()
            dbconnection.close()
            return selection
+   
+   
+Product_add: Adds a row to product table. Data is passed by arguments.
+Product_delete: Deletes the row specified by ID
+Product_select: Selects the row specified by ID and checks it with name 
+Product_edit: Edits the row specified by ID          
+Product_name_select: Returns all product id, brand and name
+Product_provider_id: returns provider ID of row specified by Product ID
