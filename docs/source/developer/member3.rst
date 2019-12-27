@@ -287,3 +287,6 @@ Product_select: Selects the row specified by ID and checks it with name
 Product_edit: Edits the row specified by ID          
 Product_name_select: Returns all product id, brand and name
 Product_provider_id: returns provider ID of row specified by Product ID
+
+
+
