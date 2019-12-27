@@ -183,12 +183,21 @@ get_orderID: Returns recently added Order ID of orders table
 
            elif (request.form['submit_button'] == 'Homepage'):
                return redirect(url_for('home_page'))
+               
+
+   @app.route('/all_orders',methods=['GET'])
+   def all_orders():
+       obj = forms.Order()
+       data = obj.get_order()
+       return render_template('all_orders.html',data=data)
 
 create_order: 'GET' method shows the create order form page. For 'POST', on the page, there are 2 text input boxes which are for searching items. If there are items match with those criterias, you can select one of them with option box and redirects user to order_information page with that items informations.
 
 my_orders : For 'GET' method, this function gets the employeeid from session and runs the my_orders method from forms.py. For 'POST' method, if dispatch button is clicked, first it checks with check_dispatch method of Orders form to see if there are enough stock, if there is enough stock, stock amount is decreased and dispatches order. Then updates the finance table. Otherwise, it raises No Stock error. 
 
 order_information: On this page, 'GET' method processes the given product_id and renders template accordingly. After filling the form with related information, 'POST' method ,which is triggered by 'Order' button, gets form fields and creates a temp_order row, also it assigns this temp_order to a available employee.
+
+all_orders: Shows user all order data
 
 **Form of Products**
 
@@ -393,7 +402,7 @@ product_list : On this page, you can see all products you are associated with an
 product_edit : This page is reached after product_list page. On this page you can fill the form to edit specified row. 
 
 
-**Codes related to Finance in forms.py**
+**Codes related to Finance**
 
 *From forms.py*
 
@@ -498,3 +507,25 @@ product_edit : This page is reached after product_list page. On this page you ca
 view_finance : Returns all rows of finance table
 weBougthSmth : Adds a new row to Finance table by processing the data from row before and given supply id. Calculates total money spent.
 weSoldSmth : Adds a new row to Finance table by processing the data from row before and given supply id. Calculates total money earned.
+
+
+*From server.py*
+
+
+.. code-block:: python
+
+   @app.route('/view_finance',methods=['GET'])
+   def view_finance():
+       if session['usertype']==1:
+           obj = forms.Finance()
+           data = obj.view_finance()
+           return render_template('view_finance.html',data=data)
+       else:
+           return redirect(url_for('home_page',error='You are not Authorized'))
+           
+Calls all of the finance table and renders them for user to see
+
+**Codes related to Users**
+
+*From forms.py*
+ 
