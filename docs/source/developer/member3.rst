@@ -393,5 +393,108 @@ product_list : On this page, you can see all products you are associated with an
 product_edit : This page is reached after product_list page. On this page you can fill the form to edit specified row. 
 
 
+**Codes related to Finance in forms.py**
+
+*From forms.py*
 
 
+.. code-block:: python
+
+   class Finance():
+
+       def view_finance(self):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """SELECT * FROM Financial;"""
+           cursor.execute(queryString)
+           results = cursor.fetchall()
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+           return results
+
+
+       def weBoughtSmth(self,supplyid):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """SELECT Quantity,ProductID,Price FROM Supply_order WHERE OrderID = %s;"""
+           cursor.execute(queryString, (supplyid,))
+           results = cursor.fetchall()[0]
+           quantity = results[0]
+           proId = results[1]
+           buyPrice = results[2]
+           totalPay = int(quantity) * int(buyPrice)
+           totalPay = -1*totalPay
+           queryString = """SELECT MAX(TransactionID) FROM Financial;"""
+           cursor.execute(queryString)
+           maxT = cursor.fetchall()[0]
+           queryString = """SELECT Total FROM Financial WHERE TransactionID = %s;"""
+           cursor.execute(queryString,(maxT,))
+           isThereTotal = cursor.fetchall()
+           if isThereTotal:
+               lastTotal = isThereTotal[0][0]
+           else:
+               lastTotal = 0
+           newTotal = int(lastTotal) + totalPay
+           queryString = """INSERT INTO Financial(Supply_orderID,Transaction,Cargo_price,Total) VALUES(%s,%s,0,%s);"""
+           cursor.execute(queryString, (supplyid,totalPay,newTotal,))
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+
+       def weSoldSmth(self,orderid):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """SELECT MarketplaceID,companyID,ProductID,Quantity FROM Orders WHERE OrderID = %s;"""
+           cursor.execute(queryString, (orderid,))
+           orderquery = cursor.fetchall()[0]
+           print(orderquery)
+           marketplace = orderquery[0]
+           cargo = orderquery[1]
+           productid = orderquery[2]
+           howMany = orderquery[3]
+
+           queryString = """SELECT sellprice,weight FROM Products WHERE ProductID = %s;"""
+           cursor.execute(queryString, (productid,))
+           orderquery = cursor.fetchall()[0]
+           sellprice = orderquery[0]
+           weight = orderquery[1]
+
+           queryString = """SELECT priceperkilo FROM cargocompany WHERE companyid = %s;"""
+           cursor.execute(queryString, (cargo,))
+           orderquery = cursor.fetchall()[0]
+           perkilo = orderquery[0]
+
+           queryString = """SELECT commissionfee FROM marketplace WHERE marketid = %s;"""
+           cursor.execute(queryString, (marketplace,))
+           orderquery = cursor.fetchall()[0]
+           commission = orderquery[0]
+
+           cargoprice = (float(weight)/1000) * float(perkilo)
+           gain = float(sellprice)*float(howMany)
+           netWorth = gain-gain*(float(commission)/100)
+           netWorth = netWorth-cargoprice
+
+           queryString = """SELECT MAX(TransactionID) FROM Financial;"""
+           cursor.execute(queryString)
+           maxT = cursor.fetchall()[0]
+           queryString = """SELECT Total FROM Financial WHERE TransactionID = %s;"""
+           cursor.execute(queryString,(maxT,))
+           isThereTotal = cursor.fetchall()
+           if isThereTotal:
+               lastTotal = isThereTotal[0][0]
+           else:
+               lastTotal = 0
+           newTotal = float(lastTotal) + netWorth
+           queryString = """INSERT INTO Financial(orderid,Transaction,Cargo_price,Total) VALUES(%s,%s,%s,%s);"""
+           cursor.execute(queryString, (orderid,int(netWorth),cargoprice,newTotal,))    
+
+
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+           
+          
+view_finance : Returns all rows of finance table
+weBougthSmth : Adds a new row to Finance table by processing the data from row before and given supply id. Calculates total money spent.
+weSoldSmth : Adds a new row to Finance table by processing the data from row before and given supply id. Calculates total money earned.
