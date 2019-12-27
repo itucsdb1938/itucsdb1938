@@ -10,7 +10,7 @@ In the screenshot above, the provider adding page can be seen. There admins can 
 .. figure:: provider_search.png
    :scale: 50 %
    :alt: Provider searching page
-In the screenshot above, the provider searching can be seen. There admins can search for the provider by typing in their ID or name or can list them all by typing '*' in the ID section.
+In the screenshot above, the provider searching can be seen. There admins can search for a provider by typing in their ID or name or can list them all by typing '*' in the ID section.
 
 .. figure:: provider_list.png
    :scale: 50 %
@@ -25,4 +25,28 @@ In the screenshot above, the provider list can be seen. There admins can select 
    :alt: Provider editing page
    
 In the screenshot above, the provider editing page can be seen. There admins can edit the provider they selected in the previous page and submit their changes.
+ 
+ 
+ .. figure:: cargo_add.png
+   :scale: 50 %
+   :alt: Cargo Company adding page
+In the screenshot above, the cargo company adding page can be seen. There admins can provide the information of a Cargo Company and add them to database.
+
+.. figure:: cargo_search.png
+   :scale: 50 %
+   :alt: Cargo Company searching page
+In the screenshot above, the cargo company searching can be seen. There admins can search for a cargo company by typing in their ID or name or can list them all by typing '*' in the ID section.
+
+.. figure:: cargo_list.png
+   :scale: 50 %
+   :alt: Provider listing page
+ 
+ 
+In the screenshot above, the provider list can be seen. There admins can select a provider by checking the radio button next to the row. There admin can choose to edit or delete a provider.
+
+ .. figure:: cargo_edit.png
+   :scale: 50 %
+   :alt: Provider editing page
+   
+In the screenshot above, the cargo company editing page can be seen. There admins can edit the cargo company they selected in the previous page and submit their changes.
  
