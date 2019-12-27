@@ -528,4 +528,92 @@ Calls all of the finance table and renders them for user to see
 **Codes related to Users**
 
 *From forms.py*
- 
+
+.. code-block:: python
+
+   class Users():    
+
+       def getUser(self,username, password):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           server_salt = "CVca9QBtk4U8pfPb"
+           db_password = password+server_salt
+           h = hashlib.md5(db_password.encode())
+           queryString = """SELECT usertype, EmployeeID FROM users WHERE username = %s AND password = %s;"""
+           cursor.execute(queryString, (username, h.hexdigest(),))
+           selection = cursor.fetchall()
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+           return selection
+
+       def addUser(self,username,password,employeeid,usertype):
+           server_salt = "CVca9QBtk4U8pfPb"
+           db_password = password+server_salt
+           h = hashlib.md5(db_password.encode())
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """INSERT INTO users (username,password,employeeid,usertype) VALUES (%s,%s,%s,%s);"""
+           cursor.execute(queryString, (username,h.hexdigest(),employeeid,usertype,))
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+           
+getUser : Checks the username and hashed password, if it matches with any row, returns usertype and EmployeeID of that row
+addUser : Saves the user information which are passed as arguments, to the users table
+
+
+*From server.py*
+
+.. code-block:: python
+
+   @app.route("/logout", methods=['GET'])
+   def logout():
+       session['usertype'] = 0
+       session['employeeid'] = 0
+       return redirect(url_for('home_page'))
+
+
+   @app.route("/register", methods=['GET', 'POST'])
+   def register():
+
+       if request.method == 'GET' and session['usertype']==1:
+           print(session['usertype'])
+           return render_template('register.html')
+
+       elif request.method == 'POST' and session['usertype']==1:
+           username = request.form.get('add_username')
+           password = request.form.get('add_password')
+           employeeid = request.form.get('add_employeeid')
+           usertype = request.form.get('add_type')
+           print(username,password,employeeid,usertype)
+           obj = forms.Users()
+           obj.addUser(username,password,employeeid,usertype)
+           return redirect(url_for('register'))
+
+       else:
+           return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+   @app.route("/login",methods=['GET','POST'])
+   def login():
+       if(request.method == 'GET') :
+           return render_template('login.html')
+       else:
+           if(request.form['submit_button']) == 'Submit':
+               username = request.form.get('login_username')
+               password = request.form.get('login_password')
+               obj = forms.Users()
+               data = obj.getUser(username, password)
+               if (not data):
+                   return redirect(url_for('login',message='LOGIN FAILED'))
+               else:
+                   session['usertype'] = data[0][0]
+                   session['employeeid'] = data[0][1]
+                   print(session['usertype'])
+                   print(session['employeeid'])
+                   return redirect(url_for('home_page'))
+                   
+Logout : Resets the sessions stored in local files of users computer
+LogIn : Gets the data from form at /login, then checks if datas are related to a user. If it finds a user, then creates sessions accordingly
+Register : Adds a new user to users table if there are no duplicate users. 'GET' method returns the form. You need to be admin to use this page.
