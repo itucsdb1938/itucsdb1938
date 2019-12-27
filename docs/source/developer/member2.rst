@@ -294,8 +294,12 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 				('employee_phonenumber')
 				employee_email = request.form.get('employee_email')
 				employee_workinghours = '{'
-				if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
-					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + 
+				if (int(request.form.get('employee_workinghour1')) <
+				int(request.form.get('employee_workinghour2'))):
+		
+					employee_workinghours = employee_workinghours +
+					str(int(request.form.get('employee_workinghour1')) 
+					* 60) + ',' + 
 					str(int(request.form.get('employee_workinghour2')) 
 					* 60) + '}'
 				else:
