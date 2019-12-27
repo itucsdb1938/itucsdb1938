@@ -290,12 +290,14 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 			if (request.form['submit_button'] == 'Submit'):
 				employee_name = request.form.get('employee_name')
 				employee_surname = request.form.get('employee_surname')
-				employee_phonenumber = request.form.get('employee_phonenumber')
+				employee_phonenumber = request.form.get
+				('employee_phonenumber')
 				employee_email = request.form.get('employee_email')
 				employee_workinghours = '{'
 				if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
 					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + 
-					str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+					str(int(request.form.get('employee_workinghour2')) 
+					* 60) + '}'
 				else:
 					employee_workinghours += '0,0}'
 				employee_workingdays = ''
@@ -378,7 +380,8 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 				employee_workinghours = '{'
 				if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
 					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + 
-					str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+					str(int(request.form.get('employee_workinghour2')) 
+					* 60) + '}'
 				else:
 					employee_workinghours += '0,0}'
 				employee_workingdays = ''
