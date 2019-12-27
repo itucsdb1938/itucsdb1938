@@ -11,7 +11,8 @@ Parts Implemented by Yavuz Ege Okumuş
        def Provider_add(self, company, address, phone, taxid, authority):
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
-           queryString = """INSERT INTO Provider (Company, Address, Phone, TaxID, Authority) VALUES (%s, %s, %s, %s, %s);"""
+           queryString = """INSERT INTO Provider (Company, Address, Phone, TaxID, Authority) 
+              VALUES (%s, %s, %s, %s, %s);"""
            cursor.execute(queryString, (company, address, phone, taxid, authority,))
            dbconnection.commit()
            cursor.close()
@@ -366,7 +367,10 @@ cargo_edit:If usertype is 1 (admin) page opens, otherwise app redirects for home
                dbconnection = dbapi.connect(url)
                cursor = dbconnection.cursor()
                if (supply_id == '*' or name == '*' or company == '*'):
-                   queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod on supply_order.productid = prod.productid ORDER BY orderID ASC;"""
+                   queryString = """select orderid, price, quantity, time, company, 
+                     concat_ws(' - ', brand, name) as item from 
+                     supply_order inner join provider as prov on supply_order.providerid = prov.providerid 
+                     inner join products as prod on supply_order.productid = prod.productid ORDER BY orderID ASC;"""
                    cursor.execute(queryString)
                    selection = cursor.fetchall()
                    dbconnection.commit()
@@ -376,7 +380,8 @@ cargo_edit:If usertype is 1 (admin) page opens, otherwise app redirects for home
                elif (supply_id == '' and name != '' and company == ''):
                    queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) 
                      as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid 
-                     inner join products as prod on supply_order.productid = prod.productid WHERE supply_order.productid = %s ORDER BY                        orderID ASC;"""
+                     inner join products as prod on supply_order.productid = prod.productid WHERE supply_order.productid = %s 
+                     ORDER BY orderID ASC;"""
                    cursor.execute(queryString, (name,))
                    selection = cursor.fetchall()
                    dbconnection.commit()
@@ -384,7 +389,10 @@ cargo_edit:If usertype is 1 (admin) page opens, otherwise app redirects for home
                    dbconnection.close()
                    return selection
                elif (supply_id != '' and name == '' and company == ''):
-                   queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) as item from                                supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join products as prod                        on supply_order.productid = prod.productid WHERE orderID = %s ORDER BY orderID ASC;"""
+                   queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) 
+                     as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid 
+                     inner join products as prod on supply_order.productid = prod.productid 
+                     WHERE orderID = %s ORDER BY orderID ASC;"""
                    cursor.execute(queryString, (supply_id,))
                    selection = cursor.fetchall()
                    dbconnection.commit()
@@ -393,7 +401,8 @@ cargo_edit:If usertype is 1 (admin) page opens, otherwise app redirects for home
                    return selection
                elif (supply_id == '' and name == '' and company != ''):
                    queryString = """select orderid, price, quantity, time, company, concat_ws(' - ', brand, name) 
-                     as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid inner join                            products as prod on supply_order.productid = prod.productid WHERE supply_order.providerid = %s 
+                     as item from supply_order inner join provider as prov on supply_order.providerid = prov.providerid 
+                     inner join products as prod on supply_order.productid = prod.productid WHERE supply_order.providerid = %s 
                      ORDER BY orderID ASC;"""
                    cursor.execute(queryString, (company,))
                    selection = cursor.fetchall()
