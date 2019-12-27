@@ -12,7 +12,8 @@ Parts Implemented by Egehan Orta
     def MarketPlace_add(self, name, address, authority, phonenumber, taxid, commission):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """INSERT INTO Marketplace (name, address, authority, phonenumber, taxid, commissionfee) VALUES (%s, %s, %s, %s, %s, %s);"""
+        queryString = """INSERT INTO Marketplace (name, address, authority, phonenumber, taxid, 
+		commissionfee) VALUES (%s, %s, %s, %s, %s, %s);"""
         cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission,))
         dbconnection.commit()
         cursor.close()
@@ -63,8 +64,10 @@ Parts Implemented by Egehan Orta
     def MarketPlace_edit(self, market_id, name, address, authority, phonenumber, taxid, commission):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """UPDATE Marketplace SET name = %s, address = %s, authority = %s, phonenumber = %s, taxid = %s, commissionfee = %s  WHERE  MarketID = %s;"""
-        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission, market_id,))
+        queryString = """UPDATE Marketplace SET name = %s, address = %s, authority = %s, 
+		phonenumber = %s, taxid = %s, commissionfee = %s  WHERE  MarketID = %s;"""
+        cursor.execute(queryString, (name, address, authority, phonenumber, taxid, commission, 
+		market_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
@@ -96,7 +99,8 @@ MarketPlace_edit: Edit existing row by using its id.
 				market_commisionfee = request.form.get('market_commission')
 				obj = forms.MarketPlace()
 				obj.MarketPlace_add(market_name, market_address, market_authority,
-									market_phonenumber, market_taxid,
+									market_phonenumber, 
+									market_taxid,
 									market_commisionfee)
 				return redirect(url_for('marketplace_add'))
 			elif (request.form['submit_button'] == 'Homepage'):
@@ -151,8 +155,10 @@ MarketPlace_edit: Edit existing row by using its id.
 				market_commisionfee = request.form.get('market_commission')
 				obj = forms.MarketPlace()
 				obj.MarketPlace_edit(market_id, market_name, market_address,
-									 market_authority, market_phonenumber,
-									 market_taxid, market_commisionfee)
+									 market_authority, 
+									 market_phonenumber,
+									 market_taxid, 
+									 market_commisionfee)
 				return redirect(url_for('marketplace_list'))
 			elif (request.form['submit_button'] == 'Homepage'):
 				return redirect(url_for('home_page'))
@@ -177,7 +183,8 @@ marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects f
     def Employee_add(self, name, surname, phonenumber, email, workinghours, workingdays):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """INSERT INTO Employee (name, surname, phonenumber, email, workinghours, workingdays) VALUES (%s, %s, %s, %s, %s, %s);"""
+        queryString = """INSERT INTO Employee (name, surname, phonenumber, email, workinghours,
+		workingdays) VALUES (%s, %s, %s, %s, %s, %s);"""
         cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays,))
         dbconnection.commit()
         cursor.close()
@@ -225,11 +232,14 @@ marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects f
         cursor.close()
         dbconnection.close()
     
-    def Employee_edit(self, employee_id, name, surname, phonenumber, email, workinghours, workingdays):
+    def Employee_edit(self, employee_id, name, surname, phonenumber, email, workinghours, 
+    workingdays):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """UPDATE Employee SET name = %s, surname = %s, phonenumber = %s, email = %s, workinghours = %s, workingdays = %s  WHERE  employeeid = %s;"""
-        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays, employee_id,))
+        queryString = """UPDATE Employee SET name = %s, surname = %s, phonenumber = %s, email = %s, 
+		workinghours = %s, workingdays = %s  WHERE  employeeid = %s;"""
+        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays, 
+		employee_id,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
@@ -237,7 +247,8 @@ marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects f
     def Employee_select_id (self, week_day, time):
         dbconnection = dbapi.connect(url)
         cursor = dbconnection.cursor()
-        queryString = """SELECT employeeid FROM Employee WHERE %s > workinghours[1] AND %s < workinghours[2] AND %s = ANY(workingdays) ORDER BY EmployeeID ASC;"""
+        queryString = """SELECT employeeid FROM Employee WHERE %s > workinghours[1] AND %s < 
+		workinghours[2] AND %s = ANY(workingdays) ORDER BY EmployeeID ASC;"""
         cursor.execute(queryString, (time, time, week_day,))
         selection = cursor.fetchall()
        
@@ -245,7 +256,8 @@ marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects f
             if (not selection):
                 if week_day+i == 8:
                     week_day = week_day - 7
-                queryString = """SELECT employeeid FROM Employee WHERE %s = ANY(workingdays) ORDER BY EmployeeID ASC;"""
+                queryString = """SELECT employeeid FROM Employee WHERE %s = ANY(workingdays) 
+			ORDER BY EmployeeID ASC;"""
                 cursor.execute(queryString, (week_day+i,))
                 selection = cursor.fetchall()
             else:
@@ -282,7 +294,8 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 				employee_email = request.form.get('employee_email')
 				employee_workinghours = '{'
 				if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
-					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + 
+					str(int(request.form.get('employee_workinghour2')) * 60) + '}'
 				else:
 					employee_workinghours += '0,0}'
 				employee_workingdays = ''
@@ -303,7 +316,8 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 				employee_workingdays = functions.commafy(employee_workingdays)
 				employee_workingdays = '{' + employee_workingdays + '}'
 				obj = forms.Employee()
-				obj.Employee_add(employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+				obj.Employee_add(employee_name, employee_surname, 
+				employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
 				return redirect(url_for('employee_add'))
 			elif (request.form['submit_button'] == 'Homepage'):
 				return redirect(url_for('home_page'))
@@ -355,7 +369,8 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 				employee_email = request.form.get('employee_email')
 				employee_workinghours = '{'
 				if (int(request.form.get('employee_workinghour1')) < int(request.form.get('employee_workinghour2'))):
-					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + str(int(request.form.get('employee_workinghour2')) * 60) + '}'
+					employee_workinghours = employee_workinghours + str(int(request.form.get('employee_workinghour1')) * 60) + ',' + 
+					str(int(request.form.get('employee_workinghour2')) * 60) + '}'
 				else:
 					employee_workinghours += '0,0}'
 				employee_workingdays = ''
@@ -376,7 +391,8 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 				employee_workingdays = functions.commafy(employee_workingdays)
 				employee_workingdays = '{' + employee_workingdays + '}'
 				obj = forms.Employee()
-				obj.Employee_edit(employee_id, employee_name, employee_surname, employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+				obj.Employee_edit(employee_id, employee_name, employee_surname,
+				employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
 				return redirect(url_for('employee_list'))
 			elif (request.form['submit_button'] == 'Homepage'):
 				return redirect(url_for('home_page'))
@@ -439,7 +455,8 @@ employee_edit: If usertype is 1 (admin) page opens, otherwise app redirects for 
 		def update_location(self, x, y, z, stock_id):
 			dbconnection = dbapi.connect(url)
 			cursor = dbconnection.cursor()
-			queryString = """UPDATE stock SET location_x = %s, location_y = %s, location_z = %s WHERE id = %s;"""
+			queryString = """UPDATE stock SET location_x = %s, location_y = %s,
+			location_z = %s WHERE id = %s;"""
 			cursor.execute(queryString, (x, y, z, stock_id,))
 			dbconnection.commit()
 			cursor.close()
@@ -448,7 +465,9 @@ employee_edit: If usertype is 1 (admin) page opens, otherwise app redirects for 
 		def display_stock(self):
 			dbconnection = dbapi.connect(url)
 			cursor = dbconnection.cursor()
-			queryString = """SELECT id,location_x,location_y,location_z,concat_ws(' - ',brand,name),quantity FROM stock inner join products on stock.productid=products.productid;"""
+			queryString = """SELECT id,location_x,location_y,location_z,
+			concat_ws(' - ',brand,name),quantity FROM stock inner join products on
+			stock.productid=products.productid;"""
 			cursor.execute(queryString,)
 			selection = cursor.fetchall()
 			dbconnection.commit()
