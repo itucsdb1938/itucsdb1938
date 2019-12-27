@@ -62,7 +62,8 @@ Parts Implemented by Yavuz Ege Okumuş
        def Provider_edit(self, provider_id, company, address, phone, taxid, authority):
            dbconnection = dbapi.connect(url)
            cursor = dbconnection.cursor()
-           queryString = """UPDATE Provider SET Company = %s, Address = %s, Phone = %s, TaxID = %s, Authority = %s WHERE ProviderID = %s;"""
+           queryString = """UPDATE Provider SET Company = %s, Address = %s, 
+              Phone = %s, TaxID = %s, Authority = %s WHERE ProviderID = %s;"""
            cursor.execute(queryString, (company, address, phone, taxid, authority, provider_id,))
            dbconnection.commit()
            cursor.close()
@@ -185,7 +186,8 @@ provider_edit:If usertype is 1 (admin) page opens, otherwise app redirects for h
            def cargo_add(self, company, address, price, taxid, authority):
                dbconnection = dbapi.connect(url)
                cursor = dbconnection.cursor()
-               queryString = """INSERT INTO CargoCompany (Name, Address, Priceperkilo, TaxID, Authority) VALUES (%s, %s, %s, %s, %s);"""
+               queryString = """INSERT INTO CargoCompany (Name, Address, Priceperkilo, TaxID, Authority) 
+                     VALUES (%s, %s, %s, %s, %s);"""
                cursor.execute(queryString, (company, address, price, taxid, authority,))
                dbconnection.commit()
                cursor.close()
@@ -236,7 +238,8 @@ provider_edit:If usertype is 1 (admin) page opens, otherwise app redirects for h
            def cargo_edit(self, cargo_id, company, address, price, taxid, authority):
                dbconnection = dbapi.connect(url)
                cursor = dbconnection.cursor()
-               queryString = """UPDATE CargoCompany SET Name = %s, Address = %s, Priceperkilo = %s, TaxID = %s, Authority = %s WHERE companyID = %s;"""
+               queryString = """UPDATE CargoCompany SET Name = %s, 
+                     Address = %s, Priceperkilo = %s, TaxID = %s, Authority = %s WHERE companyID = %s;"""
                cursor.execute(queryString, (company, address, price, taxid, authority, cargo_id,))
                dbconnection.commit()
                cursor.close()
