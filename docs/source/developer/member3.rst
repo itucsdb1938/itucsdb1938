@@ -154,6 +154,35 @@ get_orderID: Returns recently added Order ID of orders table
                obj2 = forms.Order()
                obj2.temp_order(market_id, order_address, order_date, customer_name, cargo_id, product_id, order_quantity, employee_id, order_time)
                return redirect(url_for('home_page'))
+               
+   @app.route ('/my_orders', methods= ['GET', 'POST'])
+   def my_orders():
+       if request.method == 'GET':
+
+           employee_id = session['employeeid']
+           obj = forms.Order()
+           data = obj.my_orders(employee_id)
+           if request.args.get('error'):
+               return render_template('my_orders.html', data=data, message=request.args.get('error'))
+           else:
+               return render_template('my_orders.html', data=data)
+
+       elif request.method == 'POST':
+           if (request.form['submit_button'] == 'Dispatch Selected'):
+               option = request.form['options'] #order id burdan product_id yi cek product_id den stoka git ve stok durumunu cek
+               obj = forms.Order()
+               if obj.check_dispatch(option):
+                   obj2 = forms.Stock()
+                   obj2.update_quantity(-obj.check_dispatch(option)[0],obj2.get_ID(obj.check_dispatch(option)[2])[0][0])
+                   obj.dispatch_order(option)
+                   obj3 = forms.Finance()
+                   obj3.weSoldSmth(obj.get_orderID())
+                   return redirect(url_for('my_orders'))
+               else:
+                   return redirect(url_for('my_orders',error='NO STOCK!'))
+
+           elif (request.form['submit_button'] == 'Homepage'):
+               return redirect(url_for('home_page'))
 
 create_order: 'GET' method shows the create order form page. For 'POST', on the page, there are 2 text input boxes which are for searching items. If there are items match with those criterias, you can select one of them with option box and redirects user to order_information page with that items informations.
 
