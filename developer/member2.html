@@ -1,0 +1,721 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by Egehan Orta &mdash; ITUCSDB1938  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parts Implemented by Yigitcan Coban" href="member3.html" />
+    <link rel="prev" title="Parts Implemented by Yavuz Ege Okumus" href="member1.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1938
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#database-design">Database Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#code">Code</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="member1.html">Parts Implemented by Yavuz Ege Okumus</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parts Implemented by Egehan Orta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html">Parts Implemented by Yigitcan Coban</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1938</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by Egehan Orta</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/member2.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-egehan-orta">
+<h1>Parts Implemented by Egehan Orta<a class="headerlink" href="#parts-implemented-by-egehan-orta" title="Permalink to this headline">¶</a></h1>
+<p><strong>For MarketPlace</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MarketPlace</span><span class="p">:</span>
+
+ <span class="k">def</span> <span class="nf">MarketPlace_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">authority</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">taxid</span><span class="p">,</span> <span class="n">commission</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO Marketplace (name, address, authority, phonenumber, taxid,</span>
+<span class="s2">             commissionfee) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">authority</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">taxid</span><span class="p">,</span> <span class="n">commission</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">MarketPlace_select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">market_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">market_id</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">):</span>
+         <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM Marketplace ORDER BY MarketID ASC;&quot;&quot;&quot;</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+         <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span> <span class="n">selection</span>
+     <span class="k">elif</span> <span class="p">(</span><span class="n">market_id</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+         <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM Marketplace WHERE name = </span><span class="si">%s</span><span class="s2"> ORDER BY MarketID ASC;&quot;&quot;&quot;</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+         <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span> <span class="n">selection</span>
+     <span class="k">elif</span> <span class="p">(</span><span class="n">market_id</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+         <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM Marketplace WHERE MarketID = </span><span class="si">%s</span><span class="s2"> ORDER BY MarketID ASC;&quot;&quot;&quot;</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">market_id</span><span class="p">,))</span>
+         <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span> <span class="n">selection</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span>
+
+ <span class="k">def</span> <span class="nf">MarketPlace_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">market_id</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;DELETE FROM Marketplace WHERE MarketID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">market_id</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">MarketPlace_edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">market_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">authority</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">taxid</span><span class="p">,</span> <span class="n">commission</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE Marketplace SET name = </span><span class="si">%s</span><span class="s2">, address = </span><span class="si">%s</span><span class="s2">, authority = </span><span class="si">%s</span><span class="s2">,</span>
+<span class="s2">             phonenumber = </span><span class="si">%s</span><span class="s2">, taxid = </span><span class="si">%s</span><span class="s2">, commissionfee = </span><span class="si">%s</span><span class="s2">  WHERE  MarketID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">authority</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">taxid</span><span class="p">,</span> <span class="n">commission</span><span class="p">,</span>
+             <span class="n">market_id</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>MarketPlace_add: Used for adding data to database.</p>
+<p>MarketPlace_select: Selecting data from table according to id or name.</p>
+<p>MarketPlace_delete: Delete data from table with its id.</p>
+<p>MarketPlace_edit: Edit existing row by using its id.</p>
+<p><em>From server.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/marketplace_add&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">marketplace_add</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;marketplace_add.html&#39;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+                        <span class="n">market_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_name&#39;</span><span class="p">)</span>
+                        <span class="n">market_address</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_address&#39;</span><span class="p">)</span>
+                        <span class="n">market_authority</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_authority&#39;</span><span class="p">)</span>
+                        <span class="n">market_phonenumber</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_phonenumber&#39;</span><span class="p">)</span>
+                        <span class="n">market_taxid</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_taxid&#39;</span><span class="p">)</span>
+                        <span class="n">market_commisionfee</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_commission&#39;</span><span class="p">)</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MarketPlace</span><span class="p">()</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">MarketPlace_add</span><span class="p">(</span><span class="n">market_name</span><span class="p">,</span> <span class="n">market_address</span><span class="p">,</span>
+                        <span class="n">market_authority</span><span class="p">,</span><span class="n">market_phonenumber</span><span class="p">,</span><span class="n">market_taxid</span><span class="p">,</span>
+                        <span class="n">market_commisionfee</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;marketplace_add&#39;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/marketplace_list&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">marketplace_list</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;marketplace_list.html&#39;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Delete Selected&#39;</span><span class="p">):</span>
+                        <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MarketPlace</span><span class="p">()</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">MarketPlace_delete</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;marketplace_list&#39;</span><span class="p">))</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Edit Selected&#39;</span><span class="p">):</span>
+                        <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;marketplace_edit&#39;</span><span class="p">,</span> <span class="n">market_id</span><span class="o">=</span><span class="n">option</span><span class="p">))</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+                        <span class="n">market_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_id&#39;</span><span class="p">)</span>
+                        <span class="n">market_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_name&#39;</span><span class="p">)</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MarketPlace</span><span class="p">()</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">MarketPlace_select</span><span class="p">(</span><span class="n">market_id</span><span class="p">,</span> <span class="n">market_name</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;marketplace_list.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/marketplace_edit/&lt;market_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">marketplace_edit</span><span class="p">(</span><span class="n">market_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MarketPlace</span><span class="p">()</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">MarketPlace_select</span><span class="p">(</span><span class="n">market_id</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;marketplace_edit.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+                        <span class="n">market_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_name&#39;</span><span class="p">)</span>
+                        <span class="n">market_address</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_address&#39;</span><span class="p">)</span>
+                        <span class="n">market_authority</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_authority&#39;</span><span class="p">)</span>
+                        <span class="n">market_phonenumber</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_phonenumber&#39;</span><span class="p">)</span>
+                        <span class="n">market_taxid</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_taxid&#39;</span><span class="p">)</span>
+                        <span class="n">market_commisionfee</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_commission&#39;</span><span class="p">)</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MarketPlace</span><span class="p">()</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">MarketPlace_edit</span><span class="p">(</span><span class="n">market_id</span><span class="p">,</span> <span class="n">market_name</span><span class="p">,</span> <span class="n">market_address</span><span class="p">,</span>
+                                                                 <span class="n">market_authority</span><span class="p">,</span>
+                                                                 <span class="n">market_phonenumber</span><span class="p">,</span>
+                                                                 <span class="n">market_taxid</span><span class="p">,</span>
+                                                                 <span class="n">market_commisionfee</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;marketplace_list&#39;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>marketplace_add: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request if POST, MarketPlace object will be crated and MarketPlace_add function will be called.</p>
+<p>marketplace_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls MarketPlace_select function from <em>forms.py</em> and lists them. If Edit button is used for POST request app redirects page for marketplace_edit. If Delete button clicked for POST request, MarketPlace_delete is called from <em>forms.py</em>. Since template of that page does not contain Hompage button as form element, it is just a junk code.</p>
+<p>marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given marketid. If Submit button is used for POST request MarketPlace_edit function will be called from <em>forms.py</em>. Since template of that page does not contain Hompage button as form element, it is just a junk code.</p>
+<p><strong>For Employee</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+
+ <span class="k">def</span> <span class="nf">Employee_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">workinghours</span><span class="p">,</span> <span class="n">workingdays</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO Employee (name, surname, phonenumber, email, workinghours,</span>
+<span class="s2">             workingdays) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">workinghours</span><span class="p">,</span>
+     <span class="n">workingdays</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">Employee_select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">employee_id</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">):</span>
+         <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM Employee ORDER BY EmployeeID ASC;&quot;&quot;&quot;</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+         <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span> <span class="n">selection</span>
+     <span class="k">elif</span> <span class="p">(</span><span class="n">employee_id</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+         <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM Employee WHERE name = </span><span class="si">%s</span><span class="s2"> ORDER BY EmployeeID ASC;&quot;&quot;&quot;</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+         <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span> <span class="n">selection</span>
+     <span class="k">elif</span> <span class="p">(</span><span class="n">employee_id</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+         <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM Employee WHERE EmployeeID = </span><span class="si">%s</span><span class="s2"> ORDER BY EmployeeID ASC;&quot;&quot;&quot;</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">employee_id</span><span class="p">,))</span>
+         <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span> <span class="n">selection</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+         <span class="k">return</span>
+
+ <span class="k">def</span> <span class="nf">Employee_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">employee_id</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;DELETE FROM Employee WHERE EmployeeID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">employee_id</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">Employee_edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">workinghours</span><span class="p">,</span>
+ <span class="n">workingdays</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE Employee SET name = </span><span class="si">%s</span><span class="s2">, surname = </span><span class="si">%s</span><span class="s2">, phonenumber = </span><span class="si">%s</span><span class="s2">, email = </span><span class="si">%s</span><span class="s2">,</span>
+<span class="s2">             workinghours = </span><span class="si">%s</span><span class="s2">, workingdays = </span><span class="si">%s</span><span class="s2">  WHERE  employeeid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">phonenumber</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">workinghours</span><span class="p">,</span> <span class="n">workingdays</span><span class="p">,</span>
+             <span class="n">employee_id</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">Employee_select_id</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">week_day</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT employeeid FROM Employee WHERE </span><span class="si">%s</span><span class="s2"> &gt; workinghours[1] AND </span><span class="si">%s</span><span class="s2"> &lt;</span>
+<span class="s2">             workinghours[2] AND </span><span class="si">%s</span><span class="s2"> = ANY(workingdays) ORDER BY EmployeeID ASC;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">week_day</span><span class="p">,))</span>
+     <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">):</span>
+         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">selection</span><span class="p">):</span>
+             <span class="k">if</span> <span class="n">week_day</span><span class="o">+</span><span class="n">i</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+                 <span class="n">week_day</span> <span class="o">=</span> <span class="n">week_day</span> <span class="o">-</span> <span class="mi">7</span>
+             <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT employeeid FROM Employee WHERE </span><span class="si">%s</span><span class="s2"> = ANY(workingdays)</span>
+<span class="s2">                     ORDER BY EmployeeID ASC;&quot;&quot;&quot;</span>
+             <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">week_day</span><span class="o">+</span><span class="n">i</span><span class="p">,))</span>
+             <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+         <span class="k">else</span><span class="p">:</span>
+             <span class="k">break</span>
+
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">return</span> <span class="n">selection</span>
+</pre></div>
+</div>
+<p>Employee_add: Used for adding data to database.</p>
+<p>Employee_select: Selecting data from table according to id or name.</p>
+<p>Employee_delete: Delete data from table with its id.</p>
+<p>Employee_edit: Edit existing row by using its id.</p>
+<p>Employee_select_id: Select employeeID by using its workingdays and workinghours.</p>
+<p><em>From server.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/employee_add&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">employee_add</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;employee_add.html&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+                        <span class="n">employee_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_name&#39;</span><span class="p">)</span>
+                        <span class="n">employee_surname</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_surname&#39;</span><span class="p">)</span>
+                        <span class="n">employee_phonenumber</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                        <span class="p">(</span><span class="s1">&#39;employee_phonenumber&#39;</span><span class="p">)</span>
+                        <span class="n">employee_email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_email&#39;</span><span class="p">)</span>
+                        <span class="n">employee_workinghours</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour1&#39;</span><span class="p">))</span> <span class="o">&lt;</span>
+                        <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour2&#39;</span><span class="p">))):</span>
+
+                                <span class="n">employee_workinghours</span> <span class="o">=</span> <span class="n">employee_workinghours</span> <span class="o">+</span>
+                                <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour1&#39;</span><span class="p">))</span>
+                                <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span>
+                                <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour2&#39;</span><span class="p">))</span>
+                                <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+                        <span class="k">else</span><span class="p">:</span>
+                                <span class="n">employee_workinghours</span> <span class="o">+=</span> <span class="s1">&#39;0,0}&#39;</span>
+                        <span class="n">employee_workingdays</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday1&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday1&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday2&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday2&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday3&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday3&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday4&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday4&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday5&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday5&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday6&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday6&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday7&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday7&#39;</span><span class="p">)</span>
+                        <span class="n">employee_workingdays</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">commafy</span><span class="p">(</span><span class="n">employee_workingdays</span><span class="p">)</span>
+                        <span class="n">employee_workingdays</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span> <span class="n">employee_workingdays</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Employee</span><span class="p">()</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">Employee_add</span><span class="p">(</span><span class="n">employee_name</span><span class="p">,</span> <span class="n">employee_surname</span><span class="p">,</span>
+                        <span class="n">employee_phonenumber</span><span class="p">,</span> <span class="n">employee_email</span><span class="p">,</span> <span class="n">employee_workinghours</span><span class="p">,</span>
+                        <span class="n">employee_workingdays</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;employee_add&#39;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/employee_list&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">employee_list</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;employee_list.html&#39;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Delete Selected&#39;</span><span class="p">):</span>
+                        <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Employee</span><span class="p">()</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">Employee_delete</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;employee_list&#39;</span><span class="p">))</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Edit Selected&#39;</span><span class="p">):</span>
+                        <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;employee_edit&#39;</span><span class="p">,</span> <span class="n">employee_id</span><span class="o">=</span><span class="n">option</span><span class="p">))</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+                        <span class="n">employee_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_id&#39;</span><span class="p">)</span>
+                        <span class="n">employee_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_name&#39;</span><span class="p">)</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Employee</span><span class="p">()</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Employee_select</span><span class="p">(</span><span class="n">employee_id</span><span class="p">,</span> <span class="n">employee_name</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;employee_list.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/employee_edit/&lt;employee_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">employee_edit</span><span class="p">(</span><span class="n">employee_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Employee</span><span class="p">()</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Employee_select</span><span class="p">(</span><span class="n">employee_id</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;employee_edit.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+                        <span class="n">employee_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_name&#39;</span><span class="p">)</span>
+                        <span class="n">employee_surname</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_surname&#39;</span><span class="p">)</span>
+                        <span class="n">employee_phonenumber</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_phonenumber&#39;</span><span class="p">)</span>
+                        <span class="n">employee_email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_email&#39;</span><span class="p">)</span>
+                        <span class="n">employee_workinghours</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour1&#39;</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour2&#39;</span><span class="p">))):</span>
+                                <span class="n">employee_workinghours</span> <span class="o">=</span> <span class="n">employee_workinghours</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour1&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span>
+                                <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workinghour2&#39;</span><span class="p">))</span>
+                                <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+                        <span class="k">else</span><span class="p">:</span>
+                                <span class="n">employee_workinghours</span> <span class="o">+=</span> <span class="s1">&#39;0,0}&#39;</span>
+                        <span class="n">employee_workingdays</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday1&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                                <span class="p">(</span><span class="s1">&#39;employee_workingday1&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday2&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                                <span class="p">(</span><span class="s1">&#39;employee_workingday2&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday3&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                                <span class="p">(</span><span class="s1">&#39;employee_workingday3&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday4&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                                <span class="p">(</span><span class="s1">&#39;employee_workingday4&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday5&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                                <span class="p">(</span><span class="s1">&#39;employee_workingday5&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday6&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                                <span class="p">(</span><span class="s1">&#39;employee_workingday6&#39;</span><span class="p">)</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;employee_workingday7&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">employee_workingdays</span> <span class="o">+=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span>
+                                <span class="p">(</span><span class="s1">&#39;employee_workingday7&#39;</span><span class="p">)</span>
+                        <span class="n">employee_workingdays</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">commafy</span><span class="p">(</span><span class="n">employee_workingdays</span><span class="p">)</span>
+                        <span class="n">employee_workingdays</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span> <span class="n">employee_workingdays</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Employee</span><span class="p">()</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">Employee_edit</span><span class="p">(</span><span class="n">employee_id</span><span class="p">,</span> <span class="n">employee_name</span><span class="p">,</span> <span class="n">employee_surname</span><span class="p">,</span>
+                        <span class="n">employee_phonenumber</span><span class="p">,</span> <span class="n">employee_email</span><span class="p">,</span> <span class="n">employee_workinghours</span><span class="p">,</span>
+                        <span class="n">employee_workingdays</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;employee_list&#39;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>employee_add: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request if POST, Employee object will be crated and Employee_add function will be called.</p>
+<p>employee_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls Employee_select function from <em>forms.py</em> and lists them. If Edit button is used for POST request app redirects page for employee_edit. If Delete button clicked for POST request, employee_delete is called from <em>forms.py</em>. Since template of that page does not contain Hompage button as form element, it is just a junk code.</p>
+<p>employee_edit: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given employeeid. If Submit button is used for POST request employee_edit function will be called from <em>forms.py</em>. Since template of that page does not contain Hompage button as form element, it is just a junk code.</p>
+<p><strong>For Stock</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Stock</span><span class="p">():</span>
+            <span class="k">def</span> <span class="nf">add_to_stock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
+                    <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO stock (productID, quantity) VALUES (</span><span class="si">%s</span><span class="s2">, 0);&quot;&quot;&quot;</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">product_id</span><span class="p">,))</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="k">def</span> <span class="nf">get_ID</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
+                    <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT ID FROM stock WHERE productid=</span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">product_id</span><span class="p">,))</span>
+                    <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="k">return</span> <span class="n">selection</span>
+
+            <span class="k">def</span> <span class="nf">get_quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stock_id</span><span class="p">):</span>
+                    <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT quantity FROM stock WHERE id = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">stock_id</span><span class="p">,))</span>
+                    <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="k">return</span> <span class="n">selection</span>
+
+            <span class="k">def</span> <span class="nf">update_quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_quantity</span><span class="p">,</span> <span class="n">stock_id</span><span class="p">):</span>
+                    <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE stock SET quantity = quantity + </span><span class="si">%s</span><span class="s2"> WHERE id = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">new_quantity</span><span class="p">,</span> <span class="n">stock_id</span><span class="p">,))</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="k">def</span> <span class="nf">update_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">stock_id</span><span class="p">):</span>
+                    <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE stock SET location_x = </span><span class="si">%s</span><span class="s2">, location_y = </span><span class="si">%s</span><span class="s2">,</span>
+<span class="s2">                    location_z = </span><span class="si">%s</span><span class="s2"> WHERE id = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">stock_id</span><span class="p">,))</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="k">def</span> <span class="nf">display_stock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                    <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT id,location_x,location_y,location_z,</span>
+<span class="s2">                    concat_ws(&#39; - &#39;,brand,name),quantity FROM stock inner join products on</span>
+<span class="s2">                    stock.productid=products.productid;&quot;&quot;&quot;</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,)</span>
+                    <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="k">return</span> <span class="n">selection</span>
+</pre></div>
+</div>
+<p>add_to_stock: Used for adding initial data to database.</p>
+<p>get_ID: Select id by using its productID.</p>
+<p>get_quantity: Select quantity by using its id.</p>
+<p>update_quantity: Update quantity by using its id.</p>
+<p>update_location: Select employeeID by using its workingdays and workinghours.</p>
+<p>display_stock: Displays stock status by getting product name using inner join.</p>
+<p><em>From server.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/stock&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">stock</span><span class="p">():</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Stock</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">display_stock</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;stock.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>stock: Shows the all stock conditions.</p>
+<p><strong>For some features</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">group</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">groupby</span><span class="p">):</span>
+            <span class="n">args</span><span class="o">=</span><span class="p">[]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">%</span><span class="n">groupby</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">name</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">-</span><span class="n">groupby</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">groupby</span><span class="p">):</span>
+                    <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">groupby</span><span class="p">):</span>
+                            <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">args</span>
+
+    <span class="k">def</span> <span class="nf">commafy</span> <span class="p">(</span><span class="n">str_to_comma</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">str_to_comma</span><span class="p">:</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+<p>group: Gorups given array by desired pairs.</p>
+<p>commafy: Adds comma between all characters.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="member3.html" class="btn btn-neutral float-right" title="Parts Implemented by Yigitcan Coban" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="member1.html" class="btn btn-neutral float-left" title="Parts Implemented by Yavuz Ege Okumus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ITUCSDB1938
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,811 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by Yigitcan Coban &mdash; ITUCSDB1938  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Parts Implemented by Egehan Orta" href="member2.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1938
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#database-design">Database Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#code">Code</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="member1.html">Parts Implemented by Yavuz Ege Okumus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member2.html">Parts Implemented by Egehan Orta</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parts Implemented by Yigitcan Coban</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1938</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by Yigitcan Coban</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/member3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-yigitcan-coban">
+<h1>Parts Implemented by Yigitcan Coban<a class="headerlink" href="#parts-implemented-by-yigitcan-coban" title="Permalink to this headline">¶</a></h1>
+<p><strong>This Forms Section is for Temporary Orders and Orders Together</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Order</span><span class="p">:</span>
+ <span class="k">def</span> <span class="nf">temp_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">market_id</span><span class="p">,</span> <span class="n">ship_address</span><span class="p">,</span> <span class="n">order_date</span><span class="p">,</span> <span class="n">customer_name</span><span class="p">,</span> <span class="n">company_id</span><span class="p">,</span>
+ <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">order_time</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO temporary_order (marketplaceid, shipaddress, order_date,</span>
+<span class="s2">     customer_name, companyid, productid, quantity, employeeid, isdispatched, order_time)</span>
+<span class="s2">     VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, &#39;false&#39;, </span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">market_id</span><span class="p">,</span> <span class="n">ship_address</span><span class="p">,</span> <span class="n">order_date</span><span class="p">,</span> <span class="n">customer_name</span><span class="p">,</span>
+     <span class="n">company_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">order_time</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">my_orders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;select orderid,shipaddress,location_x,location_y,location_z,</span>
+<span class="s2">     customer_name, concat_ws(&#39; - &#39;,brand,name), a.quantity, (a.quantity*sellprice)</span>
+<span class="s2">     as price from temporary_order a inner join stock b on a.productid = b.productid</span>
+<span class="s2">     inner join products c on c.productid = a.productid WHERE employeeid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">employee_id</span><span class="p">,))</span>
+     <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">return</span> <span class="n">selection</span>
+
+ <span class="k">def</span> <span class="nf">dispatch_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM temporary_order WHERE orderid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">order_id</span><span class="p">,))</span>
+     <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO orders (marketplaceid, shipaddress, order_date, customer_name,</span>
+<span class="s2">     companyid, productid, quantity, order_time) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span>
+     <span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">6</span><span class="p">],</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">7</span><span class="p">],</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">10</span><span class="p">],))</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;DELETE FROM temporary_order WHERE orderid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">order_id</span><span class="p">,))</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">check_dispatch</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orderid</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;select temp.quantity as temporary_quantity, stock.quantity,</span>
+<span class="s2">     temp.productid, orderid from stock inner join temporary_order as temp on</span>
+<span class="s2">     stock.productid = temp.productid where orderid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">orderid</span><span class="p">,))</span>
+     <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+         <span class="k">return</span> <span class="kc">False</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="k">return</span> <span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+ <span class="k">def</span> <span class="nf">get_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orderid</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;select productid from orders where orderid=</span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">orderid</span><span class="p">,))</span>
+     <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">return</span> <span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+ <span class="k">def</span> <span class="nf">get_order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;select orderid, marketplace.name,shipaddress,order_date,concat_ws</span>
+<span class="s2">     (&#39;:&#39;,order_time/60,order_time%60) as time,customer_name,cargocompany.name,concat_ws</span>
+<span class="s2">     (&#39; - &#39;,products.brand,products.name) as product_info,quantity from orders inner join</span>
+<span class="s2">     products on orders.productid = products.productid inner join cargocompany on</span>
+<span class="s2">     orders.companyid=cargocompany.companyid inner join marketplace on orders.marketplaceid</span>
+<span class="s2">     = marketplace.marketid;&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,)</span>
+     <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">return</span> <span class="n">selection</span>
+
+ <span class="k">def</span> <span class="nf">get_orderID</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+     <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT MAX(orderid) FROM orders; &quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+     <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">return</span> <span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>temp_order: Creates a temporary order with given data</p>
+<p>my_orders: Returns all orders associated to a specific employee</p>
+<p>dispatch_order: Deletes the specific row from temporary order and creates row with same datas in orders table</p>
+<p>check_dispatch: Checks if there is enough stock to dispatch order</p>
+<p>get_product_id: Returns product ID of a order row which is specified by orderid</p>
+<p>get_order: Returns orders</p>
+<p>get_orderID: Returns recently added Order ID of orders table</p>
+<p><strong>This Server.py Section is for Temporary Orders and Orders Together</strong></p>
+<p><em>From server.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/create_order&quot;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">create_order</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;create_order.html&#39;</span><span class="p">)</span>
+     <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Order Selected&#39;</span><span class="p">):</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;order_information&#39;</span><span class="p">,</span> <span class="n">product_id</span><span class="o">=</span><span class="n">option</span><span class="p">))</span>
+         <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+            <span class="n">item_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;item_id&#39;</span><span class="p">)</span>
+            <span class="n">item_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;item_name&#39;</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Product</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Product_select</span><span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;create_order.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+         <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span> <span class="p">(</span><span class="s2">&quot;/order_information/&lt;product_id&gt;&quot;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">order_information</span><span class="p">(</span><span class="n">product_id</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Product</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Product_select</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]]</span>
+        <span class="n">obj2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MarketPlace</span><span class="p">()</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="n">obj2</span><span class="o">.</span><span class="n">MarketPlace_select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">obj3</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CargoCompany</span><span class="p">()</span>
+        <span class="n">data3</span> <span class="o">=</span> <span class="n">obj3</span><span class="o">.</span><span class="n">cargo_select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="n">data</span><span class="p">],</span> <span class="p">[</span><span class="n">data2</span><span class="p">],</span> <span class="p">[</span><span class="n">data3</span><span class="p">]]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;order_information.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Order&#39;</span><span class="p">):</span>
+            <span class="n">market_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;market_id&#39;</span><span class="p">)</span>
+            <span class="n">cargo_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cargo_id&#39;</span><span class="p">)</span>
+            <span class="n">order_address</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order_address&#39;</span><span class="p">)</span>
+            <span class="n">customer_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customer_name&#39;</span><span class="p">)</span>
+            <span class="n">order_quantity</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order_quantity&#39;</span><span class="p">)</span>
+            <span class="n">order_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">)</span>
+            <span class="n">order_time</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H&quot;</span><span class="p">))</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%M&quot;</span><span class="p">)))</span>
+            <span class="n">order_week_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">obj1</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Employee</span><span class="p">()</span>
+            <span class="n">employee_id</span> <span class="o">=</span> <span class="n">obj1</span><span class="o">.</span><span class="n">Employee_select_id</span><span class="p">(</span><span class="n">order_week_day</span><span class="p">,</span> <span class="n">order_time</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">obj2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Order</span><span class="p">()</span>
+            <span class="n">obj2</span><span class="o">.</span><span class="n">temp_order</span><span class="p">(</span><span class="n">market_id</span><span class="p">,</span> <span class="n">order_address</span><span class="p">,</span> <span class="n">order_date</span><span class="p">,</span> <span class="n">customer_name</span><span class="p">,</span>
+            <span class="n">cargo_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">order_quantity</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">order_time</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span> <span class="p">(</span><span class="s1">&#39;/my_orders&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">my_orders</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+
+        <span class="n">employee_id</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;employeeid&#39;</span><span class="p">]</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Order</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">my_orders</span><span class="p">(</span><span class="n">employee_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;my_orders.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;my_orders.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Dispatch Selected&#39;</span><span class="p">):</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span> <span class="c1">#order id burdan product_id yi cek product_id den stoka git ve stok durumunu cek</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Order</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">check_dispatch</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
+                <span class="n">obj2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Stock</span><span class="p">()</span>
+                <span class="n">obj2</span><span class="o">.</span><span class="n">update_quantity</span><span class="p">(</span><span class="o">-</span><span class="n">obj</span><span class="o">.</span><span class="n">check_dispatch</span><span class="p">(</span><span class="n">option</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">obj2</span><span class="o">.</span><span class="n">get_ID</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">check_dispatch</span><span class="p">(</span><span class="n">option</span><span class="p">)[</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">dispatch_order</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
+                <span class="n">obj3</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Finance</span><span class="p">()</span>
+                <span class="n">obj3</span><span class="o">.</span><span class="n">weSoldSmth</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get_orderID</span><span class="p">())</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;my_orders&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;my_orders&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;NO STOCK!&#39;</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/all_orders&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">all_orders</span><span class="p">():</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Order</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_order</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;all_orders.html&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>create_order: ‘GET’ method shows the create order form page. For ‘POST’, on the page, there are 2 text input boxes which are for searching items. If there are items match with those criterias, you can select one of them with option box and redirects user to order_information page with that items informations.</p>
+<p>my_orders : For ‘GET’ method, this function gets the employeeid from session and runs the my_orders method from forms.py. For ‘POST’ method, if dispatch button is clicked, first it checks with check_dispatch method of Orders form to see if there are enough stock, if there is enough stock, stock amount is decreased and dispatches order. Then updates the finance table. Otherwise, it raises No Stock error.</p>
+<p>order_information: On this page, ‘GET’ method processes the given product_id and renders template accordingly. After filling the form with related information, ‘POST’ method ,which is triggered by ‘Order’ button, gets form fields and creates a temp_order row, also it assigns this temp_order to a available employee.</p>
+<p>all_orders: Shows user all order data</p>
+<p><strong>Form of Products</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Product</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">Product_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">sell_price</span><span class="p">,</span> <span class="n">provider_id</span><span class="p">,</span> <span class="n">weight</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO Products (Name, Brand, Sellprice,</span>
+<span class="s2">        ProviderID, Weight) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">sell_price</span><span class="p">,</span> <span class="n">provider_id</span><span class="p">,</span> <span class="n">weight</span><span class="p">,))</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">Product_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;DELETE FROM Products WHERE productID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">product_id</span><span class="p">,))</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">Product_select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">product_id</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">):</span>
+            <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT productid, name, brand, sellprice, company,</span>
+<span class="s2">            weight FROM Products INNER JOIN (SELECT providerid, company FROM provider)</span>
+<span class="s2">            AS prov ON products.providerid = prov.providerid ORDER BY productID ASC;&quot;&quot;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">selection</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">product_id</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+            <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT productid, name, brand, sellprice, company, weight</span>
+<span class="s2">            FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov</span>
+<span class="s2">            ON products.providerid = prov.providerid WHERE Name = </span><span class="si">%s</span><span class="s2"> ORDER BY productID ASC;&quot;&quot;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">selection</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">product_id</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+            <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT productid, name, brand, sellprice, company, weight</span>
+<span class="s2">            FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov</span>
+<span class="s2">            ON products.providerid = prov.providerid WHERE productID = </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">            ORDER BY productID ASC;&quot;&quot;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">product_id</span><span class="p">,))</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">selection</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">Product_edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">sell_price</span><span class="p">,</span> <span class="n">provider_id</span><span class="p">,</span> <span class="n">weight</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE Products SET Name = </span><span class="si">%s</span><span class="s2">, Brand = </span><span class="si">%s</span><span class="s2">, Sellprice = </span><span class="si">%s</span><span class="s2">,</span>
+<span class="s2">        ProviderID = </span><span class="si">%s</span><span class="s2">, Weight = </span><span class="si">%s</span><span class="s2"> WHERE productID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">sell_price</span><span class="p">,</span> <span class="n">provider_id</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span>
+        <span class="n">product_id</span><span class="p">,))</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">Product_name_select</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT productid, brand, name FROM Products;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">selection</span>
+
+    <span class="k">def</span> <span class="nf">Product_provider_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">productid</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT providerID FROM Products where productid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">productid</span><span class="p">,))</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">selection</span>
+</pre></div>
+</div>
+<p>Product_add: Adds a row to product table. Data is passed by arguments.</p>
+<p>Product_delete: Deletes the row specified by ID</p>
+<p>Product_select: Selects the row specified by ID and checks it with name</p>
+<p>Product_edit: Edits the row specified by ID</p>
+<p>Product_name_select: Returns all product id, brand and name</p>
+<p>Product_provider_id: returns provider ID of row specified by Product ID</p>
+<p><strong>Codes related to Products in server.py</strong></p>
+<p><em>From server.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/product_add&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">product_add</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Provider</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Provider_name_select</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;product_add.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+            <span class="n">product_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_name&#39;</span><span class="p">)</span>
+            <span class="n">product_brand</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_brand&#39;</span><span class="p">)</span>
+            <span class="n">product_sellprice</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_sellprice&#39;</span><span class="p">)</span>
+            <span class="n">provider_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;provider_id&#39;</span><span class="p">)</span>
+            <span class="n">product_weight</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_weight&#39;</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Product</span><span class="p">()</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">Product_add</span><span class="p">(</span><span class="n">product_name</span><span class="p">,</span> <span class="n">product_brand</span><span class="p">,</span> <span class="n">product_sellprice</span><span class="p">,</span>
+            <span class="n">provider_id</span><span class="p">,</span> <span class="n">product_weight</span><span class="p">)</span>
+            <span class="n">product_id</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Product_select</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">product_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">obj2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Stock</span><span class="p">()</span>
+            <span class="n">obj2</span><span class="o">.</span><span class="n">add_to_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;product_add&#39;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/product_list&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">product_list</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;product_list.html&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Delete Selected&#39;</span><span class="p">):</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Product</span><span class="p">()</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">Product_delete</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;product_list&#39;</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Edit Selected&#39;</span><span class="p">):</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;product_edit&#39;</span><span class="p">,</span> <span class="n">product_id</span><span class="o">=</span><span class="n">option</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+            <span class="n">product_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_id&#39;</span><span class="p">)</span>
+            <span class="n">product_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_name&#39;</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Product</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Product_select</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="n">product_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;product_list.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/product_edit/&lt;product_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">product_edit</span><span class="p">(</span><span class="n">product_id</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Product</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Product_select</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">obj2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Provider</span><span class="p">()</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="n">obj2</span><span class="o">.</span><span class="n">Provider_name_select</span><span class="p">()</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="n">data</span><span class="p">],</span> <span class="p">[</span><span class="n">data2</span><span class="p">]]</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">Product_provider_id</span><span class="p">(</span><span class="n">product_id</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;product_Edit.html&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">):</span>
+            <span class="n">product_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_name&#39;</span><span class="p">)</span>
+            <span class="n">product_brand</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_brand&#39;</span><span class="p">)</span>
+            <span class="n">product_sellprice</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_sellprice&#39;</span><span class="p">)</span>
+            <span class="n">provider_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;provider_id&#39;</span><span class="p">)</span>
+            <span class="n">product_weight</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;product_weight&#39;</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Product</span><span class="p">()</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">Product_edit</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="n">product_name</span><span class="p">,</span> <span class="n">product_brand</span><span class="p">,</span>
+                             <span class="n">product_sellprice</span><span class="p">,</span> <span class="n">provider_id</span><span class="p">,</span> <span class="n">product_weight</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;product_list&#39;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Homepage&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>product_add : Page is responsible for showing form in ‘GET’ method and sending it to database for ‘POST’ method. When filled with correct informations and this page is reached by a correct user type, adds a row to product table</p>
+<p>product_list : On this page, you can see all products you are associated with and edit or delete them one by one</p>
+<p>product_edit : This page is reached after product_list page. On this page you can fill the form to edit specified row.</p>
+<p><strong>Codes related to Finance</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Finance</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">view_finance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT * FROM Financial;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">results</span>
+
+
+    <span class="k">def</span> <span class="nf">weBoughtSmth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">supplyid</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT Quantity,ProductID,Price FROM Supply_order</span>
+<span class="s2">        WHERE OrderID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">supplyid</span><span class="p">,))</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">quantity</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">proId</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">buyPrice</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">totalPay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">buyPrice</span><span class="p">)</span>
+        <span class="n">totalPay</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">totalPay</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT MAX(TransactionID) FROM Financial;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+        <span class="n">maxT</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT Total FROM Financial WHERE TransactionID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,(</span><span class="n">maxT</span><span class="p">,))</span>
+        <span class="n">isThereTotal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">isThereTotal</span><span class="p">:</span>
+            <span class="n">lastTotal</span> <span class="o">=</span> <span class="n">isThereTotal</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lastTotal</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">newTotal</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lastTotal</span><span class="p">)</span> <span class="o">+</span> <span class="n">totalPay</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO Financial(Supply_orderID,Transaction,Cargo_price,Total)</span>
+<span class="s2">        VALUES(</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,0,</span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">supplyid</span><span class="p">,</span><span class="n">totalPay</span><span class="p">,</span><span class="n">newTotal</span><span class="p">,))</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">weSoldSmth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orderid</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT MarketplaceID,companyID,ProductID,Quantity FROM Orders</span>
+<span class="s2">        WHERE OrderID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">orderid</span><span class="p">,))</span>
+        <span class="n">orderquery</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">orderquery</span><span class="p">)</span>
+        <span class="n">marketplace</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cargo</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">productid</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">howMany</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT sellprice,weight FROM Products WHERE ProductID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">productid</span><span class="p">,))</span>
+        <span class="n">orderquery</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sellprice</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT priceperkilo FROM cargocompany WHERE companyid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">cargo</span><span class="p">,))</span>
+        <span class="n">orderquery</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">perkilo</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT commissionfee FROM marketplace WHERE marketid = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">marketplace</span><span class="p">,))</span>
+        <span class="n">orderquery</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">commission</span> <span class="o">=</span> <span class="n">orderquery</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">cargoprice</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">perkilo</span><span class="p">)</span>
+        <span class="n">gain</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sellprice</span><span class="p">)</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">howMany</span><span class="p">)</span>
+        <span class="n">netWorth</span> <span class="o">=</span> <span class="n">gain</span><span class="o">-</span><span class="n">gain</span><span class="o">*</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">commission</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">netWorth</span> <span class="o">=</span> <span class="n">netWorth</span><span class="o">-</span><span class="n">cargoprice</span>
+
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT MAX(TransactionID) FROM Financial;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+        <span class="n">maxT</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT Total FROM Financial WHERE TransactionID = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,(</span><span class="n">maxT</span><span class="p">,))</span>
+        <span class="n">isThereTotal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">isThereTotal</span><span class="p">:</span>
+            <span class="n">lastTotal</span> <span class="o">=</span> <span class="n">isThereTotal</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lastTotal</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">newTotal</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lastTotal</span><span class="p">)</span> <span class="o">+</span> <span class="n">netWorth</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO Financial(orderid,Transaction,Cargo_price,Total)</span>
+<span class="s2">        VALUES(</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">orderid</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">netWorth</span><span class="p">),</span><span class="n">cargoprice</span><span class="p">,</span><span class="n">newTotal</span><span class="p">,))</span>
+
+
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>view_finance : Returns all rows of finance table
+weBougthSmth : Adds a new row to Finance table by processing the data from row before and given supply id. Calculates total money spent.
+weSoldSmth : Adds a new row to Finance table by processing the data from row before and given supply id. Calculates total money earned.</p>
+<p><em>From server.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/view_finance&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">view_finance</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Finance</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">view_finance</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;view_finance.html&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Calls all of the finance table and renders them for user to see</p>
+<p><strong>Codes related to Users</strong></p>
+<p><em>From forms.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Users</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">getUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">server_salt</span> <span class="o">=</span> <span class="s2">&quot;CVca9QBtk4U8pfPb&quot;</span>
+        <span class="n">db_password</span> <span class="o">=</span> <span class="n">password</span><span class="o">+</span><span class="n">server_salt</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">db_password</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;SELECT usertype, EmployeeID FROM users WHERE username = </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">        AND password = </span><span class="si">%s</span><span class="s2">;&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),))</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">selection</span>
+
+    <span class="k">def</span> <span class="nf">addUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">,</span><span class="n">employeeid</span><span class="p">,</span><span class="n">usertype</span><span class="p">):</span>
+        <span class="n">server_salt</span> <span class="o">=</span> <span class="s2">&quot;CVca9QBtk4U8pfPb&quot;</span>
+        <span class="n">db_password</span> <span class="o">=</span> <span class="n">password</span><span class="o">+</span><span class="n">server_salt</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">db_password</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="n">dbconnection</span> <span class="o">=</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">dbconnection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;INSERT INTO users (username,password,employeeid,usertype)</span>
+<span class="s2">        VALUES (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">);&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span><span class="n">employeeid</span><span class="p">,</span><span class="n">usertype</span><span class="p">,))</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">dbconnection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>getUser : Checks the username and hashed password, if it matches with any row, returns usertype and EmployeeID of that row</p>
+<p>addUser : Saves the user information which are passed as arguments, to the users table</p>
+<p><em>From server.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;employeeid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/register&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;register.html&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;add_username&#39;</span><span class="p">)</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;add_password&#39;</span><span class="p">)</span>
+        <span class="n">employeeid</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;add_employeeid&#39;</span><span class="p">)</span>
+        <span class="n">usertype</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;add_type&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">,</span><span class="n">employeeid</span><span class="p">,</span><span class="n">usertype</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Users</span><span class="p">()</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">addUser</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">,</span><span class="n">employeeid</span><span class="p">,</span><span class="n">usertype</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;register&#39;</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;You are not Authorized&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login.html&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;submit_button&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;Submit&#39;</span><span class="p">:</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;login_username&#39;</span><span class="p">)</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;login_password&#39;</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">Users</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">getUser</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">data</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s1">&#39;LOGIN FAILED&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">session</span><span class="p">[</span><span class="s1">&#39;employeeid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;usertype&#39;</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;employeeid&#39;</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Logout : Resets the sessions stored in local files of users computer</p>
+<p>LogIn : Gets the data from form at /login, then checks if datas are related to a user. If it finds a user, then creates sessions accordingly</p>
+<p>Register : Adds a new user to users table if there are no duplicate users. ‘GET’ method returns the form. You need to be admin to use this page.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="member2.html" class="btn btn-neutral float-left" title="Parts Implemented by Egehan Orta" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ITUCSDB1938
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
