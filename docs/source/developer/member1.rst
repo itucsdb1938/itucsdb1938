@@ -5,7 +5,7 @@ Parts Implemented by Yavuz Ege Okumuş
 *From forms.py*
 
 .. code-block:: python
-class Provider:
+       class Provider:
 
        def Provider_add(self, company, address, phone, taxid, authority):
            dbconnection = dbapi.connect(url)
