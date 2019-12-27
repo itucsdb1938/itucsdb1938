@@ -190,3 +190,92 @@ my_orders : For 'GET' method, this function gets the employeeid from session and
 
 order_information: On this page, 'GET' method processes the given product_id and renders template accordingly. After filling the form with related information, 'POST' method ,which is triggered by 'Order' button, gets form fields and creates a temp_order row, also it assigns this temp_order to a available employee.
 
+**Form of Products**
+
+*From forms.py*
+
+.. code-block:: python
+
+   class Product:
+
+       def Product_add(self, name, brand, sell_price, provider_id, weight):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """INSERT INTO Products (Name, Brand, Sellprice, ProviderID, Weight) VALUES (%s, %s, %s, %s, %s);"""
+           cursor.execute(queryString, (name, brand, sell_price, provider_id, weight,))
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+
+       def Product_delete(self, product_id):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """DELETE FROM Products WHERE productID = %s;"""
+           cursor.execute(queryString, (product_id,))
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+
+       def Product_select(self, product_id, name):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           if (product_id == '*' or name == '*'):
+               queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid ORDER BY productID ASC;"""
+               cursor.execute(queryString)
+               selection = cursor.fetchall()
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+               return selection
+           elif (product_id == '' and name != ''):
+               queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE Name = %s ORDER BY productID ASC;"""
+               cursor.execute(queryString, (name,))
+               selection = cursor.fetchall()
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+               return selection
+           elif (product_id != '' and name == ''):
+               queryString = """SELECT productid, name, brand, sellprice, company, weight FROM Products INNER JOIN (SELECT providerid, company FROM provider) AS prov ON products.providerid = prov.providerid WHERE productID = %s ORDER BY productID ASC;"""
+               cursor.execute(queryString, (product_id,))
+               selection = cursor.fetchall()
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+               return selection
+           else:
+               cursor.close()
+               dbconnection.commit()
+               dbconnection.close()
+               return
+
+       def Product_edit(self, product_id, name, brand, sell_price, provider_id, weight):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """UPDATE Products SET Name = %s, Brand = %s, Sellprice = %s, ProviderID = %s, Weight = %s WHERE productID = %s;"""
+           cursor.execute(queryString, (name, brand, sell_price, provider_id, weight, product_id,))
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+
+       def Product_name_select(self):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """SELECT productid, brand, name FROM Products;"""
+           cursor.execute(queryString)
+           selection = cursor.fetchall()
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+           return selection
+
+       def Product_provider_id(self,productid):
+           dbconnection = dbapi.connect(url)
+           cursor = dbconnection.cursor()
+           queryString = """SELECT providerID FROM Products where productid = %s;"""
+           cursor.execute(queryString, (productid,))
+           selection = cursor.fetchall()[0][0]
+           dbconnection.commit()
+           cursor.close()
+           dbconnection.close()
+           return selection
