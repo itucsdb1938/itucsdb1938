@@ -300,24 +300,32 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 					employee_workinghours += '0,0}'
 				employee_workingdays = ''
 				if(type(request.form.get('employee_workingday1')) is str):
-					employee_workingdays += request.form.get('employee_workingday1')
+					employee_workingdays += 
+					request.form.get('employee_workingday1')
 				if(type(request.form.get('employee_workingday2')) is str):
-					employee_workingdays += request.form.get('employee_workingday2')
+					employee_workingdays += 
+					request.form.get('employee_workingday2')
 				if(type(request.form.get('employee_workingday3')) is str):
-					employee_workingdays += request.form.get('employee_workingday3')
+					employee_workingdays += 
+					request.form.get('employee_workingday3')
 				if(type(request.form.get('employee_workingday4')) is str):
-					employee_workingdays += request.form.get('employee_workingday4')
+					employee_workingdays += 
+					request.form.get('employee_workingday4')
 				if(type(request.form.get('employee_workingday5')) is str):
-					employee_workingdays += request.form.get('employee_workingday5')
+					employee_workingdays += 
+					request.form.get('employee_workingday5')
 				if(type(request.form.get('employee_workingday6')) is str):
-					employee_workingdays += request.form.get('employee_workingday6')
+					employee_workingdays += 
+					request.form.get('employee_workingday6')
 				if(type(request.form.get('employee_workingday7')) is str):
-					employee_workingdays += request.form.get('employee_workingday7')
+					employee_workingdays += 
+					request.form.get('employee_workingday7')
 				employee_workingdays = functions.commafy(employee_workingdays)
 				employee_workingdays = '{' + employee_workingdays + '}'
 				obj = forms.Employee()
 				obj.Employee_add(employee_name, employee_surname, 
-				employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+				employee_phonenumber, employee_email, employee_workinghours,
+				employee_workingdays)
 				return redirect(url_for('employee_add'))
 			elif (request.form['submit_button'] == 'Homepage'):
 				return redirect(url_for('home_page'))
@@ -375,24 +383,32 @@ Employee_select_id: Select employeeID by using its workingdays and workinghours.
 					employee_workinghours += '0,0}'
 				employee_workingdays = ''
 				if(type(request.form.get('employee_workingday1')) is str):
-					employee_workingdays += request.form.get('employee_workingday1')
+					employee_workingdays += request.form.get
+					('employee_workingday1')
 				if(type(request.form.get('employee_workingday2')) is str):
-					employee_workingdays += request.form.get('employee_workingday2')
+					employee_workingdays += request.form.get
+					('employee_workingday2')
 				if(type(request.form.get('employee_workingday3')) is str):
-					employee_workingdays += request.form.get('employee_workingday3')
+					employee_workingdays += request.form.get
+					('employee_workingday3')
 				if(type(request.form.get('employee_workingday4')) is str):
-					employee_workingdays += request.form.get('employee_workingday4')
+					employee_workingdays += request.form.get
+					('employee_workingday4')
 				if(type(request.form.get('employee_workingday5')) is str):
-					employee_workingdays += request.form.get('employee_workingday5')
+					employee_workingdays += request.form.get
+					('employee_workingday5')
 				if(type(request.form.get('employee_workingday6')) is str):
-					employee_workingdays += request.form.get('employee_workingday6')
+					employee_workingdays += request.form.get
+					('employee_workingday6')
 				if(type(request.form.get('employee_workingday7')) is str):
-					employee_workingdays += request.form.get('employee_workingday7')
+					employee_workingdays += request.form.get
+					('employee_workingday7')
 				employee_workingdays = functions.commafy(employee_workingdays)
 				employee_workingdays = '{' + employee_workingdays + '}'
 				obj = forms.Employee()
 				obj.Employee_edit(employee_id, employee_name, employee_surname,
-				employee_phonenumber, employee_email, employee_workinghours, employee_workingdays)
+				employee_phonenumber, employee_email, employee_workinghours,
+				employee_workingdays)
 				return redirect(url_for('employee_list'))
 			elif (request.form['submit_button'] == 'Homepage'):
 				return redirect(url_for('home_page'))
