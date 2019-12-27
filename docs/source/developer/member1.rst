@@ -173,3 +173,165 @@ provider_add: If usertype is 1 (admin) page opens, otherwise app redirects for h
 provider_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls provider_select function from *forms.py* and lists them. If Edit button is used for POST request app redirects page for provider_edit. If Delete button clicked for POST request, provider_delete is called from *forms.py*. 
 
 provider_edit:If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given providerid. If Submit button is used for POST request provider_edit function will be called from *forms.py*. 
+
+
+**For CargoCompany**
+*From forms.py*
+
+.. code-block:: python
+
+       class CargoCompany:
+
+           def cargo_add(self, company, address, price, taxid, authority):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               queryString = """INSERT INTO CargoCompany (Name, Address, Priceperkilo, TaxID, Authority) VALUES (%s, %s, %s, %s, %s);"""
+               cursor.execute(queryString, (company, address, price, taxid, authority,))
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+
+           def cargo_select(self, cargo_id, company):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               if (cargo_id == '*' or company == '*'):
+                   queryString = """SELECT * FROM CargoCompany ORDER BY CompanyID ASC;"""
+                   cursor.execute(queryString)
+                   selection = cursor.fetchall()
+                   dbconnection.commit()
+                   cursor.close()
+                   dbconnection.close()
+                   return selection
+               elif (cargo_id == '' and company != ''):
+                   queryString = """SELECT * FROM CargoCompany WHERE Name = %s ORDER BY CompanyID ASC;"""
+                   cursor.execute(queryString, (company,))
+                   selection = cursor.fetchall()
+                   dbconnection.commit()
+                   cursor.close()
+                   dbconnection.close()
+                   return selection
+               elif (cargo_id != '' and company == ''):
+                   queryString = """SELECT * FROM CargoCompany WHERE companyID = %s ORDER BY CompanyID ASC;"""
+                   cursor.execute(queryString, (cargo_id,))
+                   selection = cursor.fetchall()
+                   dbconnection.commit()
+                   cursor.close()
+                   dbconnection.close()
+                   return selection
+               else:
+                   cursor.close()
+                   dbconnection.commit()
+                   dbconnection.close()
+                   return
+
+           def cargo_delete(self, cargo_id):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               queryString = """DELETE FROM CargoCompany WHERE companyID = %s;"""
+               cursor.execute(queryString, (cargo_id,))
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+
+           def cargo_edit(self, cargo_id, company, address, price, taxid, authority):
+               dbconnection = dbapi.connect(url)
+               cursor = dbconnection.cursor()
+               queryString = """UPDATE CargoCompany SET Name = %s, Address = %s, Priceperkilo = %s, TaxID = %s, Authority = %s WHERE companyID = %s;"""
+               cursor.execute(queryString, (company, address, price, taxid, authority, cargo_id,))
+               dbconnection.commit()
+               cursor.close()
+               dbconnection.close()
+               
+cargo_add: Used to add cargo company data to database.
+cargo_select: Getting data of a cargo company according to the id or name.
+cargo_delete: Deletes a cargo company with using its id.
+cargo_edit: Edits the existing row of a cargo company by using its id.               
+
+*From server.py*
+
+.. code-block:: python
+
+       @app.route("/cargo_add", methods=['GET', 'POST'])
+       def cargo_add():
+           if request.method == 'GET' and session['usertype']==1:
+               return render_template('cargo_add.html')
+           elif request.method == 'POST' and session['usertype']==1:
+               if (request.form['submit_button'] == 'Submit'):
+                   cargo_company = request.form.get('cargo_company')
+                   cargo_address = request.form.get('cargo_address')
+                   cargo_price = request.form.get('cargo_price')
+                   cargo_taxid = request.form.get('cargo_taxid')
+                   cargo_authority = request.form.get('cargo_authority')
+                   obj = forms.CargoCompany()
+                   obj.cargo_add(cargo_company, cargo_address, cargo_price,
+                                 cargo_taxid, cargo_authority)
+                   return redirect(url_for('cargo_add'))
+               elif (request.form['submit_button'] == 'Homepage'):
+                   return redirect(url_for('home_page'))
+
+           else:
+               return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+       @app.route("/cargo_list", methods=['GET', 'POST'])
+       def cargo_list():
+           if request.method == 'GET' and session['usertype']==1:
+               return render_template('cargo_list.html')
+
+           elif request.method == 'POST' and session['usertype']==1:
+               if (request.form['submit_button'] == 'Delete Selected'):
+                   option = request.form['options']
+                   obj = forms.CargoCompany()
+                   obj.cargo_delete(option)
+                   return redirect(url_for('cargo_list'))
+
+               elif (request.form['submit_button'] == 'Edit Selected'):
+                   option = request.form['options']
+                   return redirect(url_for('cargo_edit', cargo_id=option))
+
+               elif (request.form['submit_button'] == 'Submit'):
+                   cargo_id = request.form.get('cargo_id')
+                   cargo_company = request.form.get('cargo_company')
+                   obj = forms.CargoCompany()
+                   data = obj.cargo_select(cargo_id, cargo_company)
+                   return render_template('cargo_list.html', data=data)
+
+               elif (request.form['submit_button'] == 'Homepage'):
+                   return redirect(url_for('home_page'))
+
+           else:
+               return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+       @app.route("/cargo_edit/<cargo_id>", methods=['GET', 'POST'])
+       def cargo_edit(cargo_id):
+           if request.method == 'GET' and session['usertype']==1:
+               obj = forms.CargoCompany()
+               data = obj.cargo_select(cargo_id, '')
+               return render_template('cargo_edit.html', data=data)
+
+           if request.method == 'POST' and session['usertype']==1:
+               if (request.form['submit_button'] == 'Submit'):
+                   cargo_company = request.form.get('cargo_company')
+                   cargo_address = request.form.get('cargo_address')
+                   cargo_price = request.form.get('cargo_price')
+                   cargo_taxid = request.form.get('cargo_taxid')
+                   cargo_authority = request.form.get('cargo_authority')
+                   obj = forms.CargoCompany()
+                   obj.cargo_edit(cargo_id, cargo_company, cargo_address, cargo_price,
+                                  cargo_taxid, cargo_authority)
+                   return redirect(url_for('cargo_list'))
+               elif (request.form['submit_button'] == 'Homepage'):
+                   return redirect(url_for('home_page'))
+
+           else:
+               return redirect(url_for('home_page',error='You are not Authorized'))
+
+
+cargo_add: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request if POST, cargo object will be crated and cargo_add function will be called.
+
+cargo_list: If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with template. If request is POST there are 4 options. If Submit button is used for POST request, app calls cargo_select function from *forms.py* and lists them. If Edit button is used for POST request app redirects page for cargo_edit. If Delete button clicked for POST request, cargo_delete is called from *forms.py*. 
+
+cargo_edit:If usertype is 1 (admin) page opens, otherwise app redirects for homepage. For GET request, page loads with information of given cargoid. If Submit button is used for POST request cargo_edit function will be called from *forms.py*. 
+
+
