@@ -1,6 +1,6 @@
 Parts Implemented by Yiğitcan Çoban
 ================================
-**For MarketPlace**
+**This Forms Section is for Temporary Orders and Orders Together**
 
 *From forms.py*
 
@@ -89,4 +89,106 @@ Parts Implemented by Yiğitcan Çoban
         return selection[0]
         
         
-bhlkhklh
+temp_order: Creates a temporary order with given data
+
+my_orders: Returns all orders associated to a specific employee
+
+dispatch_order: Deletes the specific row from temporary order and creates row with same datas in orders table
+
+check_dispatch: Checks if there is enough stock to dispatch order
+
+get_product_id: Returns product ID of a order row which is specified by orderid
+
+get_order: Returns orders
+
+get_orderID: Returns recently added Order ID of orders table
+
+**This Server.py Section is for Temporary Orders and Orders Together**
+
+*From server.py*
+
+.. code-block:: python
+   @app.route("/create_order",methods=['GET', 'POST'])
+   def create_order():
+       if request.method == 'GET':
+           return render_template('create_order.html')
+
+       elif request.method == 'POST':
+           if (request.form['submit_button'] == 'Order Selected'):
+               option = request.form['options']
+               return redirect(url_for('order_information', product_id=option))
+
+           elif (request.form['submit_button'] == 'Submit'):
+               item_id = request.form.get('item_id')
+               item_name = request.form.get('item_name')
+               obj = forms.Product()
+               data = obj.Product_select(item_id, item_name)
+               return render_template('create_order.html', data=data)
+
+           elif (request.form['submit_button'] == 'Homepage'):
+               return redirect(url_for('home_page'))
+               
+   @app.route ('/my_orders', methods= ['GET', 'POST'])
+   def my_orders():
+       if request.method == 'GET':
+
+           employee_id = session['employeeid']
+           obj = forms.Order()
+           data = obj.my_orders(employee_id)
+           if request.args.get('error'):
+               return render_template('my_orders.html', data=data, message=request.args.get('error'))
+           else:
+               return render_template('my_orders.html', data=data)
+
+       elif request.method == 'POST':
+           if (request.form['submit_button'] == 'Dispatch Selected'):
+               option = request.form['options'] 
+               obj = forms.Order()
+               if obj.check_dispatch(option):
+                   obj2 = forms.Stock()
+                   obj2.update_quantity(-obj.check_dispatch(option)[0],obj2.get_ID(obj.check_dispatch(option)[2])[0][0])
+                   obj.dispatch_order(option)
+                   obj3 = forms.Finance()
+                   obj3.weSoldSmth(obj.get_orderID())
+                   return redirect(url_for('my_orders'))
+               else:
+                   return redirect(url_for('my_orders',error='NO STOCK!'))
+
+           elif (request.form['submit_button'] == 'Homepage'):
+               return redirect(url_for('home_page'))
+
+   @app.route ("/order_information/<product_id>",methods=['GET', 'POST'])
+   def order_information(product_id):
+       if request.method == 'GET':
+           obj = forms.Product()
+           data = obj.Product_select(product_id, '')
+           data = [data[0][0], data[0][1], data[0][2], data[0][3]]
+           obj2 = forms.MarketPlace()
+           data2 = obj2.MarketPlace_select('*','')
+           obj3 = forms.CargoCompany()
+           data3 = obj3.cargo_select('*','')
+           data = [[data], [data2], [data3]]
+           print(data)
+           return render_template('order_information.html', data=data)
+       elif request.method == 'POST':
+           if (request.form['submit_button'] == 'Order'):
+               market_id = request.form.get('market_id')
+               cargo_id = request.form.get('cargo_id')
+               order_address = request.form.get('order_address')
+               customer_name = request.form.get('customer_name')
+               order_quantity = request.form.get('order_quantity')
+               order_date = datetime.now().strftime("%d/%m/%Y")
+               order_time = str(int(datetime.now().strftime("%H"))*60 + int(datetime.now().strftime("%M")))
+               order_week_day = datetime.today().weekday() + 1
+               obj1 = forms.Employee()
+               employee_id = obj1.Employee_select_id(order_week_day, order_time)[0]
+               obj2 = forms.Order()
+               obj2.temp_order(market_id, order_address, order_date, customer_name, cargo_id, product_id, order_quantity, employee_id, order_time)
+               return redirect(url_for('home_page'))
+
+create_order: 'GET' method shows the create order form page. For 'POST', on the page, there are 2 text input boxes which are for searching items. If there are items match with those criterias, you can select one of them with option box and redirects user to order_information page with that items informations.
+
+my_orders : For 'GET' method, this function gets the employeeid from session and runs the my_orders method from forms.py. For 'POST' method, if dispatch button is clicked, first it checks with check_dispatch method of Orders form to see if there are enough stock, if there is enough stock, stock amount is decreased and dispatches order. Then updates the finance table. Otherwise, it raises No Stock error. 
+
+order_information: On this page, 'GET' method processes the given product_id and renders template accordingly. After filling the form with related information, 'POST' method ,which is triggered by 'Order' button, gets form fields and creates a temp_order row, also it assigns this temp_order to a available employee.
+
