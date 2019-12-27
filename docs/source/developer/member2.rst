@@ -98,10 +98,9 @@ MarketPlace_edit: Edit existing row by using its id.
 				market_taxid = request.form.get('market_taxid')
 				market_commisionfee = request.form.get('market_commission')
 				obj = forms.MarketPlace()
-				obj.MarketPlace_add(market_name, market_address, market_authority,
-									market_phonenumber, 
-									market_taxid,
-									market_commisionfee)
+				obj.MarketPlace_add(market_name, market_address,
+				market_authority,market_phonenumber,market_taxid,
+				market_commisionfee)
 				return redirect(url_for('marketplace_add'))
 			elif (request.form['submit_button'] == 'Homepage'):
 				return redirect(url_for('home_page'))
@@ -185,7 +184,8 @@ marketplace_edit: If usertype is 1 (admin) page opens, otherwise app redirects f
         cursor = dbconnection.cursor()
         queryString = """INSERT INTO Employee (name, surname, phonenumber, email, workinghours,
 		workingdays) VALUES (%s, %s, %s, %s, %s, %s);"""
-        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours, workingdays,))
+        cursor.execute(queryString, (name, surname, phonenumber, email, workinghours,
+	workingdays,))
         dbconnection.commit()
         cursor.close()
         dbconnection.close()
