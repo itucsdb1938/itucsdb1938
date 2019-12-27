@@ -1,4 +1,4 @@
-Parts Implemented by Yiğitcan Çoban
+Parts Implemented by Yigitcan Coban
 ================================
 .. figure:: Order1.png
    :scale: 50 %
